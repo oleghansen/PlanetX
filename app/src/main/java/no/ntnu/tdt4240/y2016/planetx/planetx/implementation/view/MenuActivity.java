@@ -3,6 +3,7 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 import no.ntnu.tdt4240.y2016.planetx.planetx.framework.AppMenu;
@@ -22,9 +23,7 @@ public class MenuActivity extends AppMenu {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         menuController = new MainMenuController(this);
-
         startGameButton = (Button)findViewById(R.id.btn_startGame);
-
         startGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
