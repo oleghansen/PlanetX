@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:id="@+id/linearLayout"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Map name"
+            android:id="@+id/mapName_textView"
+            android:linksClickable="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:maxWidth="200px"
+            android:minWidth="200px"
+            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="17dp"
+            android:layout_marginStart="17dp" />
+
+          <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mapImage_imageView"
+            android:maxWidth="100dp"
+            android:minHeight="100dp"
+            android:minWidth="150dp"
+            android:maxHeight="100dp"
+            android:background="@mipmap/map_canis"
+              android:layout_alignParentTop="true"
+              android:layout_toRightOf="@+id/mapName_textView"
+              android:layout_toEndOf="@+id/mapName_textView"
+              android:layout_marginLeft="23dp"
+              android:layout_marginStart="23dp" />
+
+
+    </RelativeLayout>
+</RelativeLayout>
