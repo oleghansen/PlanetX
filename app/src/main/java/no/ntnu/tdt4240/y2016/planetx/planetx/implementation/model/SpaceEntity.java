@@ -20,4 +20,5 @@ public class SpaceEntity{
     public double getPosY() {
         return posY;
     }
+
 }

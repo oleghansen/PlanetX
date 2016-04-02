@@ -48,13 +48,16 @@ public class MainMenuController {
         final AlertDialog alert = builder.create();
 
 
+
         mapListView.setOnItemClickListener(new AdapterView.OnItemClickListener() { int save = -1;
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 vg = (ViewGroup) view;
                 TextView mapName = (TextView) vg.findViewById(R.id.mapName_textView);
                 selectedMapName = mapName.getText().toString();
                 alert.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+
                 parent.getChildAt(position).setBackgroundColor(Color.parseColor("#7ac5cd"));
 
                 if(save != -1 && save != position) {
