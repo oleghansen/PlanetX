@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +31,6 @@ public class MainMenuController {
     }
 
     public void selectMapDialog(ListView mapListView){
-
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, R.layout.maplist_item, R.id.mapName_textView, mapNames);
         mapListView.setAdapter(adapter);
 
@@ -44,18 +44,21 @@ public class MainMenuController {
                     }
                 }).setView(mapListView);
 
+        final AlertDialog alert = builder.create();
+
         mapListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 vg = (ViewGroup) view;
                 TextView mapName = (TextView) vg.findViewById(R.id.mapName_textView);
                 selectedMapName = mapName.getText().toString();
+                alert.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+
                 Toast.makeText(context, "'" + selectedMapName + "' selected.", Toast.LENGTH_SHORT).show();
             }
         });
-
-        AlertDialog alert = builder.create();
         alert.show();
+        alert.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
 
     public void startGame(Map map){
