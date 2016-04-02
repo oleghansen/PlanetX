@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>TEST</resources>
+<resources>
+    <string name="app_id">20955739378</string>
+    <integer name="google_play_services_version">
+        123
+    </integer>
+</resources>
