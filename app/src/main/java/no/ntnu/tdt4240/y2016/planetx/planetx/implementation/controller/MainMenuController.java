@@ -2,6 +2,7 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -46,14 +47,20 @@ public class MainMenuController {
 
         final AlertDialog alert = builder.create();
 
-        mapListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        mapListView.setOnItemClickListener(new AdapterView.OnItemClickListener() { int save = -1;
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 vg = (ViewGroup) view;
                 TextView mapName = (TextView) vg.findViewById(R.id.mapName_textView);
                 selectedMapName = mapName.getText().toString();
                 alert.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+                parent.getChildAt(position).setBackgroundColor(Color.parseColor("#7ac5cd"));
 
+                if(save != -1 && save != position) {
+                    parent.getChildAt(save).setBackgroundColor(Color.parseColor("#00000000"));
+                }
+                save = position;
                 Toast.makeText(context, "'" + selectedMapName + "' selected.", Toast.LENGTH_SHORT).show();
             }
         });
