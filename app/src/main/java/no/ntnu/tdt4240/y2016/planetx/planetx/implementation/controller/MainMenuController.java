@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 import no.ntnu.tdt4240.y2016.planetx.planetx.framework.AppMenu;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.Map;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view.MenuActivity;
 
 /**
@@ -19,15 +20,17 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view.MenuActivity;
  */
 public class MainMenuController {
     private AppMenu context;
-    private ListView mapListView;
+    private ViewGroup vg;
+    private String selectedMapName;
+    final private String[] mapNames = {"Canis Major", "Sagittarius", "Draco"}; //Temporary for testing
+
 
     public MainMenuController(AppMenu context){
         this.context = context;
     }
 
-    public void selectMapDialog(){
-        mapListView = new ListView(context);
-        String[] mapNames = {"Canis Major", "Sagittarius", "Draco"}; //Temporary for testing
+    public void selectMapDialog(ListView mapListView){
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, R.layout.maplist_item, R.id.mapName_textView, mapNames);
         mapListView.setAdapter(adapter);
 
@@ -36,20 +39,27 @@ public class MainMenuController {
                 .setCancelable(true)
                 .setPositiveButton("Start", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // Start game
+                        Map selectedMap = new Map(selectedMapName, null);
+                        startGame(selectedMap);
                     }
                 }).setView(mapListView);
 
         mapListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ViewGroup vg = (ViewGroup) view;
+                vg = (ViewGroup) view;
                 TextView mapName = (TextView) vg.findViewById(R.id.mapName_textView);
-                Toast.makeText(context, "'"+ mapName.getText().toString() + "' selected.", Toast.LENGTH_SHORT).show();
+                selectedMapName = mapName.getText().toString();
+                Toast.makeText(context, "'" + selectedMapName + "' selected.", Toast.LENGTH_SHORT).show();
             }
         });
 
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    public void startGame(Map map){
+        Toast.makeText(context, "Starting game on map " + map.getName(), Toast.LENGTH_SHORT).show();
+        //TODO
     }
 }
