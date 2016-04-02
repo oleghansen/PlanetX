@@ -13,5 +13,15 @@ public class LoadingActivity extends AppMenu {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /* Use this space to do all loading/preparation needed before accessing main menu */
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        goTo(MenuActivity.class);
     }
 }
