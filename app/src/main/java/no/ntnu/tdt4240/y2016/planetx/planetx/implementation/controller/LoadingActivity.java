@@ -1,4 +1,4 @@
-package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view;
+package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller;
 
 import android.os.Bundle;
 
