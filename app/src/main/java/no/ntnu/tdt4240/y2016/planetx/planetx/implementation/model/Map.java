@@ -9,7 +9,7 @@ public class Map {
 
     private String name;
     private ArrayList<Planet> planets;
-
+//private Image backgroundImage = someImage;?
     public Map(String name, ArrayList<Planet> planets){
         this.name = name;
         this.planets = planets;
@@ -18,4 +18,7 @@ public class Map {
     public String getName(){
         return name;
     }
+
+    //TODO: draw method
+    //TODO:
 }
