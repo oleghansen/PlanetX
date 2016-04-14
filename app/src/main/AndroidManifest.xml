@@ -23,7 +23,12 @@
         </activity>
 
         <activity
-            android:name=".implementation.view.MenuActivity"
+            android:name=".implementation.controller.MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".implementation.controller.GameActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
