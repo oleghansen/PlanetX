@@ -1,14 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/main_background"/>
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="START GAME"
-        android:id="@+id/btn_startGame"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginBottom="75px"
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:weightSum="1">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8">
+            <Button
+                android:layout_margin="10px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start game"
+                android:id="@+id/btn_startGame"
+                />
+            <Button
+                android:layout_margin="10px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Settings"
+                android:id="@+id/btn_settings"
+                />
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

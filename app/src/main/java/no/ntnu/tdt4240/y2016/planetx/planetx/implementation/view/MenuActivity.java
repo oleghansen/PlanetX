@@ -2,6 +2,7 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
@@ -20,6 +21,7 @@ public class MenuActivity extends AppMenu {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_menu);
         menuController = new MainMenuController(this);
 

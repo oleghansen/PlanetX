@@ -1,6 +1,7 @@
 package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view;
 
 import android.os.Bundle;
+import android.view.Window;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 import no.ntnu.tdt4240.y2016.planetx.planetx.framework.AppMenu;
