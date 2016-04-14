@@ -28,14 +28,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Start game"
-                android:id="@+id/btn_startGame"
+                android:onClick="click_startGame"
                 />
             <Button
                 android:layout_margin="10px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Settings"
-                android:id="@+id/btn_settings"
+                android:onClick="click_settings"
                 />
         </LinearLayout>
     </LinearLayout>
