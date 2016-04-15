@@ -7,6 +7,6 @@ public class GameModel {
     private SpaceEntity spaceEntity;
 
     public GameModel() {
-        spaceEntity = new SpaceEntity();
+
     }
 }

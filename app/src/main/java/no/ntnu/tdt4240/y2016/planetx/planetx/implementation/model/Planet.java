@@ -16,4 +16,8 @@ public class Planet extends SpaceObstacle {
         planetImage = img;
     }
 
+    public void collides(SpaceEntity spaceEntity) {
+
+    }
+
 }
