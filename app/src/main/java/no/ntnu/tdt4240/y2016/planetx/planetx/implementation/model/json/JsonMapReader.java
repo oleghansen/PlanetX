@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.Map;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.SpaceObstacle;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.Spaceship;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.JsonPlanet;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.JsonShip;
@@ -50,23 +51,15 @@ public class JsonMapReader implements Serializable {
         return name;
     }
 
-    public ArrayList<JsonPlanet> getJsonPlanets() {
-        return planets;
-    }
-
-    public JsonShip getJsonShip1() {
-        return ship1;
-    }
-
-    public JsonShip getJsonShip2() {
-        return ship2;
-    }
-
     public Spaceship getShip1(Map map) {
         return null;
     }
 
     public Spaceship getShip2(Map map) {
+        return null;
+    }
+
+    public ArrayList<SpaceObstacle> getObstacles(Map map){
         return null;
     }
 }

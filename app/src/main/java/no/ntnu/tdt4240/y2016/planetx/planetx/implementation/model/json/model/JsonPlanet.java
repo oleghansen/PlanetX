@@ -9,15 +9,20 @@ import org.json.JSONObject;
 public class JsonPlanet extends JsonEntity {
     private int size = 0;
     private boolean normal = false;
+    private String imgName = "";
 
     public JsonPlanet(JSONObject json) throws JSONException {
         super(json);
         size = json.getInt("size");
         normal = json.getBoolean("normal");
+        imgName = json.getString("img");
     }
 
     public int getSize() {
         return size;
+    }
+    public String getImgName(){
+        return imgName;
     }
 
     public boolean isNormal() {

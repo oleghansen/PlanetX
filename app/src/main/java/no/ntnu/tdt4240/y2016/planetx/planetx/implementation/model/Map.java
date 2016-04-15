@@ -23,16 +23,27 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.Jso
  */
 public class Map extends RelativeLayout {
     private String name;
-    private ArrayList<Spaceship> spaceships;
-    private ArrayList<SpaceObstacle> spaceObstacles;
+    private ArrayList<Spaceship> spaceships = new ArrayList<>();
+    private ArrayList<SpaceObstacle> spaceObstacles = new ArrayList<>();
 
     public Map(Context context) {
         super(context);
     }
 
     public void initializeMap(JsonMapReader jrm){
+        for(SpaceObstacle so: jrm.getObstacles(this)){
+            spaceObstacles.add(so);
+//            addToView(so);
+        }
+
         Spaceship ship1 = jrm.getShip1(this);
         Spaceship ship2 = jrm.getShip2(this);
+
+        spaceships.add(ship1);
+//        addToView(ship1);
+        spaceships.add(ship2);
+//        addToView(ship2);
+
 
         ImageView img = new ImageView(this.getContext());
         img.setX(50);
@@ -43,6 +54,14 @@ public class Map extends RelativeLayout {
                 RelativeLayout.LayoutParams.WRAP_CONTENT));
         this.addView(img);
     }
+
+    private void addToView(SpaceEntity se) {
+//        se.setLayoutParams(new RelativeLayout.LayoutParams(
+//                RelativeLayout.LayoutParams.WRAP_CONTENT,
+//                RelativeLayout.LayoutParams.WRAP_CONTENT));
+//        this.addView(se);
+    }
+
     public String getName(){
         return name;
     }

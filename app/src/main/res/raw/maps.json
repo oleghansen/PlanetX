@@ -4,6 +4,7 @@
     "obstacles": [
       {
         "type": "planet",
+        "img":"earth",
         "normal": true,
         "size": 1,
         "posX": 50.0,
@@ -24,6 +25,7 @@
     "obstacles": [
       {
         "type": "planet",
+        "img":"earth",
         "normal": true,
         "size": 4,
         "posX": 25.0,
@@ -44,6 +46,7 @@
     "obstacles": [
       {
         "type": "planet",
+        "img":"earth",
         "normal": true,
         "size": 1,
         "posX": 50.0,
@@ -51,6 +54,7 @@
       },
       {
         "type": "planet",
+        "img":"earth",
         "normal": true,
         "size": 3,
         "posX": 80.0,
@@ -58,6 +62,7 @@
       },
       {
         "type": "planet",
+        "img":"earth",
         "normal": true,
         "size": 4,
         "posX": 25.0,
@@ -78,6 +83,7 @@
     "obstacles": [
       {
         "type": "planet",
+        "img":"earth",
         "normal": true,
         "size": 3,
         "posX": 80.0,
@@ -85,6 +91,7 @@
       },
       {
         "type": "planet",
+        "img":"earth",
         "normal": true,
         "size": 4,
         "posX": 25.0,
