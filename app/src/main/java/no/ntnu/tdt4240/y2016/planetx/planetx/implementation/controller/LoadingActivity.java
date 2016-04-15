@@ -23,6 +23,6 @@ public class LoadingActivity extends AppMenu {
         //
         //
         //
-        goTo(MenuActivity.class);
+        goToAndFinishCurrent(MenuActivity.class);
     }
 }
