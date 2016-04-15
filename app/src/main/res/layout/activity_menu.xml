@@ -37,6 +37,13 @@
                 android:text="Settings"
                 android:onClick="click_settings"
                 />
+            <!-- sign-out button -->
+            <Button
+                android:layout_margin="10px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sign Out"
+                android:onClick="click_signOut"/>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

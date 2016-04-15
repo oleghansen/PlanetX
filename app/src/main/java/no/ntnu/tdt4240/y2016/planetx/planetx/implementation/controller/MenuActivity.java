@@ -37,6 +37,18 @@ public class MenuActivity extends AppMenu {
     }
 
 
+    public void click_signOut(View view) {
+        //LoadingActivity.mGoogleApiClient.disconnect();
+        LoadingActivity.mExplicitSignOut=true;
+        setContentView(R.layout.activity_main);
+        goTo(LoadingActivity.class);
+    }
+
+    /**
+     * This method starts a new game.
+     * @param map
+     */
+
     public void startGame(Map map){
         Toast.makeText(this, "Starting game on map " + map.getName(), Toast.LENGTH_SHORT).show();
 
