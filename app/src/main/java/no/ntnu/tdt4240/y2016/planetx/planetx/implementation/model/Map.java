@@ -65,4 +65,8 @@ public class Map extends RelativeLayout {
     public String getName(){
         return name;
     }
+
+    //TODO: read method
+    //TODO: draw method
+
 }

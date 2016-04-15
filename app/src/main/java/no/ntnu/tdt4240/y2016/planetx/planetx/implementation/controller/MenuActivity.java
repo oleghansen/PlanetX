@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -78,14 +79,20 @@ public class MenuActivity extends AppMenu {
         selectMapDialog();
     }
 
+
+    public void click_signOut(View view) {
+        //LoadingActivity.mGoogleApiClient.disconnect();
+        LoadingActivity.mExplicitSignOut=true;
+        setContentView(R.layout.activity_main);
+        goTo(LoadingActivity.class);
+    }
+
     /**
      * This method starts a new game.
-     *
      * @param map
      */
     public void startGame(Map map) {
         Toast.makeText(this, "Starting game on map " + map.getName(), Toast.LENGTH_SHORT).show();
-
 
         goTo(GameActivity.class);
         //TODO: create new game instance
