@@ -7,7 +7,9 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.Map;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.Planet;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.SpaceObstacle;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.Spaceship;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.JsonPlanet;
@@ -60,6 +62,10 @@ public class JsonMapReader implements Serializable {
     }
 
     public ArrayList<SpaceObstacle> getObstacles(Map map){
+        ArrayList<Planet> planetList = new ArrayList<>();
+        for(JsonPlanet p: this.planets){
+            int drawableId = map.getContext().getResources().getIdentifier(p.getImgName(), "drawable", map.getContext().getPackageName());
+        }
         return new ArrayList<SpaceObstacle>();
     }
 }
