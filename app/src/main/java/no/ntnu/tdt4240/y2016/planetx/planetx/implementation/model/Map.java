@@ -19,6 +19,7 @@ public class Map {
         return name;
     }
 
+    //TODO: read method
     //TODO: draw method
-    //TODO:
+
 }

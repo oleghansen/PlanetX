@@ -12,9 +12,25 @@ public class Spaceship {
 
     private int healthPoints;
     private ArrayList<Weapon> weapons;
+    private double firDirX;
+    private double firDirY;
+    private double firPower;
 
     public Spaceship(int healthPoints, ArrayList<Weapon> weapons){
         this.healthPoints = healthPoints;
         this.weapons = weapons;
     }
+    public ArrayList<Weapon> getWeapons() {
+        return weapons;
+    }
+    public double getFirDirX(){
+        return firDirX;
+    }
+    public double getFirDirY() {
+        return firDirY;
+    }
+    public double getFirPower() {
+        return firPower;
+    }
+
 }
