@@ -32,16 +32,16 @@ public class Map extends RelativeLayout {
 
     public void initializeMap(JsonMapReader jrm){
         for(SpaceObstacle so: jrm.getObstacles(this)){
-            spaceObstacles.add(so);
+            //spaceObstacles.add(so);
 //            addToView(so);
         }
 
-        Spaceship ship1 = jrm.getShip1(this);
-        Spaceship ship2 = jrm.getShip2(this);
+        //Spaceship ship1 = jrm.getShip1(this);
+        //Spaceship ship2 = jrm.getShip2(this);
 
-        spaceships.add(ship1);
+        //spaceships.add(ship1);
 //        addToView(ship1);
-        spaceships.add(ship2);
+        //spaceships.add(ship2);
 //        addToView(ship2);
 
 

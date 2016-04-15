@@ -60,6 +60,6 @@ public class JsonMapReader implements Serializable {
     }
 
     public ArrayList<SpaceObstacle> getObstacles(Map map){
-        return null;
+        return new ArrayList<SpaceObstacle>();
     }
 }
