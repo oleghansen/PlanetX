@@ -8,7 +8,7 @@ import org.json.JSONObject;
  */
 public class JsonShip extends JsonEntity {
 
-    public JsonShip(JSONObject json) throws JSONException {
-        super(json);
+    public JsonShip(JSONObject json, int width, int height) throws JSONException {
+        super(json, width, height);
     }
 }

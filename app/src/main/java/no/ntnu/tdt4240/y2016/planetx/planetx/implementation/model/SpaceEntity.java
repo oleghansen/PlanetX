@@ -10,20 +10,23 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.JsonEntity;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.JsonShip;
 
 
 public abstract class SpaceEntity extends ImageView {
 
     public SpaceEntity(Context context) {
         super(context);
+        setAdjustViewBounds(true);
     }
 
-    public boolean collidesWith(SpaceEntity object){
+    public boolean collidesWith(SpaceEntity object) {
         Rect rc1 = new Rect();
         this.getDrawingRect(rc1);
         Rect rc2 = new Rect();
         object.getDrawingRect(rc2);
-        if (Rect.intersects(rc1, rc2)){
+        if (Rect.intersects(rc1, rc2)) {
             //Bitmap bm=((BitmapDrawable) this.getDrawable()).getBitmap();
             //Bitmap bmTwo=((BitmapDrawable) object.getDrawable()).getBitmap();
             return true;
@@ -33,6 +36,9 @@ public abstract class SpaceEntity extends ImageView {
 
     public abstract void collides(SpaceEntity object);
 
-
+    public void setParameters(JsonEntity json) {
+        setX((float) json.getX());
+        setY((float) json.getY());
     }
+}
 

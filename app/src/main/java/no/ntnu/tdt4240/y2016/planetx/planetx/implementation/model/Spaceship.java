@@ -7,6 +7,8 @@ import android.os.PowerManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.JsonShip;
+
 
 public class Spaceship extends SpaceEntity {
 
@@ -36,5 +38,6 @@ public class Spaceship extends SpaceEntity {
     public double getFirPower() {
         return firPower;
     }
+
 
 }

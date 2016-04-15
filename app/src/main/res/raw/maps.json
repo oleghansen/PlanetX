@@ -1,4 +1,5 @@
 [
+//  MAP 1
   {
     "name": "Canis Major",
     "obstacles": [
@@ -12,35 +13,16 @@
       }
     ],
     "ship1": {
-      "posX": 10.0,
-      "posY": 10.0
+      "posX": 5.0,
+      "posY": 5.0
     },
     "ship2": {
-      "posX": 90.0,
-      "posY": 90.0
+      "posX": 80.0,
+      "posY": 80.0
     }
   },
-  {
-    "name": "Sagittarius",
-    "obstacles": [
-      {
-        "type": "planet",
-        "img":"earth",
-        "normal": true,
-        "size": 4,
-        "posX": 25.0,
-        "posY": 25.0
-      }
-    ],
-    "ship1": {
-      "posX": 10.0,
-      "posY": 10.0
-    },
-    "ship2": {
-      "posX": 90.0,
-      "posY": 90.0
-    }
-  },
+
+//  MAP 2
   {
     "name": "Crab Nebula",
     "obstacles": [
@@ -49,14 +31,14 @@
         "img":"earth",
         "normal": true,
         "size": 1,
-        "posX": 50.0,
+        "posX": 0.0,
         "posY": 50.0
       },
       {
         "type": "planet",
         "img":"earth",
         "normal": true,
-        "size": 3,
+        "size": 2,
         "posX": 80.0,
         "posY": 50.0
       },
@@ -64,28 +46,29 @@
         "type": "planet",
         "img":"earth",
         "normal": true,
-        "size": 4,
+        "size": 1.5,
         "posX": 25.0,
         "posY": 25.0
       }
     ],
     "ship1": {
-      "posX": 10.0,
-      "posY": 10.0
+      "posX": 5.0,
+      "posY": 5.0
     },
     "ship2": {
-      "posX": 90.0,
-      "posY": 90.0
+      "posX": 10.0,
+      "posY": 80.0
     }
   },
+//  MAP 3
   {
-    "name": "Nebula",
+    "name": "Sagittarius",
     "obstacles": [
       {
         "type": "planet",
         "img":"earth",
         "normal": true,
-        "size": 3,
+        "size": 0.9,
         "posX": 80.0,
         "posY": 50.0
       },
@@ -93,18 +76,18 @@
         "type": "planet",
         "img":"earth",
         "normal": true,
-        "size": 4,
+        "size": 0.1,
         "posX": 25.0,
         "posY": 25.0
       }
     ],
     "ship1": {
-      "posX": 10.0,
-      "posY": 10.0
+      "posX": 5.0,
+      "posY": 5.0
     },
     "ship2": {
-      "posX": 90.0,
-      "posY": 90.0
+      "posX": 10.0,
+      "posY": 80.0
     }
   }
 ]

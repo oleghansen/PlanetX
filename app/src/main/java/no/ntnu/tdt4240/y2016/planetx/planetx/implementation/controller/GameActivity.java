@@ -1,8 +1,10 @@
 package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
@@ -76,7 +78,13 @@ public class GameActivity extends AppMenu {
             JSONArray array = new JSONArray(byteArrayOutputStream.toString());
             for (int i = 0; i < array.length(); i++) {
                 if(array.getJSONObject(i).getString("name").equals(mapName)){
-                    return new JsonMapReader(array.getString(i));
+                    Display display = getWindowManager().getDefaultDisplay();
+                    Point size = new Point();
+                    display.getSize(size);
+                    int width = size.x;
+                    int height = size.y;
+
+                    return new JsonMapReader(array.getString(i), width, height);
                 }
             }
         } catch (JSONException e) {

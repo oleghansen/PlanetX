@@ -9,10 +9,11 @@ import org.json.JSONObject;
 public abstract class JsonEntity {
     protected double posx = 0.0, posy = 0.0;
 
-    public JsonEntity(JSONObject json) throws JSONException{
-        posx = json.getDouble("posX");
-        posy = json.getDouble("posY");
+    public JsonEntity(JSONObject json, int width, int height) throws JSONException {
+        posx = json.getDouble("posX") * width / 100;
+        posy = json.getDouble("posY") * height / 100;
     }
+
     public double getX() {
         return posx;
     }

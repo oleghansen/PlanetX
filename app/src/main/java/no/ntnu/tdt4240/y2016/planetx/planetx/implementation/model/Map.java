@@ -32,34 +32,34 @@ public class Map extends RelativeLayout {
 
     public void initializeMap(JsonMapReader jrm){
         for(SpaceObstacle so: jrm.getObstacles(this)){
-            //spaceObstacles.add(so);
-//            addToView(so);
+            spaceObstacles.add(so);
+            addToView(so);
         }
 
-        //Spaceship ship1 = jrm.getShip1(this);
-        //Spaceship ship2 = jrm.getShip2(this);
+        Spaceship ship1 = jrm.getShip1(this);
+        spaceships.add(ship1);
+        addToView(ship1);
 
-        //spaceships.add(ship1);
-//        addToView(ship1);
-        //spaceships.add(ship2);
-//        addToView(ship2);
+        Spaceship ship2 = jrm.getShip2(this);
+        spaceships.add(ship2);
+        addToView(ship2);
 
 
-        ImageView img = new ImageView(this.getContext());
-        img.setX(50);
-        img.setY(50);
-        img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.earth));
-        img.setLayoutParams(new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT));
-        this.addView(img);
+//        ImageView img = new ImageView(this.getContext());
+//        img.setX(50);
+//        img.setY(50);
+//        img.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.earth));
+//        img.setLayoutParams(new RelativeLayout.LayoutParams(
+//                RelativeLayout.LayoutParams.WRAP_CONTENT,
+//                RelativeLayout.LayoutParams.WRAP_CONTENT));
+//        this.addView(img);
     }
 
     private void addToView(SpaceEntity se) {
-//        se.setLayoutParams(new RelativeLayout.LayoutParams(
-//                RelativeLayout.LayoutParams.WRAP_CONTENT,
-//                RelativeLayout.LayoutParams.WRAP_CONTENT));
-//        this.addView(se);
+        se.setLayoutParams(new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT));
+        this.addView(se);
     }
 
     public String getName(){
