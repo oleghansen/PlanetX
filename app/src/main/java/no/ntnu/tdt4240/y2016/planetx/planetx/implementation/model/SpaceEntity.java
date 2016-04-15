@@ -1,5 +1,6 @@
 package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model;
 
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
@@ -9,9 +10,8 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Ole on 02.04.2016.
- */
+
+
 public abstract class SpaceEntity extends ImageView {
 
     public SpaceEntity(Context context) {
@@ -33,4 +33,6 @@ public abstract class SpaceEntity extends ImageView {
 
     public abstract void collides(SpaceEntity object);
 
-}
+
+    }
+
