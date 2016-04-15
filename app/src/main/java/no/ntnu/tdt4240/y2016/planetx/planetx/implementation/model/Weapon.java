@@ -1,16 +1,20 @@
 package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model;
 
-/**
- * Created by Ole on 31.03.2016.
- */
-public class Weapon {
+import android.content.Context;
+
+
+public class Weapon extends SpaceEntity {
 
     private double damage;
     private String name, description;
 
-    public Weapon(double damage, String name, String description){
+    public Weapon(Context context, double damage, String name, String description){
+        super(context);
         this.damage = damage;
         this.name = name;
         this.description = name;
+    }
+    public void collides (SpaceEntity spaceEntity) {
+
     }
 }

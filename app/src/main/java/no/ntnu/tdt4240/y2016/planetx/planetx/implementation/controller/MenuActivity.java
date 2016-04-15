@@ -17,9 +17,7 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 import no.ntnu.tdt4240.y2016.planetx.planetx.framework.AppMenu;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.Map;
 
-/**
- * Created by Ole on 31.03.2016.
- */
+
 public class MenuActivity extends AppMenu {
 
     private ListView mapListView;
@@ -38,10 +36,7 @@ public class MenuActivity extends AppMenu {
         selectMapDialog();
     }
 
-    /**
-     * This method starts a new game.
-     * @param map
-     */
+
     public void startGame(Map map){
         Toast.makeText(this, "Starting game on map " + map.getName(), Toast.LENGTH_SHORT).show();
 
