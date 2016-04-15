@@ -22,7 +22,6 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.Map;
  */
 public class MenuActivity extends AppMenu {
 
-    private Button startGameButton;
     private ListView mapListView;
     private ViewGroup vg;
     private String selectedMapName;
@@ -34,14 +33,9 @@ public class MenuActivity extends AppMenu {
         setContentView(R.layout.activity_menu);
 
         mapListView = new ListView(this);
-
-        startGameButton = (Button)findViewById(R.id.btn_startGame);
-        startGameButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectMapDialog();
-            }
-        });
+    }
+    public void click_startGame(View view) {
+        selectMapDialog();
     }
 
     /**
