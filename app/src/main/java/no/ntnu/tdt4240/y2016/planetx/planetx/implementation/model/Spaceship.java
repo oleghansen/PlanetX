@@ -1,14 +1,13 @@
 package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model;
 
+import android.content.Context;
 import android.media.Image;
 import android.os.PowerManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Ole on 31.03.2016.
- */
+
 public class Spaceship extends SpaceEntity {
 
     private int healthPoints;
@@ -17,8 +16,8 @@ public class Spaceship extends SpaceEntity {
     private double firDirY;
     private double firPower;
 
-    public Spaceship(Image img,int healthPoints, ArrayList<Weapon> weapons){
-        //super(img);
+    public Spaceship(Context context,int healthPoints, ArrayList<Weapon> weapons){
+        super(context);
         this.healthPoints = healthPoints;
         this.weapons = weapons;
     }

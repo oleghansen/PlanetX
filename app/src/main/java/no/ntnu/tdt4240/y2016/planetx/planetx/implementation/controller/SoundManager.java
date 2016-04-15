@@ -8,9 +8,7 @@ import android.util.Log;
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 
 
-/**
- * Created by Petter on 15.04.2016.
- */
+
 public class SoundManager {
 
     private static SoundManager instance = new SoundManager();
@@ -44,14 +42,14 @@ public class SoundManager {
             return;
         }
 
-        /*try {
+        try {
             //Chooses audio file
-         //   mainTheme.setDataSource(context,
-           //         Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.main_theme));
+            mainTheme.setDataSource(context,
+                    Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.main_theme));
         } catch (Exception e) {
             Log.d("Sound", e.toString());
         }
-*/
+
         //Starts playing song
         mainTheme.start();
 
@@ -84,14 +82,14 @@ public class SoundManager {
         //Create a new sound effect
         MediaPlayer mpSound = new MediaPlayer();
 
-        /*try {
+        try {
             //Chooses sound effect
-           // mpSound.setDataSource(context,
-             //       Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.short2));
+            mpSound.setDataSource(context,
+                   Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.short2));
         } catch (Exception e) {
             Log.d("Sound", e.toString());
         }
-*/
+
         //Start playing
         //Stops when audio is finished playing
         mpSound.start();

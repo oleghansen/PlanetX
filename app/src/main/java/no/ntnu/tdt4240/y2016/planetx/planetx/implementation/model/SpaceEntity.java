@@ -11,9 +11,6 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 
-/**
- * Created by Ole on 02.04.2016.
- */
 
 public abstract class SpaceEntity extends ImageView {
 
