@@ -66,8 +66,7 @@ public class MenuActivity extends AppMenu {
         try {
            JSONArray array = new JSONArray(byteArrayOutputStream.toString());
             for (int i = 0; i < array.length(); i++) {
-                    JsonMapReader jmr = new JsonMapReader(array.getString(i));
-                    mapNames.add(jmr.getName());
+                mapNames.add(array.getJSONObject(i).getString("name"));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -87,6 +86,7 @@ public class MenuActivity extends AppMenu {
     public void startGame(Map map) {
         Toast.makeText(this, "Starting game on map " + map.getName(), Toast.LENGTH_SHORT).show();
 
+
         goTo(GameActivity.class);
         //TODO: create new game instance
     }
@@ -94,7 +94,8 @@ public class MenuActivity extends AppMenu {
     public void startGame(String mapName) {
         Toast.makeText(this, "Starting game on map " + mapName, Toast.LENGTH_SHORT).show();
 
-        goTo(GameActivity.class);
+        goToWithMap(GameActivity.class,mapName);
+//        goTo(GameActivity.class);
         //TODO: create new game instance
     }
 

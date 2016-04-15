@@ -4,15 +4,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.Map;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.Spaceship;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.JsonPlanet;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.JsonShip;
 
 /**
  * Created by Anders on 15.04.2016.
  */
-public class JsonMapReader {
+public class JsonMapReader implements Serializable {
     private String name;
     private ArrayList<JsonPlanet> planets = new ArrayList<>();
     private JsonShip ship1;
@@ -47,15 +50,23 @@ public class JsonMapReader {
         return name;
     }
 
-    public ArrayList<JsonPlanet> getPlanets() {
+    public ArrayList<JsonPlanet> getJsonPlanets() {
         return planets;
     }
 
-    public JsonShip getShip1() {
+    public JsonShip getJsonShip1() {
         return ship1;
     }
 
-    public JsonShip getShip2() {
+    public JsonShip getJsonShip2() {
         return ship2;
+    }
+
+    public Spaceship getShip1(Map map) {
+        return null;
+    }
+
+    public Spaceship getShip2(Map map) {
+        return null;
     }
 }
