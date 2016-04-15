@@ -146,5 +146,15 @@ public class LoadingActivity extends AppMenu implements GoogleApiClient.Connecti
     @Override
     public void onConnectionSuspended(int i) {
 
+        /* Use this space to do all loading/preparation needed before accessing main menu */
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        goToAndFinishCurrent(MenuActivity.class);
+
     }
 }
