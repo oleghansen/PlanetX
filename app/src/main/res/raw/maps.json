@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Canis Major",
+    "obstacles": [
+      {
+        "type": "planet",
+        "img":"earth",
+        "normal": true,
+        "size": 1,
+        "posX": 50.0,
+        "posY": 50.0
+      }
+    ],
+    "ship1": {
+      "posX": 10.0,
+      "posY": 10.0
+    },
+    "ship2": {
+      "posX": 90.0,
+      "posY": 90.0
+    }
+  },
+  {
+    "name": "Sagittarius",
+    "obstacles": [
+      {
+        "type": "planet",
+        "img":"earth",
+        "normal": true,
+        "size": 4,
+        "posX": 25.0,
+        "posY": 25.0
+      }
+    ],
+    "ship1": {
+      "posX": 10.0,
+      "posY": 10.0
+    },
+    "ship2": {
+      "posX": 90.0,
+      "posY": 90.0
+    }
+  },
+  {
+    "name": "Crab Nebula",
+    "obstacles": [
+      {
+        "type": "planet",
+        "img":"earth",
+        "normal": true,
+        "size": 1,
+        "posX": 50.0,
+        "posY": 50.0
+      },
+      {
+        "type": "planet",
+        "img":"earth",
+        "normal": true,
+        "size": 3,
+        "posX": 80.0,
+        "posY": 50.0
+      },
+      {
+        "type": "planet",
+        "img":"earth",
+        "normal": true,
+        "size": 4,
+        "posX": 25.0,
+        "posY": 25.0
+      }
+    ],
+    "ship1": {
+      "posX": 10.0,
+      "posY": 10.0
+    },
+    "ship2": {
+      "posX": 90.0,
+      "posY": 90.0
+    }
+  },
+  {
+    "name": "Nebula",
+    "obstacles": [
+      {
+        "type": "planet",
+        "img":"earth",
+        "normal": true,
+        "size": 3,
+        "posX": 80.0,
+        "posY": 50.0
+      },
+      {
+        "type": "planet",
+        "img":"earth",
+        "normal": true,
+        "size": 4,
+        "posX": 25.0,
+        "posY": 25.0
+      }
+    ],
+    "ship1": {
+      "posX": 10.0,
+      "posY": 10.0
+    },
+    "ship2": {
+      "posX": 90.0,
+      "posY": 90.0
+    }
+  }
+]
