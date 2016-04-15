@@ -27,7 +27,14 @@ public abstract class AppMenu extends AppCompatActivity {
         Intent intent = new Intent(this, javaClass);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
-        finish(); //Ends the previous activity
+        overridePendingTransition(0, 0);
+    }
+
+    public void goToAndFinishCurrent(Class javaClass) {
+        Intent intent = new Intent(this, javaClass);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
+        finish();
         overridePendingTransition(0, 0);
     }
 
