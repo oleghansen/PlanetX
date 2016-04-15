@@ -39,7 +39,9 @@ public class MenuActivity extends AppMenu {
     }
 
     public void click_signOut(View view) {
-        LoadingActivity.mGoogleApiClient.disconnect();
+        //LoadingActivity.mGoogleApiClient.disconnect();
+        LoadingActivity.mExplicitSignOut=true;
+        setContentView(R.layout.activity_main);
         goTo(LoadingActivity.class);
     }
 

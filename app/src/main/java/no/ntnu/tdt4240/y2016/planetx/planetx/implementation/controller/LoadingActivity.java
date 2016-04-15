@@ -25,7 +25,7 @@ public class LoadingActivity extends AppMenu implements GoogleApiClient.Connecti
     private boolean mResolvingConnectionFailure = false;
     private boolean mAutoStartSignInflow = true;
     private boolean mSignInClicked = false;
-    boolean mExplicitSignOut = false;
+    static boolean mExplicitSignOut = false;
     boolean mInSignInFlow = false; // set to true when you're in the middle of the
     // sign in flow, to know you should not attempt
     // to connect in onStart()
@@ -39,25 +39,26 @@ public class LoadingActivity extends AppMenu implements GoogleApiClient.Connecti
         mGoogleApiClient = new GoogleApiClient.Builder(this, this, this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
-                .addApi(Games.API).addScope(Games.SCOPE_GAMES)
+                .addApi(Games.API)
                         // add other APIs and scopes here as needed
                 .build();
-
-
-       SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
-        signInButton.setOnClickListener(this);
-
+        
+        findViewById(R.id.sign_in_button).setOnClickListener(this);
         findViewById(R.id.sign_out_button).setOnClickListener(this);
 
 
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             // signed in. Show the "sign out" button and explanation.
             // ...
+            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+            findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
 
         } else {
             // not signed in. Show the "sign in" button and explanation.
             // ...
            // findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+            findViewById(R.id.sign_out_button).setVisibility(View.GONE);
         }
 
     }
@@ -66,6 +67,8 @@ public class LoadingActivity extends AppMenu implements GoogleApiClient.Connecti
         return (mGoogleApiClient != null && mGoogleApiClient.isConnected());
     }
 
+
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -73,6 +76,12 @@ public class LoadingActivity extends AppMenu implements GoogleApiClient.Connecti
             // auto sign in
             mGoogleApiClient.connect();
             if(isSignedIn())goTo(MenuActivity.class);
+        }
+        else if(mExplicitSignOut){
+            mSignInClicked = false;
+            if(mGoogleApiClient.isConnected()) {
+                Games.signOut(mGoogleApiClient);
+            }
         }
     }
 
