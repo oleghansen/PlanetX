@@ -3,7 +3,7 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model;
 import android.content.Context;
 
 
-public class Weapon extends SpaceEntity {
+public abstract class Weapon extends SpaceEntity {
 
     private double damage;
     private String name, description;
@@ -14,7 +14,5 @@ public class Weapon extends SpaceEntity {
         this.name = name;
         this.description = name;
     }
-    public void collides (SpaceEntity spaceEntity) {
 
-    }
 }
