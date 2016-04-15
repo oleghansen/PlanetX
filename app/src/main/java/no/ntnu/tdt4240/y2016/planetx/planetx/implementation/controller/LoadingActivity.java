@@ -21,7 +21,7 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.framework.AppMenu;
  */
 public class LoadingActivity extends AppMenu implements GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
     private static int RC_SIGN_IN = 9001;
-    private GoogleApiClient mGoogleApiClient;
+    public static GoogleApiClient mGoogleApiClient;
     private boolean mResolvingConnectionFailure = false;
     private boolean mAutoStartSignInflow = true;
     private boolean mSignInClicked = false;
@@ -36,7 +36,7 @@ public class LoadingActivity extends AppMenu implements GoogleApiClient.Connecti
         setContentView(R.layout.activity_main);
 
         // Create the Google Api Client with access to the Play Games services
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+        mGoogleApiClient = new GoogleApiClient.Builder(this, this, this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(Games.API).addScope(Games.SCOPE_GAMES)
@@ -53,11 +53,11 @@ public class LoadingActivity extends AppMenu implements GoogleApiClient.Connecti
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             // signed in. Show the "sign out" button and explanation.
             // ...
-            goTo(MenuActivity.class);
+
         } else {
             // not signed in. Show the "sign in" button and explanation.
             // ...
-            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+           // findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
         }
 
     }
@@ -72,6 +72,7 @@ public class LoadingActivity extends AppMenu implements GoogleApiClient.Connecti
         if (!mInSignInFlow && !mExplicitSignOut) {
             // auto sign in
             mGoogleApiClient.connect();
+            if(isSignedIn())goTo(MenuActivity.class);
         }
     }
 
@@ -89,6 +90,7 @@ public class LoadingActivity extends AppMenu implements GoogleApiClient.Connecti
             // start the asynchronous sign in flow
             mSignInClicked = true;
             mGoogleApiClient.connect();
+            if(isSignedIn()) goTo(MenuActivity.class);
         }
         else if (view.getId() == R.id.sign_out_button) {
             // sign out.
@@ -134,8 +136,9 @@ public class LoadingActivity extends AppMenu implements GoogleApiClient.Connecti
     public void onConnected(Bundle bundle) {
 
         //   show sign-out button, hide the sign-in button
-        findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-        findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
+        //findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+       // findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
+        goTo(MenuActivity.class);
 
         // (your code here: update UI, enable functionality that depends on sign in, etc)
     }

@@ -38,6 +38,11 @@ public class MenuActivity extends AppMenu {
         selectMapDialog();
     }
 
+    public void click_signOut(View view) {
+        LoadingActivity.mGoogleApiClient.disconnect();
+        setContentView(R.layout.activity_menu);
+    }
+
     /**
      * This method starts a new game.
      * @param map
