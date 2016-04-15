@@ -11,10 +11,29 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    signingConfigs{
+        debug{
+            storeFile file("keystore/debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+        release{
+            storeFile file("keystore/planetx-release-key.keystore")
+            storePassword "Passord.00"
+            keyAlias "planetx"
+            keyPassword "Passord.00"
+        }
+
+    }
     buildTypes {
+        debug{
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
