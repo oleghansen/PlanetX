@@ -18,8 +18,7 @@ public abstract class SpaceObstacle extends SpaceEntity {
 
 
     public SpaceObstacle(Context context, double grav, double radius) {
-        super(context);
-        this.radius = radius;
+        super(context, radius);
         gravity = grav;
     }
 

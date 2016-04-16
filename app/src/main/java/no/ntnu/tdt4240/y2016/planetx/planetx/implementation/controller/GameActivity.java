@@ -8,6 +8,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,6 +19,8 @@ import java.io.InputStream;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 import no.ntnu.tdt4240.y2016.planetx.planetx.framework.AppMenu;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.View.MapView;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.Map;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.JsonMapReader;
 
@@ -32,6 +35,9 @@ import com.google.example.games.basegameutils.BaseGameUtils;
  * Created by Ole on 11.04.2016.
  */
 public class GameActivity extends AppMenu {
+    private GameModel gameModel;
+    private GameController gameController;
+
     @Override
     public void onCreate(Bundle savedInstanceBundle) {
         super.onCreate(savedInstanceBundle);
@@ -39,59 +45,17 @@ public class GameActivity extends AppMenu {
 
         Intent i = getIntent();
         String mapName = (String) i.getSerializableExtra("MapName");
-        JsonMapReader jmr = getJsonMapByName(mapName);
+
+        JsonMapReader jmr = JsonMapReader.getMapReader(mapName, getApplicationContext(), getWindowManager());
 
         if(jmr == null){
-            // TODO: Map med det navnet finnes ikke, gi feilmelding og gå til MenuActivity
+            Toast.makeText(this, "An error occurred with the map " +mapName, Toast.LENGTH_LONG).show();
+            finish();
         }
 
+        gameModel = new GameModel(getApplicationContext(), jmr);
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.activity_layout);
-        Map map = new Map(this);
-        map.setLayoutParams(new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.MATCH_PARENT));
-        rl.addView(map);
-
-        map.initializeMap(jmr);
-    }
-
-    private JsonMapReader getJsonMapByName(String mapName) {
-
-        InputStream inputStream = getResources().openRawResource(R.raw.maps);
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-
-        int ctr;
-        try {
-            ctr = inputStream.read();
-            while (ctr != -1) {
-                byteArrayOutputStream.write(ctr);
-                ctr = inputStream.read();
-            }
-            inputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.d("JSONError", "Error with StreamReader");
-            return null;
-        }
-
-        try {
-            JSONArray array = new JSONArray(byteArrayOutputStream.toString());
-            for (int i = 0; i < array.length(); i++) {
-                if(array.getJSONObject(i).getString("name").equals(mapName)){
-                    Display display = getWindowManager().getDefaultDisplay();
-                    Point size = new Point();
-                    display.getSize(size);
-                    int width = size.x;
-                    int height = size.y;
-
-                    return new JsonMapReader(array.getString(i), width, height);
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Log.d("JSONError","Error with JsonMapReader");
-            return null;
-        }
-        return null;
+        rl.addView(gameModel.getMapView());
+        gameModel.initializeMap();
     }
 }

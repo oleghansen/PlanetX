@@ -19,7 +19,7 @@ public abstract class SpaceEntity extends ImageView {
 
     protected double radius;
 
-    public SpaceEntity(Context context) {
+    public SpaceEntity(Context context, double radius) {
         super(context);
         this.radius = radius;
         setAdjustViewBounds(true);

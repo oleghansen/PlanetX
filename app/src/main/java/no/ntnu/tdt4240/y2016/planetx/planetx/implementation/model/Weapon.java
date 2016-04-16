@@ -1,6 +1,11 @@
 package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Canvas;
+import android.os.CountDownTimer;
+
+import java.util.Timer;
 
 
 public abstract class Weapon extends SpaceEntity {
@@ -10,11 +15,24 @@ public abstract class Weapon extends SpaceEntity {
     private String name, description;
 
     public Weapon(Context context, int shots, double damage, String name, String description) {
-        super(context);
+        super(context, 50);
         this.shots = shots;
         this.damage = damage;
         this.name = name;
         this.description = description;
+    }
+
+    public void startMove(){
+        final Weapon w = this;
+        new CountDownTimer(900000, 10) {
+            public void onTick(long l) {
+                w.invalidate();
+            }
+
+            public void onFinish() {
+              w.invalidate();
+            }
+        }.start();
     }
 
     public void setVelocityX(double velocity) {
@@ -25,7 +43,7 @@ public abstract class Weapon extends SpaceEntity {
         return velocityX;
     }
 
-    public void setVelY(double velocity) {
+    public void setVelocityY(double velocity) {
         velocityY = velocity;
     }
 
@@ -33,5 +51,11 @@ public abstract class Weapon extends SpaceEntity {
         return velocityY;
     }
 
+    @Override
+    public void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        setX(getX()+(float)velocityX);
+        setY(getY()+(float)velocityY);
 
+    }
 }

@@ -28,6 +28,7 @@ public class Spaceship extends SpaceEntity {
         super(context, radius);
         this.healthPoints = healthPoints;
         this.weapons = weapons;
+        this.radius = radius;
     }
 
     public ArrayList<Weapon> getWeapons() {
@@ -50,18 +51,38 @@ public class Spaceship extends SpaceEntity {
         return firPower;
     }
 
-
-    private float flipDeg = 0;
+    private double fireAngle = -90;
 
     public void flipTowardsTouch(View v, MotionEvent e) {
         double difX = e.getX() - getCenterX();
         double difY = e.getY() - getCenterY();
-        double angle = Math.atan(difY / difX) * 360 / (2 * 3.14) + 90;
-        if (difX < 0) angle += 180;
+        fireAngle = Math.atan(difY / difX) * 360 / (2 * 3.14) + 90;
+        if (difX < 0) fireAngle += 180;
 
         Matrix matrix = new Matrix();
-        matrix.preRotate((float) angle, getWidth() / 2, getHeight() / 2);
+        matrix.preRotate((float) fireAngle, getWidth() / 2, getHeight() / 2);
         this.setScaleType(ImageView.ScaleType.MATRIX);
         this.setImageMatrix(matrix);
+    }
+
+    public Missile fireTestShot(int power) {
+        double pow = power * 0.15 + 15;
+        Missile m = new Missile(getContext());
+
+        m.setX((float) getCenterX());
+        m.setY((float) getCenterY());
+
+//        Matrix matrix = new Matrix();
+//        matrix.preRotate((float) fireAngle, m.getWidth() / 2, m.getHeight() / 2);
+//        m.setScaleType(ImageView.ScaleType.MATRIX);
+//        m.setImageMatrix(matrix);
+
+        double fireRad = (fireAngle - 90) * 2 * 3.14 / 360;
+        double xVel = Math.cos(fireRad) * pow;
+        double yVel = Math.sin(fireRad) * pow;
+
+        m.setVelocityX(xVel);
+        m.setVelocityY(yVel);
+        return m;
     }
 }

@@ -41,44 +41,14 @@ public class MenuActivity extends AppMenu {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        readMaps();
 
+        mapNames = JsonMapReader.getMapList(getApplicationContext());
         mapListView = new ListView(this);
-    }
-
-    private void readMaps() {
-        InputStream inputStream = getResources().openRawResource(R.raw.maps);
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-
-        int ctr;
-        try {
-            ctr = inputStream.read();
-            while (ctr != -1) {
-                byteArrayOutputStream.write(ctr);
-                ctr = inputStream.read();
-            }
-            inputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.d("JSONError", "Error with StreamReader");
-            return;
-        }
-
-        try {
-           JSONArray array = new JSONArray(byteArrayOutputStream.toString());
-            for (int i = 0; i < array.length(); i++) {
-                mapNames.add(array.getJSONObject(i).getString("name"));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Log.d("JSONError","Error with JsonMapReader");
-        }
     }
 
     public void click_startGame(View view) {
         selectMapDialog();
     }
-
 
     public void click_signOut(View view) {
         //LoadingActivity.mGoogleApiClient.disconnect();
@@ -87,23 +57,10 @@ public class MenuActivity extends AppMenu {
         goTo(LoadingActivity.class);
     }
 
-    /**
-     * This method starts a new game.
-     * @param map
-     */
-    public void startGame(Map map) {
-        Toast.makeText(this, "Starting game on map " + map.getName(), Toast.LENGTH_SHORT).show();
-
-        goTo(GameActivity.class);
-        //TODO: create new game instance
-    }
-
     public void startGame(String mapName) {
         Toast.makeText(this, "Starting game on map " + mapName, Toast.LENGTH_SHORT).show();
 
         goToWithMap(GameActivity.class,mapName);
-//        goTo(GameActivity.class);
-        //TODO: create new game instance
     }
 
     /**
