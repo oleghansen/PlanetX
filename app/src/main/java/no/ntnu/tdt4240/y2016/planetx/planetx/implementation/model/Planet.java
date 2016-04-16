@@ -9,11 +9,8 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.Jso
 
 public class Planet extends SpaceObstacle {
 
-    public static final double GRAVITY = 9.81;
-    public static double RADIUS = 20;
-
-    public Planet(Context context, double gravity) {
-        super(context, gravity);
+    public Planet(Context context, double gravity, double radius) {
+        super(context, gravity, radius);
     }
 
     public void collides(SpaceEntity spaceO) {
@@ -26,6 +23,6 @@ public class Planet extends SpaceObstacle {
         int drawableId = getContext().getResources().getIdentifier(json.getImgName(), "drawable", getContext().getPackageName());
         setImageBitmap(BitmapFactory.decodeResource(getResources(), drawableId));
 
-        setMaxWidth((int)(Planet.RADIUS * json.getSize()));
+        setMaxWidth((int) (SpaceObstacle.RADIUS * 2 * json.getSize()));
     }
 }

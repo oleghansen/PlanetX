@@ -1,5 +1,7 @@
 package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.Space;
 
@@ -8,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
@@ -21,6 +24,8 @@ public class JsonMapReader implements Serializable {
     private int width, height;
 
     private String name;
+    private ArrayList<JsonWeapon> weapons = new ArrayList<>();
+
     private ArrayList<JsonPlanet> planets = new ArrayList<>();
     private ArrayList<JsonWormhole> wormholes = new ArrayList<>();
     private JsonShip ship1;
@@ -30,14 +35,30 @@ public class JsonMapReader implements Serializable {
     public JsonMapReader(String jsonString, int width, int height) throws JSONException {
         this.width = width;
         this.height = height;
-        Planet.RADIUS = Planet.RADIUS * width / 100;
+        SpaceObstacle.RADIUS = SpaceObstacle.RADIUS * height / 100;
 
         JSONObject json = new JSONObject(jsonString);
         parseJson(json);
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     private void parseJson(JSONObject json) throws JSONException {
         name = json.getString("name");
+
+        JSONArray weap = json.getJSONArray("weapons");
+        for (int i = 0; i < weap.length(); i++) {
+            JSONObject we = weap.getJSONObject(i);
+            JsonWeapon weapon = new JsonWeapon(we);
+            weapons.add(weapon);
+        }
+
         JSONArray obst = json.getJSONArray("obstacles");
         for (int i = 0; i < obst.length(); i++) {
             JSONObject ob = obst.getJSONObject(i);
@@ -62,20 +83,37 @@ public class JsonMapReader implements Serializable {
         return name;
     }
 
+    private ArrayList<Weapon> getWeaponList(Context context) {
+        ArrayList<Weapon> weps = new ArrayList<>();
+        for (JsonWeapon w : weapons) {
+            switch (w.getType()) {
+                case "bazooka":
+//                    Bazooka b = new Bazooka(context, w.getShots());
+//                    weps.add(b);
+                    break;
+
+                default: //missile
+                    Missile m = new Missile(context);
+                    weps.add(m);
+                    break;
+            }
+        }
+        return weps;
+    }
+
     private Spaceship getShip(Map map, boolean shipOne) {
         JsonShip thisShip = ship1;
         if (!shipOne) {
             thisShip = ship2;
         }
 
-        //TODO: Get weapon list from somewhere...?
-        ArrayList<Weapon> weaponList = new ArrayList<>();
-        weaponList.add(new Missile(map.getContext(), 15, "Missile", "Missile"));
+        ArrayList<Weapon> weaponList = getWeaponList(map.getContext());
 
-        Spaceship ship = new Spaceship(map.getContext(), 100, weaponList);
-
+        double radius = width * 0.05;
+        Spaceship ship = new Spaceship(map.getContext(), radius, 100, weaponList);
+        Bitmap b = BitmapFactory.decodeResource(map.getResources(), R.drawable.ship);
         ship.setParameters(thisShip);
-        ship.setImageBitmap(BitmapFactory.decodeResource(ship.getResources(), R.drawable.ship));
+        ship.setImageBitmap(b);
 
         return ship;
     }
@@ -92,9 +130,10 @@ public class JsonMapReader implements Serializable {
         ArrayList<SpaceObstacle> obstacles = new ArrayList<>();
         for (JsonPlanet p : this.planets) {
             //TODO: Determine gravity based on planet size
-            double gravity = Planet.GRAVITY * p.getSize();
+            double gravity = SpaceObstacle.GRAVITY * p.getSize();
+            double radius = SpaceObstacle.RADIUS * p.getSize() / 2;
 
-            Planet planet = new Planet(map.getContext(), gravity);
+            Planet planet = new Planet(map.getContext(), gravity, radius);
             planet.setParameters(p);
             obstacles.add(planet);
         }

@@ -5,8 +5,8 @@ import android.content.Context;
 
 public class Wormhole extends SpaceObstacle {
 
-    public Wormhole(Context context, double gravity){
-        super(context, gravity);
+    public Wormhole(Context context, double gravity, double radius){
+        super(context, gravity, radius);
     }
 
     public void collides(SpaceEntity spaceO){

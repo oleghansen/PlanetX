@@ -2,6 +2,12 @@
 //  MAP 1
   {
     "name": "Canis Major",
+    "weapons":[
+      {
+        "type":"missile",
+        "shots":-1
+      }
+    ],
     "obstacles": [
       {
         "type": "planet",
@@ -25,6 +31,12 @@
 //  MAP 2
   {
     "name": "Crab Nebula",
+    "weapons":[
+      {
+        "type":"missile",
+        "shots":-1
+      }
+    ],
     "obstacles": [
       {
         "type": "planet",
@@ -36,7 +48,7 @@
       },
       {
         "type": "planet",
-        "img":"earth",
+        "img":"shine",
         "normal": true,
         "size": 2,
         "posX": 80.0,
@@ -44,7 +56,7 @@
       },
       {
         "type": "planet",
-        "img":"earth",
+        "img":"shine",
         "normal": true,
         "size": 1.5,
         "posX": 25.0,
@@ -63,12 +75,18 @@
 //  MAP 3
   {
     "name": "Sagittarius",
+    "weapons":[
+      {
+        "type":"missile",
+        "shots":-1
+      }
+    ],
     "obstacles": [
       {
         "type": "planet",
-        "img":"earth",
+        "img":"blue",
         "normal": true,
-        "size": 0.9,
+        "size": 1.9,
         "posX": 80.0,
         "posY": 50.0
       },
