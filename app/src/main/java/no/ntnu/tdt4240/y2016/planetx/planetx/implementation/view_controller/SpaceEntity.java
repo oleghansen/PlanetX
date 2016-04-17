@@ -2,8 +2,11 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller;
 
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.JsonEntity;
 
@@ -16,7 +19,15 @@ public abstract class SpaceEntity extends ImageView {
         super(context);
         this.radius = radius;
         setAdjustViewBounds(true);
-        setMaxWidth((int) (radius * 2));
+        this.setLayoutParams(new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT));
+
+        if (radius > 0) {
+            setMaxWidth((int) (radius * 2));
+            getLayoutParams().width = (int) (radius * 2);
+            getLayoutParams().height = (int) (radius * 2);
+        }
     }
 
     public boolean collidesWith(SpaceEntity object) {
@@ -37,10 +48,6 @@ public abstract class SpaceEntity extends ImageView {
     public void setParameters(JsonEntity json) {
         setX((float) json.getX());
         setY((float) json.getY());
-    }
-
-    public void setRadius(double r) {
-        radius = r;
     }
 
     public double getRadius() {

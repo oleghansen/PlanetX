@@ -18,6 +18,7 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
  */
 public class MapView extends RelativeLayout {
     private GameModel gameModel;
+    private RelativeLayout parentLayout;
 
     private ImageView lockButton;
     private ImageView fireButton;
@@ -32,7 +33,7 @@ public class MapView extends RelativeLayout {
         OnTouchListener otl = new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent e) {
-                gameModel.touch_map(v,e);
+                gameModel.touch_map(v, e);
                 return true;
             }
         };
@@ -41,13 +42,17 @@ public class MapView extends RelativeLayout {
         initializeButtons();
     }
 
-    private void initializeButtons(){
+    public void setParentLayout(RelativeLayout parentLayout) {
+        this.parentLayout = parentLayout;
+    }
+
+    private void initializeButtons() {
         initializeFireButton();
         initializeLockButton();
     }
-    private ImageView initializeBottomButton(Bitmap bitmap, OnClickListener ocl){
+
+    private ImageView initializeBottomButton(Bitmap bitmap, OnClickListener ocl) {
         ImageView img = new ImageView(this.getContext());
-//        img.setBaselineAlignBottom(true);
         img.setAdjustViewBounds(true);
 
         img.setMaxHeight(100);
@@ -62,21 +67,23 @@ public class MapView extends RelativeLayout {
         img.setLayoutParams(lp);
         return img;
     }
+
     private void initializeFireButton() {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.fire);
-        OnClickListener ocl = new OnClickListener(){
+        OnClickListener ocl = new OnClickListener() {
             @Override
             public void onClick(View v) {
                 gameModel.click_fireButton(v);
             }
         };
 
-        this.fireButton = initializeBottomButton(bitmap,ocl);
+        this.fireButton = initializeBottomButton(bitmap, ocl);
     }
-    private void initializeLockButton(){
+
+    private void initializeLockButton() {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.lock);
 
-        OnClickListener ocl = new OnClickListener(){
+        OnClickListener ocl = new OnClickListener() {
             @Override
             public void onClick(View v) {
                 gameModel.click_lockButton(v);
@@ -85,26 +92,33 @@ public class MapView extends RelativeLayout {
         this.lockButton = initializeBottomButton(bitmap, ocl);
     }
 
-    public void showFireButton(){
+    public void showFireButton() {
         this.removeView(lockButton);
         this.addView(fireButton);
     }
-    public void showLockButton(){
+
+    public void showLockButton() {
         this.removeView(fireButton);
         this.addView(lockButton);
     }
 
-    public void initializeMap(ArrayList<SpaceEntity> entities){
-        for(SpaceEntity entity: entities){
-            addToView(entity);
+    public void initializeMap(ArrayList<SpaceEntity> entities) {
+        for (SpaceEntity entity : entities) {
+            addView(entity);
         }
         showLockButton();
     }
+
     public void addToView(View v) {
         v.setLayoutParams(new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT));
         this.addView(v);
+    }
+
+    private void zoomOut(){
+        setScaleX(0.5f);
+        setScaleY(0.5f);
     }
 
     public void fireTestShot(Missile missile) {
