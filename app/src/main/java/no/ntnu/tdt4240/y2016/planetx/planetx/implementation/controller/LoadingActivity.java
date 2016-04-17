@@ -22,7 +22,7 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.framework.AppMenu;
  */
 public class LoadingActivity extends AppMenu implements GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
     private static int RC_SIGN_IN = 9001;
-    public static GoogleApiClient mGoogleApiClient;
+    public GoogleApiClient mGoogleApiClient;
     private boolean mResolvingConnectionFailure = false;
     private boolean mAutoStartSignInflow = true;
     private boolean mSignInClicked = false;
@@ -43,7 +43,8 @@ public class LoadingActivity extends AppMenu implements GoogleApiClient.Connecti
                 .addApi(Games.API)
                         // add other APIs and scopes here as needed
                 .build();
-        
+
+        mGoogleApiClient.connect();
         findViewById(R.id.sign_in_button).setOnClickListener(this);
         findViewById(R.id.sign_out_button).setOnClickListener(this);
 
