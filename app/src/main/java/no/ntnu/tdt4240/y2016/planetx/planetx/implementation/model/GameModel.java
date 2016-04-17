@@ -40,6 +40,7 @@ public class GameModel {
     public void initializeMap() {
         ArrayList<SpaceEntity> entities = new ArrayList<>();
         entities.addAll(spaceObstacles);
+
         entities.addAll(spaceships);
         mapView.initializeMap(entities);
     }
