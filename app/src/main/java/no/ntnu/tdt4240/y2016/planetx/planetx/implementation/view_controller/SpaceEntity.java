@@ -1,18 +1,11 @@
-package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model;
+package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller;
 
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.Image;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
-
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.JsonEntity;
-import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.JsonShip;
 
 
 public abstract class SpaceEntity extends ImageView {

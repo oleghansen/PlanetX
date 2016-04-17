@@ -2,13 +2,17 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model;
 
 
 import android.content.Context;
+import android.view.MotionEvent;
+import android.view.View;
 
 
 import java.util.ArrayList;
 
-import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.View.MapView;
-import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller.GameController;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.MapView;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.JsonMapReader;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.SpaceEntity;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.SpaceObstacle;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Spaceship;
 
 public class GameModel {
     private ArrayList<SpaceObstacle> spaceObstacles = new ArrayList<>();
@@ -26,8 +30,7 @@ public class GameModel {
             spaceships.add(sp);
         }
 
-        GameController gameController = new GameController(this);
-        mapView = new MapView(context, gameController);
+        mapView = new MapView(context, this);
     }
 
     public MapView getMapView() {
@@ -41,7 +44,31 @@ public class GameModel {
         mapView.initializeMap(entities);
     }
 
-    public ArrayList<Spaceship> getShips() {
-        return spaceships;
+    public Spaceship getCurrentShip() {
+        //TODO: Implement turn logic and return correct ship
+        return spaceships.get(0);
+    }
+
+    public void click_fireButton(View v) {
+        isLocked = false;
+        Spaceship s = getCurrentShip()
+                ;
+        mapView.fireTestShot(s.fireTestShot(100));
+
+        mapView.showLockButton();
+    }
+
+
+    public void click_lockButton(View v) {
+        isLocked = true;
+        mapView.showFireButton();
+    }
+
+    private boolean isLocked = false;
+
+    public void touch_map(View v, MotionEvent e) {
+        if (isLocked) return;
+        Spaceship s = getCurrentShip();
+        s.flipTowardsTouch(v, e);
     }
 }

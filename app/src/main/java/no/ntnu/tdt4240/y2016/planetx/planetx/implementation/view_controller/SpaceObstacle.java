@@ -1,12 +1,6 @@
-package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model;
+package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller;
 
 import android.content.Context;
-import android.graphics.Matrix;
-import android.media.Image;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.ImageView;
 
 
 public abstract class SpaceObstacle extends SpaceEntity {

@@ -10,16 +10,27 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.JsonMapReader;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.SpaceEntity;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.SpaceObstacle;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Spaceship;
 
 /**
- * Created by Ole on 31.03.2016.
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * GAMMEL KLASSE, SKAL SLETETS
+ * ANDERS SLETTER DENNE KLASSEN NÅR HAN IKKE TRENGER DEN LENGRE
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  */
 public class Map extends RelativeLayout {
     private String name;
     private ArrayList<Spaceship> spaceships = new ArrayList<>();
     private ArrayList<SpaceObstacle> spaceObstacles = new ArrayList<>();
     private ImageView fireButton;
-
+    /**
+     * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     * GAMMEL KLASSE, SKAL SLETETS
+     * ANDERS SLETTER DENNE KLASSEN NÅR HAN IKKE TRENGER DEN LENGRE
+     * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     */
     public Map(Context context) {
         super(context);
 
@@ -33,7 +44,12 @@ public class Map extends RelativeLayout {
         });
 
     }
-
+    /**
+     * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     * GAMMEL KLASSE, SKAL SLETETS
+     * ANDERS SLETTER DENNE KLASSEN NÅR HAN IKKE TRENGER DEN LENGRE
+     * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     */
     public void initializeMap(JsonMapReader jrm){
         for(SpaceObstacle so: jrm.getObstacles(getContext())){
             spaceObstacles.add(so);
@@ -50,7 +66,12 @@ public class Map extends RelativeLayout {
 
         addFireButton();
     }
-
+    /**
+     * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     * GAMMEL KLASSE, SKAL SLETETS
+     * ANDERS SLETTER DENNE KLASSEN NÅR HAN IKKE TRENGER DEN LENGRE
+     * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     */
     private void addFireButton() {
         ImageView img = new ImageView(this.getContext());
         img.setBaselineAlignBottom(true);
@@ -72,19 +93,34 @@ public class Map extends RelativeLayout {
         this.addView(img, lp);
         this.fireButton = img;
     }
-
+    /**
+     * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     * GAMMEL KLASSE, SKAL SLETETS
+     * ANDERS SLETTER DENNE KLASSEN NÅR HAN IKKE TRENGER DEN LENGRE
+     * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     */
     private void addToView(SpaceEntity se) {
         se.setLayoutParams(new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT));
         this.addView(se);
     }
-
+    /**
+     * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     * GAMMEL KLASSE, SKAL SLETETS
+     * ANDERS SLETTER DENNE KLASSEN NÅR HAN IKKE TRENGER DEN LENGRE
+     * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     */
     public String getName(){
         return name;
     }
 
     //TODO: read method
     //TODO: draw method
-
 }
+/**
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * GAMMEL KLASSE, SKAL SLETETS
+ * ANDERS SLETTER DENNE KLASSEN NÅR HAN IKKE TRENGER DEN LENGRE
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ */

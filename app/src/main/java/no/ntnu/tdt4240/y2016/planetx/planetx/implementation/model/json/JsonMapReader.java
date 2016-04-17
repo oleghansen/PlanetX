@@ -7,7 +7,6 @@ import android.graphics.Point;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
-import android.widget.Space;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,12 +16,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
-import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.*;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.*;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Missile;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Planet;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.SpaceObstacle;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Spaceship;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Weapon;
 
 /**
  * Created by Anders on 15.04.2016.

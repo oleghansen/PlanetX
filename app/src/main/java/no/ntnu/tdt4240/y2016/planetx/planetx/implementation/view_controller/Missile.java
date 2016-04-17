@@ -1,9 +1,8 @@
-package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model;
+package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller;
 
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 

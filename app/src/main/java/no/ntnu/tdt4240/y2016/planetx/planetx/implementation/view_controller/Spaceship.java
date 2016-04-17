@@ -1,19 +1,12 @@
-package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model;
+package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller;
 
 import android.content.Context;
 import android.graphics.Matrix;
-import android.media.Image;
-import android.os.PowerManager;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.JsonShip;
 
 
 public class Spaceship extends SpaceEntity {

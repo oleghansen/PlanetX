@@ -1,11 +1,8 @@
-package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model;
+package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.CountDownTimer;
-
-import java.util.Timer;
 
 
 public abstract class Weapon extends SpaceEntity {

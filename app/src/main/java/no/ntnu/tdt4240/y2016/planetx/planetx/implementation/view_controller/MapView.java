@@ -1,4 +1,4 @@
-package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.View;
+package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -7,29 +7,24 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
-import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller.GameController;
-import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.Missile;
-import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.SpaceEntity;
-import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.Weapon;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
 
 /**
  * Created by Anders on 16.04.2016.
  */
 public class MapView extends RelativeLayout {
-    private GameController gameController;
+    private GameModel gameModel;
 
     private ImageView lockButton;
     private ImageView fireButton;
 
-    public MapView(Context context, GameController gm) {
+    public MapView(Context context, GameModel gm) {
         super(context);
-        gameController = gm;
-
+        this.gameModel = gm;
         setLayoutParams(new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT));
@@ -37,7 +32,7 @@ public class MapView extends RelativeLayout {
         OnTouchListener otl = new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent e) {
-                gameController.touch_map(v, e);
+                gameModel.touch_map(v,e);
                 return true;
             }
         };
@@ -72,7 +67,7 @@ public class MapView extends RelativeLayout {
         OnClickListener ocl = new OnClickListener(){
             @Override
             public void onClick(View v) {
-                gameController.click_fireButton(v);
+                gameModel.click_fireButton(v);
             }
         };
 
@@ -84,7 +79,7 @@ public class MapView extends RelativeLayout {
         OnClickListener ocl = new OnClickListener(){
             @Override
             public void onClick(View v) {
-                gameController.click_lockButton(v);
+                gameModel.click_lockButton(v);
             }
         };
         this.lockButton = initializeBottomButton(bitmap, ocl);
