@@ -26,8 +26,8 @@ public class GameActivity extends AppMenu {
 
         JsonMapReader jmr = JsonMapReader.getMapReader(mapName, getApplicationContext(), getWindowManager());
 
-        if(jmr == null){
-            Toast.makeText(this, "An error occurred with the map " +mapName, Toast.LENGTH_LONG).show();
+        if (jmr == null) {
+            Toast.makeText(this, "An error occurred with the map: " + mapName, Toast.LENGTH_LONG).show();
             finish();
         }
 

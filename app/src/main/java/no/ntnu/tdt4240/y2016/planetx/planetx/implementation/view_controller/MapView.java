@@ -96,10 +96,11 @@ public class MapView extends RelativeLayout {
 
     public void initializeMap(ArrayList<SpaceEntity> entities){
         for(SpaceEntity entity: entities){
-            addToView(entity);
+            addView(entity);
         }
         showLockButton();
     }
+
     public void addToView(View v) {
         v.setLayoutParams(new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,

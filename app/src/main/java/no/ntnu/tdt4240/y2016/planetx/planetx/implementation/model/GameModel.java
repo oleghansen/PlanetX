@@ -2,6 +2,7 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -15,14 +16,16 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Spac
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Spaceship;
 
 public class GameModel {
+    public static final double INIT_RADIUS = 20.0;
+    public static final double UNIT_GRAVITY = 9.81;
+    public static double UNIT_RADIUS = 0.0;
+
     private ArrayList<SpaceObstacle> spaceObstacles = new ArrayList<>();
     private ArrayList<Spaceship> spaceships = new ArrayList<>();
 
     private MapView mapView;
 
     public GameModel(Context context, JsonMapReader jmr) {
-
-
         for (SpaceObstacle so : jmr.getObstacles(context)) {
             spaceObstacles.add(so);
         }
@@ -33,16 +36,19 @@ public class GameModel {
         mapView = new MapView(context, this);
     }
 
+    public ArrayList<SpaceEntity> getEntities() {
+        ArrayList<SpaceEntity> entities = new ArrayList<>();
+        entities.addAll(spaceObstacles);
+        entities.addAll(spaceships);
+        return entities;
+    }
+
     public MapView getMapView() {
         return mapView;
     }
 
     public void initializeMap() {
-        ArrayList<SpaceEntity> entities = new ArrayList<>();
-        entities.addAll(spaceObstacles);
-
-        entities.addAll(spaceships);
-        mapView.initializeMap(entities);
+        mapView.initializeMap(getEntities());
     }
 
     public Spaceship getCurrentShip() {
@@ -57,7 +63,6 @@ public class GameModel {
 
         mapView.showLockButton();
     }
-
 
     public void click_lockButton(View v) {
         isLocked = true;

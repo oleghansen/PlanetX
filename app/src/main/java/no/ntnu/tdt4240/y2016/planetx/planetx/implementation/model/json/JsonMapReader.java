@@ -19,9 +19,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.*;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Missile;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Planet;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.SpaceEntity;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.SpaceObstacle;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Spaceship;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Weapon;
@@ -45,7 +47,7 @@ public class JsonMapReader implements Serializable {
     public JsonMapReader(String jsonString, int width, int height) throws JSONException {
         this.width = width;
         this.height = height;
-        SpaceObstacle.RADIUS = SpaceObstacle.RADIUS * height / 100;
+        GameModel.UNIT_RADIUS = GameModel.INIT_RADIUS * height / 100;
 
         JSONObject json = new JSONObject(jsonString);
         parseJson(json);
@@ -113,8 +115,8 @@ public class JsonMapReader implements Serializable {
     public ArrayList<SpaceObstacle> getObstacles(Context context) {
         ArrayList<SpaceObstacle> obstacles = new ArrayList<>();
         for (JsonPlanet p : this.planets) {
-            double gravity = SpaceObstacle.GRAVITY * p.getSize();
-            double radius = SpaceObstacle.RADIUS * p.getSize() / 2;
+            double gravity = GameModel.UNIT_GRAVITY * p.getSize();
+            double radius = GameModel.UNIT_RADIUS * p.getSize();
 
             Planet planet = new Planet(context, gravity, radius);
             planet.setParameters(p);
@@ -141,7 +143,8 @@ public class JsonMapReader implements Serializable {
 
         ArrayList<Weapon> weaponList = getWeaponList(context);
 
-        double radius = width * 1;
+//        double radius = width * 0.05;
+        double radius = -1;
         Spaceship ship = new Spaceship(context, radius, 100, weaponList);
         Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.ship);
         ship.setParameters(thisShip);
