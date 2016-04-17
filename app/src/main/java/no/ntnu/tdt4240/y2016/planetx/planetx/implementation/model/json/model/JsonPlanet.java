@@ -7,18 +7,18 @@ import org.json.JSONObject;
  * Created by Anders on 15.04.2016.
  */
 public class JsonPlanet extends JsonEntity {
-    private int size = 0;
+    private double size = 0;
     private boolean normal = false;
     private String imgName = "";
 
-    public JsonPlanet(JSONObject json) throws JSONException {
-        super(json);
-        size = json.getInt("size");
+    public JsonPlanet(JSONObject json, int width, int height) throws JSONException {
+        super(json, width, height);
+        size = json.getDouble("size");
         normal = json.getBoolean("normal");
         imgName = json.getString("img");
     }
 
-    public int getSize() {
+    public double getSize() {
         return size;
     }
     public String getImgName(){
