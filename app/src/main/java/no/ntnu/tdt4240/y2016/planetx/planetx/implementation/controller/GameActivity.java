@@ -33,6 +33,7 @@ public class GameActivity extends AppMenu {
 
         gameModel = new GameModel(getApplicationContext(), jmr);
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.activity_layout);
+        gameModel.getMapView().setParentLayout(rl);
         rl.addView(gameModel.getMapView());
         gameModel.initializeMap();
     }

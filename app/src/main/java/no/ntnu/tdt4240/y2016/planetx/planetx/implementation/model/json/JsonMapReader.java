@@ -47,7 +47,7 @@ public class JsonMapReader implements Serializable {
     public JsonMapReader(String jsonString, int width, int height) throws JSONException {
         this.width = width;
         this.height = height;
-        GameModel.UNIT_RADIUS = GameModel.INIT_RADIUS * height / 100;
+        GameModel.UNIT_RADIUS = GameModel.INIT_RADIUS * height;
 
         JSONObject json = new JSONObject(jsonString);
         parseJson(json);
