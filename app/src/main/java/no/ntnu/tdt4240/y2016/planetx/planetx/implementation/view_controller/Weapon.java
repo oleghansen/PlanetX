@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller.SoundManager;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GravityGod;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GravityVector;
@@ -17,24 +18,25 @@ public abstract class Weapon extends SpaceEntity {
     private double damage, velocityX = 0, velocityY = 0;
     private String name, description;
     private CountDownTimer cdt;
-
+    private GameModel gameModel;
     public Weapon(Context context, GameModel gm, int shots, double damage, String name, String description) {
         super(context, gm, -1);
         this.shots = shots;
         this.damage = damage;
         this.name = name;
         this.description = description;
+        this.gameModel = gm;
     }
 
     public void startMove() {
         final Weapon w = this;
-        cdt = new CountDownTimer(900000, 10) {
+        cdt = new CountDownTimer(5000, 10) {
             public void onTick(long l) {
                 w.invalidate();
             }
 
             public void onFinish() {
-                w.invalidate();
+                explode();
             }
         }.start();
     }
@@ -59,6 +61,11 @@ public abstract class Weapon extends SpaceEntity {
     public void collides(SpaceEntity se){
         cdt.cancel();
         setImageBitmap(null);
+        this.explode();
+    }
+
+    public void explode() {
+        SoundManager.getInstance().playSoundEffectExplosion(this.getContext());
         //animation
     }
 
@@ -73,5 +80,6 @@ public abstract class Weapon extends SpaceEntity {
 
         setX(getX() + (float) velocityX);
         setY(getY() + (float) velocityY);
+        gameModel.checkCollision(this);
     }
 }
