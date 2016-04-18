@@ -36,7 +36,7 @@ public abstract class Weapon extends SpaceEntity {
 
     public void startMove() {
         final Weapon w = this;
-        cdt = new CountDownTimer(5000, 10) {
+        cdt = new CountDownTimer(5000, 20) {
             public void onTick(long l) {
                 w.invalidate();
             }
@@ -77,12 +77,9 @@ public abstract class Weapon extends SpaceEntity {
     public void explode() {
         SoundManager.getInstance().playSoundEffectExplosion(this.getContext());
 
-        explotion = new Animation(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.explosion), 201, 201, 12, 45, 20, 20);
+        explotion = new Animation(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.explosion), 201, 201, 12, 45, (int)getX()-100, (int)getY()-100);
         RelativeLayout.LayoutParams lp =
                 new RelativeLayout.LayoutParams(201 ,201);
-        lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        lp.addRule(RelativeLayout.CENTER_VERTICAL);
-
         explotion.setLayoutParams(lp);
         gameModel.getMapView().addView(explotion);
         explotion.startAnimation();
