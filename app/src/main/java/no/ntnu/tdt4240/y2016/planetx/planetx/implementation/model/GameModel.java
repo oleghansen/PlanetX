@@ -84,12 +84,16 @@ public class GameModel {
         Spaceship s = getCurrentShip();
         s.flipTowardsTouch(v, e);
     }
-    
-    public void checkCollision (SpaceEntity spaceEntity){
-        for (SpaceObstacle spaceObstacle: spaceObstacles) {
-            if(spaceEntity.collidesWith(spaceObstacle)){
-                spaceEntity.collides(spaceObstacle);
-                spaceObstacle.collides(spaceEntity);
+
+    public static void spaceshipIsDead(Spaceship spaceship) {
+        //TODO:Start END sequence
+    }
+
+    public void checkCollision (SpaceEntity se){
+        for (SpaceObstacle soObstical: spaceObstacles) {
+            if(se.collidesWith(soObstical)){
+                se.collides(soObstical);
+                soObstical.collides(se);
             }
         }
         for (Spaceship spaceship: spaceships) {

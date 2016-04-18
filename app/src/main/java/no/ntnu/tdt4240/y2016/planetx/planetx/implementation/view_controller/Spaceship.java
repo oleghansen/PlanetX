@@ -7,6 +7,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.android.gms.games.Game;
+
 import java.util.ArrayList;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
@@ -58,6 +60,12 @@ public class Spaceship extends SpaceEntity {
 
     public void damageSpaceship(int damage){
         healthPoints = getHealthPoints() - damage;
+    }
+    public void reduceHPwith(double hp) {
+        this.healthPoints -= hp;
+        if(this.healthPoints<=0) {
+            GameModel.spaceshipIsDead(this);
+        }
     }
 
     public double getFirDirX() {
