@@ -157,7 +157,6 @@ public class MapView extends RelativeLayout {
     }
 
     public void initializeMap(ArrayList<SpaceEntity> entities) {
-        SoundManager.getInstance().playInGameSong(this.getContext());
         for (SpaceEntity entity : entities) {
             addView(entity);
         }

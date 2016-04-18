@@ -71,17 +71,18 @@ public abstract class Weapon extends SpaceEntity {
     @Override
     public void collides(SpaceEntity se) {
         cdt.cancel();
-        setImageBitmap(null);
         Log.d("COLLISION", "Weapon() collide!!");
         this.explode();
     }
 
     public void explode() {
+        gameModel.getMapView().removeView(this);
+
         SoundManager.getInstance().playSoundEffectExplosion(this.getContext());
 
-        explotion = new Animation(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.explosion), 201, 201, 12, 45, (int)getX()-100, (int)getY()-100);
+        explotion = new Animation(gameModel.getMapView(), BitmapFactory.decodeResource(getResources(), R.drawable.explosion), 12, 45, (int)getX()-100, (int)getY()-100);
         RelativeLayout.LayoutParams lp =
-                new RelativeLayout.LayoutParams(201 ,201);
+                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT ,RelativeLayout.LayoutParams.WRAP_CONTENT);
         explotion.setLayoutParams(lp);
         gameModel.getMapView().addView(explotion);
         explotion.startAnimation();
