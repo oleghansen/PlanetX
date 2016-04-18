@@ -1,9 +1,14 @@
 package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -35,6 +40,22 @@ public class MenuActivity extends AppMenu {
 
         mapNames = JsonMapReader.getMapList(getApplicationContext());
         mapListView = new ListView(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuActivity.initializeSoundMenu(menu, this);
+        return true;
+    }
+
+    public void click_toggleSound(MenuItem item) {
+        item.setChecked(!item.isChecked());
+        SoundManager.getInstance().muteSoundeffects();
+    }
+
+    public void click_toggleMusic(MenuItem item) {
+        item.setChecked(!item.isChecked());
+        SoundManager.getInstance().muteMusic();
     }
 
     public void click_startGame(View view) {
@@ -96,5 +117,18 @@ public class MenuActivity extends AppMenu {
         });
         alert.show();
         alert.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+    }
+
+    public static Menu initializeSoundMenu(Menu menu, Activity activity) {
+        MenuInflater inflater = activity.getMenuInflater();
+        inflater.inflate(R.menu.menu_sound, menu);
+//        menu.findItem(R.id.sound_effects).setChecked(
+//                SoundManager.getInstance().isSoundMuted()
+//        );
+//        menu.findItem(R.id.music_effects).setChecked(
+//                SoundManager.getInstance().isMusicMuted()
+//        );
+
+        return menu;
     }
 }
