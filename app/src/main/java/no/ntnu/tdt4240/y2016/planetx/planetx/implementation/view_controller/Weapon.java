@@ -62,6 +62,6 @@ public abstract class Weapon extends SpaceEntity {
         super.onDraw(canvas);
         setX(getX() + (float) velocityX);
         setY(getY()+(float)velocityY);
-        //gameModel.checkCollision(this);
+         //gameModel.checkCollision(this);
     }
 }
