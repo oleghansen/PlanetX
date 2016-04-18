@@ -17,13 +17,14 @@ public abstract class Weapon extends SpaceEntity {
     private double damage, velocityX = 0, velocityY = 0;
     private String name, description;
     private CountDownTimer cdt;
-
+    private GameModel gameModel;
     public Weapon(Context context, GameModel gm, int shots, double damage, String name, String description) {
         super(context, gm, -1);
         this.shots = shots;
         this.damage = damage;
         this.name = name;
         this.description = description;
+        this.gameModel = gm;
     }
 
     public void startMove() {
@@ -73,5 +74,6 @@ public abstract class Weapon extends SpaceEntity {
 
         setX(getX() + (float) velocityX);
         setY(getY() + (float) velocityY);
+        gameModel.checkCollision(this);
     }
 }
