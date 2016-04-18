@@ -10,14 +10,13 @@ public class SoundManager {
 
     private static SoundManager instance = new SoundManager();
     private MediaPlayer music = new MediaPlayer(); //The in game theme
-    //private MediaPlayer menuTheme = new MediaPlayer(); //The in game theme
     private MediaPlayer soundEffectsShoot = new MediaPlayer();
     private MediaPlayer soundEffectsExplode = new MediaPlayer();
     private boolean mutedMusic; //Is true if sound is muted
     private boolean mutedSoundEffects; //Is true if sound is muted
 
     private SoundManager() {
-        mutedMusic = true;
+        mutedMusic = false;
         mutedSoundEffects = false;
     }
 
@@ -67,20 +66,16 @@ public class SoundManager {
      * @param context
      */
     public void playMenuSong(Context context) {
-
-        //Return if sound is muted
-        if(mutedMusic) {
-            return;
-        }
-
         if(music.isPlaying()) {
-            music.stop();
+            music.release();
         }
 
         music = MediaPlayer.create(context, R.raw.ingamesong);
 
         //Starts playing song
-        music.start();
+        if(!mutedMusic) {
+            music.start();
+        }
 
         //Make sure the song is looping
         music.setLooping(true);
@@ -138,7 +133,9 @@ public class SoundManager {
      */
     public void muteMusic() {
         if(music.isPlaying()) {
-            music.stop();
+            music.pause();
+        } else {
+            music.start();
         }
 
         //Inverts muting variable
