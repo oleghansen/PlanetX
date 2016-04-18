@@ -11,11 +11,9 @@ import java.util.Random;
 public class Missile extends Weapon {
     private Animation explotion;
     private Random random;
-    private Context con;
     public Missile(Context context) {
         super(context, -1, 15, "Missile", "Standard missile, takes 15 dmg");
         random = new Random();
-        con = context;
         setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.missile));
         explotion = new Animation(BitmapFactory.decodeResource(context.getResources(), R.drawable.explosion),134,134,12,45,false,(int)this.getX(),(int)this.getY()- (100),200+ random.nextInt(100),context);
     }
@@ -26,8 +24,10 @@ public class Missile extends Weapon {
             //animation
             explotion.invalidate();
             //Missile.destroy
+            this.destroyDrawingCache();
         } else if (spaceEntity instanceof Spaceship) {
             //animation
+            explotion.invalidate();
             //do damage
             ((Spaceship) spaceEntity).reduceHPwith(this.getDamage());
         }
