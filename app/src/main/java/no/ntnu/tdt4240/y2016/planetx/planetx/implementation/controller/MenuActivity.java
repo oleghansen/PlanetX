@@ -170,7 +170,7 @@ public class MenuActivity extends AppMenu implements GoogleApiClient.ConnectionC
 
     public void click_startGame(View view) {
         findPlayer();
-        selectMapDialog();
+
     }
 
     public void click_settings(View view) {
@@ -563,8 +563,14 @@ public class MenuActivity extends AppMenu implements GoogleApiClient.ConnectionC
     }
 
     public void startMatch(TurnBasedMatch match) {
-        JsonMapReader jmr = JsonMapReader.getMapReader(selectedMapName, getApplicationContext(), getWindowManager());
-        mTurnData = new GameModel(getApplicationContext(),jmr);
+
+
+        startGame("Crab Nebula");
+        JsonMapReader jmr = JsonMapReader.getMapReader("Crab Nebula", getApplicationContext(), getWindowManager());
+        mTurnData=new GameModel(getApplicationContext(),jmr);
+        mTurnData.power=2;
+        mTurnData.fireangle=2;
+        mTurnData.turnCounter=1;
 
 
         mMatch = match;

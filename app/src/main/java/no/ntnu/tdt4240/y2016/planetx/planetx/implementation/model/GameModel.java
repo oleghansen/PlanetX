@@ -57,6 +57,9 @@ public class GameModel {
             spaceships.add(sp);
         }
 
+        fireangle=1;
+        power=1;
+        turnCounter=1;
         gravityGod = new GravityGod(spaceObstacles);
         mapView = new MapView(context, this);
     }
