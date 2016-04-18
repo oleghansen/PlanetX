@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller.SoundManager;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
 
 /**
@@ -103,6 +104,7 @@ public class MapView extends RelativeLayout {
     }
 
     public void initializeMap(ArrayList<SpaceEntity> entities) {
+        SoundManager.getInstance().playInGameSong(this.getContext());
         for (SpaceEntity entity : entities) {
             addView(entity);
         }
@@ -122,6 +124,7 @@ public class MapView extends RelativeLayout {
     }
 
     public void fireTestShot(Missile missile) {
+        SoundManager.getInstance().playSoundEffectShoot(this.getContext());
         addToView(missile);
         missile.startMove();
     }
