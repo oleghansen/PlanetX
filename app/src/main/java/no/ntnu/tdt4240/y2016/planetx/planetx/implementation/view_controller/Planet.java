@@ -10,8 +10,8 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.Jso
 
 public class Planet extends SpaceObstacle {
 
-    public Planet(Context context, double gravity, double radius) {
-        super(context, gravity, radius);
+    public Planet(Context context, GameModel gm, double gravity, double radius) {
+        super(context, gm, gravity, radius);
     }
 
     public void collides(SpaceEntity spaceO) {

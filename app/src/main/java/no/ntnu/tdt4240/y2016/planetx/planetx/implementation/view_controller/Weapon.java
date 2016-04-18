@@ -3,6 +3,13 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.CountDownTimer;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GravityGod;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GravityVector;
 
 
 public abstract class Weapon extends SpaceEntity {
@@ -12,12 +19,19 @@ public abstract class Weapon extends SpaceEntity {
     private String name, description;
     private CountDownTimer cdt;
 
-    public Weapon(Context context, int shots, double damage, String name, String description) {
-        super(context, -1);
+    public Weapon(Context context, GameModel gm, int shots, double damage, String name, String description) {
+        super(context, gm, -1);
         this.shots = shots;
         this.damage = damage;
         this.name = name;
         this.description = description;
+        this.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                invalidate();
+                return true;
+            }
+        });
     }
 
     public void startMove(){
@@ -32,7 +46,6 @@ public abstract class Weapon extends SpaceEntity {
             }
         }.start();
     }
-
 
     public void setVelocityX(double velocity) {
         velocityX = velocity;
@@ -56,12 +69,12 @@ public abstract class Weapon extends SpaceEntity {
         setImageBitmap(null);
         //animation
     }
-
+    
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        setX(getX() + (float) velocityX);
+        setX(getX()+(float)velocityX);
         setY(getY()+(float)velocityY);
-         //gameModel.checkCollision(this);
+
     }
 }
