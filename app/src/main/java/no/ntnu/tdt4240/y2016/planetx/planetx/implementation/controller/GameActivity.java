@@ -2,6 +2,9 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -21,6 +24,7 @@ public class GameActivity extends AppMenu {
         super.onCreate(savedInstanceBundle);
         setContentView(R.layout.activity_game);
 
+
         Intent i = getIntent();
         String mapName = (String) i.getSerializableExtra("MapName");
 
@@ -36,5 +40,21 @@ public class GameActivity extends AppMenu {
         gameModel.getMapView().setParentLayout(rl);
         rl.addView(gameModel.getMapView());
         gameModel.initializeMap();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuActivity.initializeSoundMenu(menu, this);
+        return true;
+    }
+
+    public void click_toggleSound(MenuItem item) {
+        item.setChecked(!item.isChecked());
+        SoundManager.getInstance().muteSoundeffects();
+    }
+
+    public void click_toggleMusic(MenuItem item) {
+        item.setChecked(!item.isChecked());
+        SoundManager.getInstance().muteMusic();
     }
 }
