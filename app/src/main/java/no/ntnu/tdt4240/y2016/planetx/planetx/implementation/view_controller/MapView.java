@@ -99,18 +99,18 @@ public class MapView extends RelativeLayout {
         this.lockButton = initializeBottomButton(bitmap, ocl);
     }
 
-    private void initializePowerText(){
+    private void initializePowerText() {
         powerText = new TextView(getContext());
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
-        lp.width = 200;
         lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
         lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         powerText.setLayoutParams(lp);
+        powerText.setText("0%")
     }
 
-    private void initializePowerBar(){
+    private void initializePowerBar() {
         powerBar = new SeekBar(getContext());
         powerBar.setMax(100);
 
@@ -124,7 +124,7 @@ public class MapView extends RelativeLayout {
         powerBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                powerText.setText(""+progress+"%");
+                powerText.setText("" + progress + "%");
             }
 
             @Override
@@ -139,6 +139,7 @@ public class MapView extends RelativeLayout {
         });
 
         powerBar.setLayoutParams(lp);
+        powerBar.setProgress(0);
     }
 
     public void showFireButton() {
@@ -170,7 +171,7 @@ public class MapView extends RelativeLayout {
         this.addView(v);
     }
 
-    private void zoomOut(){
+    private void zoomOut() {
         setScaleX(0.5f);
         setScaleY(0.5f);
     }
