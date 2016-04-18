@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Planet X</string>
     <string name="action_settings">Settings</string>
+    <string name="sound_effects_settings">Mute sound effects</string>
+    <string name="music_effects_settings">Mute music effects</string>
     <string name="choose_map">Choose map</string>
     <string name="sign_out">Sign Out</string>
     <string name="match_instructions">Type in a new word for the data in this game, then hit done.</string>

@@ -27,10 +27,12 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Spac
 
 public class GameModel {
 
+
     public static int fireangle;
     public static int power;
     public static int turnCounter;
     public static final double INIT_RADIUS = 0.2;
+
     public static final double UNIT_GRAVITY = 9.81;
     public static double UNIT_RADIUS = 0.0;
 
@@ -38,21 +40,30 @@ public class GameModel {
     private ArrayList<SpaceObstacle> spaceObstacles = new ArrayList<>();
     private ArrayList<Spaceship> spaceships = new ArrayList<>();
 
+
     public static Context c;
    static JsonMapReader j;
     private MapView mapView;
+    private GravityGod gravityGod;
 
     public GameModel(Context context, JsonMapReader jmr) {
         c=context;
         j=jmr;
-        for (SpaceObstacle so : jmr.getObstacles(context)) {
+        for (SpaceObstacle so : jmr.getObstacles(context, this)) {
+
             spaceObstacles.add(so);
         }
-        for (Spaceship sp : jmr.getSpaceships(context)) {
+        for (Spaceship sp : jmr.getSpaceships(context, this)) {
             spaceships.add(sp);
         }
 
+        gravityGod = new GravityGod(spaceObstacles);
         mapView = new MapView(context, this);
+    }
+
+
+    public GravityGod getGravityGod() {
+        return gravityGod;
     }
 
 
@@ -76,10 +87,10 @@ public class GameModel {
         return spaceships.get(0);
     }
 
-    public void click_fireButton(View v) {
+    public void click_fireButton(int progress) {
         isLocked = false;
         Spaceship s = getCurrentShip();
-        mapView.fireTestShot(s.fireTestShot(100));
+        mapView.fireTestShot(s.fireTestShot(progress));
 
         mapView.showLockButton();
     }
@@ -96,6 +107,7 @@ public class GameModel {
         Spaceship s = getCurrentShip();
         s.flipTowardsTouch(v, e);
     }
+
     // This is the byte array we will write out to the TBMP API.
     public byte[] persist(){
 
@@ -160,4 +172,21 @@ public class GameModel {
 
     }
     */
+
+    
+    public void checkCollision (SpaceEntity se){
+        for (SpaceObstacle soObstical: spaceObstacles) {
+            if(se.collidesWith(soObstical)){
+                se.collides(soObstical);
+                soObstical.collides(se);
+            }
+        }
+        for (Spaceship ssObstical: spaceships) {
+            if(se.collidesWith(ssObstical)){
+                se.collides(ssObstical);
+                ssObstical.collides(se);
+            }
+        }
+    }
+
 }

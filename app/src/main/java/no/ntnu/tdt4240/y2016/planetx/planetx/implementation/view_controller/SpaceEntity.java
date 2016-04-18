@@ -8,15 +8,17 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.JsonEntity;
 
 
 public abstract class SpaceEntity extends ImageView {
-
+    protected GameModel gameModel;
     protected double radius;
 
-    public SpaceEntity(Context context, double radius) {
+    public SpaceEntity(Context context, GameModel gm, double radius) {
         super(context);
+        this.gameModel = gm;
         this.radius = radius;
         setAdjustViewBounds(true);
         this.setLayoutParams(new RelativeLayout.LayoutParams(
@@ -36,9 +38,9 @@ public abstract class SpaceEntity extends ImageView {
         Rect rc2 = new Rect();
         object.getDrawingRect(rc2);
         if (Rect.intersects(rc1, rc2)) {
-            //Bitmap bm=((BitmapDrawable) this.getDrawable()).getBitmap();
-            //Bitmap bmTwo=((BitmapDrawable) object.getDrawable()).getBitmap();
-            return true;
+            double dist = Math.sqrt(Math.pow(this.getCenterX()-object.getCenterX(), 2) + Math.pow(this.getCenterY()-object.getCenterY(), 2));
+            if(dist <= this.getRadius() + object.getRadius())
+                return true;
         }
         return false;
     }
@@ -51,7 +53,10 @@ public abstract class SpaceEntity extends ImageView {
     }
 
     public double getRadius() {
-        return radius;
+        if (radius > 0) {
+            return radius;
+        }
+        return getWidth() / 2;
     }
 
     public double getCenterX() {

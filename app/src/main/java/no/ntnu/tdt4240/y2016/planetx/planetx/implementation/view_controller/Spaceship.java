@@ -8,6 +8,8 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
+
 
 public class Spaceship extends SpaceEntity {
 
@@ -19,8 +21,8 @@ public class Spaceship extends SpaceEntity {
     private double firDirY;
     private double firPower;
 
-    public Spaceship(Context context, double radius, int healthPoints, ArrayList<Weapon> weapons) {
-        super(context, radius);
+    public Spaceship(Context context, GameModel gm, double radius, int healthPoints, ArrayList<Weapon> weapons) {
+        super(context, gm, radius);
         this.healthPoints = healthPoints;
         this.weapons = weapons;
         this.radius = radius;
@@ -59,11 +61,11 @@ public class Spaceship extends SpaceEntity {
     }
 
     public Missile fireTestShot(int power) {
-        double pow = power * 0.15 + 15;
-        Missile m = new Missile(getContext());
+        double pow = power * 0.50;
+        Missile m = new Missile(getContext(), gameModel);
 
-        m.setX((float) getCenterX());
-        m.setY((float) getCenterY());
+        m.setX((float) (getCenterX() + getWidth() * Math.cos((fireAngle - 90) * 2 * 3.14 / 360)));
+        m.setY((float) (getCenterY() + getHeight() * Math.sin((fireAngle - 90) * 2 * 3.14 / 360)));
 
 //        Matrix matrix = new Matrix();
 //        matrix.preRotate((float) fireAngle, m.getWidth() / 2, m.getHeight() / 2);

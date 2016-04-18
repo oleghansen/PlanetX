@@ -2,20 +2,26 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.service.carrier.CarrierMessagingService;
 import android.util.Log;
+
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -35,12 +41,14 @@ import org.json.JSONException;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 import java.util.ArrayList;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 import no.ntnu.tdt4240.y2016.planetx.planetx.framework.AppMenu;
+
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
-import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.Map;
+
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.JsonMapReader;
 
 /**
@@ -48,6 +56,7 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.JsonMapRe
  */
 public class MenuActivity extends AppMenu implements GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
+    private Menu menu;
     private ListView mapListView;
     private ViewGroup vg;
     private GoogleApiClient mGoogleApiClient;
@@ -114,6 +123,49 @@ public class MenuActivity extends AppMenu implements GoogleApiClient.ConnectionC
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_out_button).setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (menu != null) {
+            menu.findItem(R.id.sound_effects).setChecked(
+                    SoundManager.getInstance().isSoundEffectsMuted()
+            );
+            menu.findItem(R.id.music_effects).setChecked(
+                    SoundManager.getInstance().isMusicMuted()
+            );
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuActivity.initializeSoundMenu(menu, this);
+        this.menu = menu;
+        return true;
+    }
+
+    public static Menu initializeSoundMenu(Menu menu, Activity activity) {
+        MenuInflater inflater = activity.getMenuInflater();
+        inflater.inflate(R.menu.menu_sound, menu);
+        menu.findItem(R.id.sound_effects).setChecked(
+                SoundManager.getInstance().isSoundEffectsMuted()
+        );
+        menu.findItem(R.id.music_effects).setChecked(
+                SoundManager.getInstance().isMusicMuted()
+        );
+
+        return menu;
+    }
+
+    public void click_toggleSound(MenuItem item) {
+        item.setChecked(!item.isChecked());
+        SoundManager.getInstance().muteSoundeffects();
+    }
+
+    public void click_toggleMusic(MenuItem item) {
+        item.setChecked(!item.isChecked());
+        SoundManager.getInstance().muteMusic();
     }
 
     public void click_startGame(View view) {
@@ -183,7 +235,6 @@ public class MenuActivity extends AppMenu implements GoogleApiClient.ConnectionC
                 .setCancelable(true)
                 .setPositiveButton("Start", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //Map selectedMap = new Map(selectedMapName, null);
                         //startGame(selectedMap);
                         startGame(selectedMapName);
                     }
@@ -211,6 +262,7 @@ public class MenuActivity extends AppMenu implements GoogleApiClient.ConnectionC
         alert.show();
         alert.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
+
 
     /**
      * Callback method for startActivityForResult
@@ -655,4 +707,5 @@ public class MenuActivity extends AppMenu implements GoogleApiClient.ConnectionC
         // show it
         mAlertDialog.show();
     }
+
 }
