@@ -13,7 +13,8 @@ public class SoundManager {
     private static SoundManager instance = new SoundManager();
     private MediaPlayer mainTheme = new MediaPlayer(); //The in game theme
     private MediaPlayer menuTheme = new MediaPlayer(); //The in game theme
-    private MediaPlayer soundEffects = new MediaPlayer();
+    private MediaPlayer soundEffectsShoot = new MediaPlayer();
+    private MediaPlayer soundEffectsExsplode = new MediaPlayer();
     private boolean mutedMusic; //Is true if sound is muted
     private boolean mutedSoundEffects; //Is true if sound is muted
 
@@ -114,11 +115,11 @@ public class SoundManager {
         }
 
         //Chooses sound effect
-        soundEffects = MediaPlayer.create(context, R.raw.shoot);
+        soundEffectsShoot = MediaPlayer.create(context, R.raw.shoot);
 
         //Start playing
         //Stops when audio is finished playing
-        soundEffects.start();
+        soundEffectsShoot.start();
     }
 
     /**
@@ -133,11 +134,15 @@ public class SoundManager {
             return;
         }
 
-        soundEffects = MediaPlayer.create(context, R.raw.explosion);
+        if(soundEffectsExsplode.isPlaying()) {
+            soundEffectsExsplode.release();
+        }
+
+        soundEffectsExsplode = MediaPlayer.create(context, R.raw.explosion);
 
         //Start playing
         //Stops when audio is finished playing
-        soundEffects.start();
+        soundEffectsExsplode.start();
     }
 
     /**
@@ -167,11 +172,11 @@ public class SoundManager {
         mutedSoundEffects = !mutedSoundEffects;
     }
 
-    public boolean isMutedMusicMuted() {
+    public boolean isMusicMuted() {
         return mutedMusic;
     }
 
-    public boolean isEffectsMuted() {
+    public boolean isSoundEffectsMuted() {
         return mutedSoundEffects;
     }
 }
