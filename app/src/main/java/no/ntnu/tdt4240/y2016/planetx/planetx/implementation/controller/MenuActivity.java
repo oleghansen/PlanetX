@@ -28,6 +28,7 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.JsonMapRe
  */
 public class MenuActivity extends AppMenu {
 
+    private Menu menu;
     private ListView mapListView;
     private ViewGroup vg;
     private String selectedMapName;
@@ -43,9 +44,36 @@ public class MenuActivity extends AppMenu {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (menu != null) {
+            menu.findItem(R.id.sound_effects).setChecked(
+                    SoundManager.getInstance().isSoundEffectsMuted()
+            );
+            menu.findItem(R.id.music_effects).setChecked(
+                    SoundManager.getInstance().isMusicMuted()
+            );
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuActivity.initializeSoundMenu(menu, this);
+        this.menu = menu;
         return true;
+    }
+
+    public static Menu initializeSoundMenu(Menu menu, Activity activity) {
+        MenuInflater inflater = activity.getMenuInflater();
+        inflater.inflate(R.menu.menu_sound, menu);
+        menu.findItem(R.id.sound_effects).setChecked(
+                SoundManager.getInstance().isSoundEffectsMuted()
+        );
+        menu.findItem(R.id.music_effects).setChecked(
+                SoundManager.getInstance().isMusicMuted()
+        );
+
+        return menu;
     }
 
     public void click_toggleSound(MenuItem item) {
@@ -119,16 +147,4 @@ public class MenuActivity extends AppMenu {
         alert.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
 
-    public static Menu initializeSoundMenu(Menu menu, Activity activity) {
-        MenuInflater inflater = activity.getMenuInflater();
-        inflater.inflate(R.menu.menu_sound, menu);
-//        menu.findItem(R.id.sound_effects).setChecked(
-//                SoundManager.getInstance().isSoundMuted()
-//        );
-//        menu.findItem(R.id.music_effects).setChecked(
-//                SoundManager.getInstance().isMusicMuted()
-//        );
-
-        return menu;
-    }
 }
