@@ -21,6 +21,10 @@ public class Missile extends Weapon {
         setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.missile));
         explotion = new Animation(BitmapFactory.decodeResource(context.getResources(), R.drawable.explosion),134,134,12,45,false,(int)this.getX(),(int)this.getY()- (100),200+ random.nextInt(100),context);
     }
+    @Override
+    public void collides(SpaceEntity se) {
+        super.collides(se);
+        explotion.invalidate();
+    }
 
-   
 }
