@@ -11,12 +11,12 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GravityGod;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GravityVector;
 
-
 public abstract class Weapon extends SpaceEntity {
 
     private int shots;
     private double damage, velocityX = 0, velocityY = 0;
     private String name, description;
+    private CountDownTimer cdt;
 
     public Weapon(Context context, GameModel gm, int shots, double damage, String name, String description) {
         super(context, gm, -1);
@@ -28,7 +28,7 @@ public abstract class Weapon extends SpaceEntity {
 
     public void startMove() {
         final Weapon w = this;
-        new CountDownTimer(900000, 100) {
+        cdt = new CountDownTimer(900000, 10) {
             public void onTick(long l) {
                 w.invalidate();
             }
@@ -53,6 +53,13 @@ public abstract class Weapon extends SpaceEntity {
 
     public double getVelocityY() {
         return velocityY;
+    }
+
+    @Override
+    public void collides(SpaceEntity se){
+        cdt.cancel();
+        setImageBitmap(null);
+        //animation
     }
 
     @Override

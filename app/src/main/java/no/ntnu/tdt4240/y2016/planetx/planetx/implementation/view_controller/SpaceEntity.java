@@ -38,9 +38,9 @@ public abstract class SpaceEntity extends ImageView {
         Rect rc2 = new Rect();
         object.getDrawingRect(rc2);
         if (Rect.intersects(rc1, rc2)) {
-            //Bitmap bm=((BitmapDrawable) this.getDrawable()).getBitmap();
-            //Bitmap bmTwo=((BitmapDrawable) object.getDrawable()).getBitmap();
-            return true;
+            double dist = Math.sqrt(Math.pow(this.getCenterX()-object.getCenterX(), 2) + Math.pow(this.getCenterY()-object.getCenterY(), 2));
+            if(dist <= this.getRadius() + object.getRadius())
+                return true;
         }
         return false;
     }
