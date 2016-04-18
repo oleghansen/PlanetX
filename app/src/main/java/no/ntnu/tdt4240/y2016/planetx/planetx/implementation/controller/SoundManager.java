@@ -2,6 +2,9 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.util.Log;
+
+import java.io.IOException;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 
@@ -119,8 +122,8 @@ public class SoundManager {
 
         //Stops all existing sound by this MediaPlayer
         //Just in case something goes wrong
-        if(soundEffectsExplode.isPlaying()) {
-            soundEffectsExplode.release();
+        if(soundEffectsShoot != null) {
+            soundEffectsShoot.release();
         }
 
         //Creates a new sound effect to be played
@@ -145,7 +148,7 @@ public class SoundManager {
 
         //Stops all existing sound by this MediaPlayer
         //Just in case something goes wrong
-        if(soundEffectsExplode.isPlaying()) {
+        if(soundEffectsExplode != null) {
             soundEffectsExplode.release();
         }
 
