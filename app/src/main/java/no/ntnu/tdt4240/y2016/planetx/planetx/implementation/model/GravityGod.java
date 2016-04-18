@@ -29,11 +29,11 @@ public class GravityGod {
 
         double dist = Math.sqrt(difX * difX + difY * difY);
 
-        double unit_radius = dist / GameModel.UNIT_RADIUS;
+        double dist_units = dist / GameModel.UNIT_RADIUS;
         double unit_x = difX / dist;
         double unit_y = difY / dist;
 
-        double gravity = so.getGravity() / (unit_radius);
+        double gravity = so.getGravity() / (dist_units);
 
         vector.add(-gravity * unit_x, -gravity * unit_y);
 
