@@ -51,7 +51,10 @@ public abstract class SpaceEntity extends ImageView {
     }
 
     public double getRadius() {
-        return radius;
+        if (radius > 0) {
+            return radius;
+        }
+        return getWidth() / 2;
     }
 
     public double getCenterX() {

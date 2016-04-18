@@ -72,7 +72,7 @@
       "posY": 80.0
     }
   },
-//  MAP 3
+  //  MAP 3
   {
     "name": "Sagittarius",
     "weapons":[
@@ -105,6 +105,20 @@
     },
     "ship2": {
       "posX": 10.0,
+      "posY": 80.0
+    }
+  },
+//  MAP 4
+  {
+    "name": "Empty space",
+    "weapons":[],
+    "obstacles": [],
+    "ship1": {
+      "posX": 5.0,
+      "posY": 5.0
+    },
+    "ship2": {
+      "posX": 80.0,
       "posY": 80.0
     }
   }

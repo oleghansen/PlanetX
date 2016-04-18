@@ -16,7 +16,7 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Spac
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Spaceship;
 
 public class GameModel {
-    public static final double INIT_RADIUS = 0.2;
+    public static final double INIT_RADIUS = 0.1;
     public static final double UNIT_GRAVITY = 9.81;
     public static double UNIT_RADIUS = 0.0;
 
