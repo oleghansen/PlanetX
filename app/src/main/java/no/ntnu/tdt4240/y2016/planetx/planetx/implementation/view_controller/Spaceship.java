@@ -2,9 +2,12 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller;
 
 import android.content.Context;
 import android.graphics.Matrix;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.google.android.gms.games.Game;
 
 import java.util.ArrayList;
 
@@ -33,7 +36,36 @@ public class Spaceship extends SpaceEntity {
     }
 
     public void collides(SpaceEntity spaceEntity) {
+        if(spaceEntity instanceof Weapon){
+            this.damageSpaceship(((Weapon) spaceEntity).getDamage());
+        }
+      //  healthPoints = setHealthPoints(healthPoints-damage);
+    }
 
+    public int getHealthPoints()
+    {
+        return healthPoints;
+    }
+
+    public boolean isAlive()
+    {
+        if(healthPoints <= 0){
+            return false;
+        }
+        else return true;
+    }
+    public void setHealthPoints(int hp){
+        healthPoints = hp;
+    }
+
+    public void damageSpaceship(int damage){
+        healthPoints = getHealthPoints() - damage;
+    }
+    public void reduceHPwith(double hp) {
+        this.healthPoints -= hp;
+        if(this.healthPoints<=0) {
+            GameModel.spaceshipIsDead(this);
+        }
     }
 
     public double getFirDirX() {

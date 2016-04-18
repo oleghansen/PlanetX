@@ -86,17 +86,9 @@
         "type": "planet",
         "img":"blue",
         "normal": true,
-        "size": 1.9,
+        "size": 5,
         "posX": 80.0,
         "posY": 50.0
-      },
-      {
-        "type": "planet",
-        "img":"earth",
-        "normal": true,
-        "size": 0.1,
-        "posX": 25.0,
-        "posY": 25.0
       }
     ],
     "ship1": {

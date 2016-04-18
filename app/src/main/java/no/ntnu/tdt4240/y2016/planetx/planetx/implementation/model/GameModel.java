@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.JsonMapRe
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.SpaceEntity;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.SpaceObstacle;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Spaceship;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Weapon;
 
 public class GameModel {
     public static final double INIT_RADIUS = 0.1;
@@ -82,7 +84,11 @@ public class GameModel {
         Spaceship s = getCurrentShip();
         s.flipTowardsTouch(v, e);
     }
-    
+
+    public static void spaceshipIsDead(Spaceship spaceship) {
+        //TODO:Start END sequence
+    }
+
     public void checkCollision (SpaceEntity se){
         for (SpaceObstacle soObstical: spaceObstacles) {
             if(se.collidesWith(soObstical)){
@@ -90,10 +96,17 @@ public class GameModel {
                 soObstical.collides(se);
             }
         }
-        for (Spaceship ssObstical: spaceships) {
-            if(se.collidesWith(ssObstical)){
-                se.collides(ssObstical);
-                ssObstical.collides(se);
+        for (Spaceship spaceship: spaceships) {
+            if(se.collidesWith(spaceship)){
+                se.collides(spaceship);
+                spaceship.collides(se);
+
+                Log.d("COLLISION", "Spaceentity hit! gameModel collide!!");
+                if(!spaceship.isAlive())
+                {
+                    Toast.makeText(mapView.getContext(), "Game over!", Toast.LENGTH_LONG).show();
+                    //TODO: FINISH activity and take to "show-winner-celebration"-screen or something like that
+                }
             }
         }
     }
