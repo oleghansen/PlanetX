@@ -10,6 +10,7 @@ public abstract class Weapon extends SpaceEntity {
     private int shots;
     private double damage, velocityX = 0, velocityY = 0;
     private String name, description;
+    private CountDownTimer cdt;
 
     public Weapon(Context context, int shots, double damage, String name, String description) {
         super(context, -1);
@@ -21,7 +22,7 @@ public abstract class Weapon extends SpaceEntity {
 
     public void startMove(){
         final Weapon w = this;
-        new CountDownTimer(900000, 10) {
+        cdt = new CountDownTimer(900000, 10) {
             public void onTick(long l) {
                 w.invalidate();
             }
@@ -31,6 +32,7 @@ public abstract class Weapon extends SpaceEntity {
             }
         }.start();
     }
+
 
     public void setVelocityX(double velocity) {
         velocityX = velocity;
@@ -51,8 +53,10 @@ public abstract class Weapon extends SpaceEntity {
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        setX(getX()+(float)velocityX);
+        setX(getX() + (float) velocityX);
         setY(getY()+(float)velocityY);
-
+        /*if(gameModel.checkCollision()){
+           cdt.cancel();
+        }*/
     }
 }
