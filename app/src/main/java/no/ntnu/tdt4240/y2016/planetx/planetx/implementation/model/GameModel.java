@@ -16,24 +16,30 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Spac
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Spaceship;
 
 public class GameModel {
-    public static final double INIT_RADIUS = 0.2;
+    public static final double INIT_RADIUS = 0.1;
     public static final double UNIT_GRAVITY = 9.81;
     public static double UNIT_RADIUS = 0.0;
 
     private ArrayList<SpaceObstacle> spaceObstacles = new ArrayList<>();
     private ArrayList<Spaceship> spaceships = new ArrayList<>();
 
+    private GravityGod gravityGod;
     private MapView mapView;
 
     public GameModel(Context context, JsonMapReader jmr) {
-        for (SpaceObstacle so : jmr.getObstacles(context)) {
+        for (SpaceObstacle so : jmr.getObstacles(context, this)) {
             spaceObstacles.add(so);
         }
-        for (Spaceship sp : jmr.getSpaceships(context)) {
+        for (Spaceship sp : jmr.getSpaceships(context, this)) {
             spaceships.add(sp);
         }
 
+        gravityGod = new GravityGod(spaceObstacles);
         mapView = new MapView(context, this);
+    }
+
+    public GravityGod getGravityGod() {
+        return gravityGod;
     }
 
     public ArrayList<SpaceEntity> getEntities() {
