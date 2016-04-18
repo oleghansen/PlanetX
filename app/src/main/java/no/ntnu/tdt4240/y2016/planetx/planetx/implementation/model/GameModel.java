@@ -76,4 +76,7 @@ public class GameModel {
         Spaceship s = getCurrentShip();
         s.flipTowardsTouch(v, e);
     }
+    public static void spaceshipIsDead(Spaceship spaceship) {
+        //TODO:Start END sequence
+    }
 }

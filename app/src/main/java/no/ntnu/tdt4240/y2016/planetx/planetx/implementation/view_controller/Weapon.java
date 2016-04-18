@@ -47,7 +47,9 @@ public abstract class Weapon extends SpaceEntity {
     public double getVelocityY() {
         return velocityY;
     }
-
+    public double getDamage() {
+        return this.damage;
+    }
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
