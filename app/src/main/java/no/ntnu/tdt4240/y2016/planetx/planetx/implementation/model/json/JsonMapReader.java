@@ -137,8 +137,11 @@ public class JsonMapReader implements Serializable {
     }
     private Spaceship getShip(Context context, boolean shipOne) {
         JsonShip thisShip = ship1;
+        Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.ship);
+
         if (!shipOne) {
             thisShip = ship2;
+            b = BitmapFactory.decodeResource(context.getResources(), R.drawable.ship2);
         }
 
         ArrayList<Weapon> weaponList = getWeaponList(context);
@@ -146,7 +149,7 @@ public class JsonMapReader implements Serializable {
 //        double radius = width * 0.05;
         double radius = -1;
         Spaceship ship = new Spaceship(context, radius, 100, weaponList);
-        Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.ship);
+
         ship.setParameters(thisShip);
         ship.setImageBitmap(b);
 
