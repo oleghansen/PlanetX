@@ -34,6 +34,8 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Weap
 public class JsonMapReader implements Serializable {
     private int width, height;
 
+    private GameModel gameModel;
+
     private String name;
     private ArrayList<JsonWeapon> weapons = new ArrayList<>();
     private ArrayList<JsonPlanet> planets = new ArrayList<>();
@@ -52,6 +54,7 @@ public class JsonMapReader implements Serializable {
         JSONObject json = new JSONObject(jsonString);
         parseJson(json);
     }
+
     private void parseJson(JSONObject json) throws JSONException {
         name = json.getString("name");
 
@@ -81,7 +84,8 @@ public class JsonMapReader implements Serializable {
         ship1 = new JsonShip(json.getJSONObject("ship1"), width, height);
         ship2 = new JsonShip(json.getJSONObject("ship2"), width, height);
     }
-    private ArrayList<Weapon> getWeaponList(Context context) {
+
+    private ArrayList<Weapon> getWeaponList(Context context, GameModel gm) {
         ArrayList<Weapon> weps = new ArrayList<>();
         for (JsonWeapon w : weapons) {
             switch (w.getType()) {
@@ -91,7 +95,7 @@ public class JsonMapReader implements Serializable {
                     break;
 
                 default: //missile
-                    Missile m = new Missile(context);
+                    Missile m = new Missile(context, gm);
                     weps.add(m);
                     break;
             }
@@ -105,20 +109,22 @@ public class JsonMapReader implements Serializable {
     public int getWidth() {
         return width;
     }
+
     public int getHeight() {
         return height;
     }
+
     public String getName() {
         return name;
     }
 
-    public ArrayList<SpaceObstacle> getObstacles(Context context) {
+    public ArrayList<SpaceObstacle> getObstacles(Context context, GameModel gm) {
         ArrayList<SpaceObstacle> obstacles = new ArrayList<>();
         for (JsonPlanet p : this.planets) {
             double gravity = GameModel.UNIT_GRAVITY * p.getSize();
             double radius = GameModel.UNIT_RADIUS * p.getSize();
 
-            Planet planet = new Planet(context, gravity, radius);
+            Planet planet = new Planet(context, gm, gravity, radius);
             planet.setParameters(p);
             obstacles.add(planet);
         }
@@ -129,24 +135,28 @@ public class JsonMapReader implements Serializable {
         }
         return obstacles;
     }
-    public ArrayList<Spaceship> getSpaceships(Context context){
+
+    public ArrayList<Spaceship> getSpaceships(Context context, GameModel gm) {
         ArrayList<Spaceship> list = new ArrayList<>();
-        list.add(getShip(context,true));
-        list.add(getShip(context, false));
+        list.add(getShip(context, gm, true));
+        list.add(getShip(context, gm, false));
         return list;
     }
-    private Spaceship getShip(Context context, boolean shipOne) {
+
+    private Spaceship getShip(Context context, GameModel gm, boolean shipOne) {
         JsonShip thisShip = ship1;
+        Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.ship);
+
         if (!shipOne) {
             thisShip = ship2;
+            b = BitmapFactory.decodeResource(context.getResources(), R.drawable.ship2);
         }
 
-        ArrayList<Weapon> weaponList = getWeaponList(context);
+        ArrayList<Weapon> weaponList = getWeaponList(context, gm);
 
 //        double radius = width * 0.05;
         double radius = -1;
-        Spaceship ship = new Spaceship(context, radius, 100, weaponList);
-        Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.ship);
+        Spaceship ship = new Spaceship(context, gm, radius, 100, weaponList);
         ship.setParameters(thisShip);
         ship.setImageBitmap(b);
 
@@ -156,7 +166,7 @@ public class JsonMapReader implements Serializable {
     /*
      * Get list of names of maps from JSON
      */
-    public static ArrayList<String> getMapList(Context context){
+    public static ArrayList<String> getMapList(Context context) {
         ArrayList<String> mapList = new ArrayList<>();
 
         InputStream inputStream = context.getResources().openRawResource(R.raw.maps);
@@ -183,7 +193,7 @@ public class JsonMapReader implements Serializable {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            Log.d("JSONError","Error with JsonMapReader");
+            Log.d("JSONError", "Error with JsonMapReader");
         }
 
         return mapList;
@@ -192,7 +202,7 @@ public class JsonMapReader implements Serializable {
     /*
      * Return the JsonMapReader object used for the specific map name
      */
-    public static JsonMapReader getMapReader(String mapName, Context context, WindowManager windowManager){
+    public static JsonMapReader getMapReader(String mapName, Context context, WindowManager windowManager) {
 
         InputStream inputStream = context.getResources().openRawResource(R.raw.maps);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -216,7 +226,7 @@ public class JsonMapReader implements Serializable {
         try {
             JSONArray array = new JSONArray(byteArrayOutputStream.toString());
             for (int i = 0; i < array.length(); i++) {
-                if(array.getJSONObject(i).getString("name").equals(mapName)){
+                if (array.getJSONObject(i).getString("name").equals(mapName)) {
 
                     Display display = windowManager.getDefaultDisplay();
                     Point size = new Point();
@@ -228,7 +238,7 @@ public class JsonMapReader implements Serializable {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            Log.d("JSONError","Error with JsonMapReader");
+            Log.d("JSONError", "Error with JsonMapReader");
             return null;
         }
         return null;
