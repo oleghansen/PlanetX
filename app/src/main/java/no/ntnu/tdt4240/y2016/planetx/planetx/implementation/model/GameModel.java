@@ -62,10 +62,10 @@ public class GameModel {
         return spaceships.get(0);
     }
 
-    public void click_fireButton(View v) {
+    public void click_fireButton(int progress) {
         isLocked = false;
         Spaceship s = getCurrentShip();
-        mapView.fireTestShot(s.fireTestShot(100));
+        mapView.fireTestShot(s.fireTestShot(progress));
 
         mapView.showLockButton();
     }
@@ -82,7 +82,24 @@ public class GameModel {
         Spaceship s = getCurrentShip();
         s.flipTowardsTouch(v, e);
     }
+
     public static void spaceshipIsDead(Spaceship spaceship) {
         //TODO:Start END sequence
+    }
+    
+    public void checkCollision (SpaceEntity se){
+        for (SpaceObstacle soObstical: spaceObstacles) {
+            if(se.collidesWith(soObstical)){
+                se.collides(soObstical);
+                soObstical.collides(se);
+            }
+        }
+        for (Spaceship ssObstical: spaceships) {
+            if(se.collidesWith(ssObstical)){
+                se.collides(ssObstical);
+                ssObstical.collides(se);
+            }
+        }
+
     }
 }
