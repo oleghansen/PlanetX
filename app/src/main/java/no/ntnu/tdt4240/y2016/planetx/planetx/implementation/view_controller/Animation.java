@@ -8,7 +8,7 @@ import android.widget.ImageView;
 /**
  * Class for animations, e.g. explosion.
  *
- * @author www.gametutorial.net
+ * @author www.gametutorial.net & Hans
  */
 
 public class Animation extends ImageView{
