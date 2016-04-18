@@ -1,23 +1,16 @@
 package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller;
 
-import android.content.Context;
+
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.os.CountDownTimer;
-import android.util.Log;
+import android.text.Layout;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-
-import no.ntnu.tdt4240.y2016.planetx.planetx.R;
-
-/**
- * Class for animations, e.g. explosion.
- *
- * @author www.gametutorial.net & Hans
- */
 
 public class Animation extends ImageView {
+    private ViewGroup parentViewGroup;
+
     private CountDownTimer cdt;
 
     private final Bitmap bitmap;
@@ -30,11 +23,14 @@ public class Animation extends ImageView {
 
     private int startingXOfFrameInImage;
 
-    public Animation(Context context, Bitmap b, int frameWidth, int frameHeight, int numberOfFrames, long frameTime, int x, int y) {
-        super(context);
+    public Animation(ViewGroup vg, Bitmap b, int numberOfFrames, long frameTime, int x, int y) {
+        super(vg.getContext());
+
+        parentViewGroup = vg;
         this.bitmap = b;
-        this.frameWidth = frameWidth;
-        this.frameHeight = frameHeight;
+        this.frameHeight = b.getHeight();
+        this.frameWidth = b.getHeight();
+
         this.numberOfFrames = numberOfFrames;
         this.frameTime = frameTime;
 
@@ -63,8 +59,7 @@ public class Animation extends ImageView {
     }
 
     private void stopAnimation() {
-
-        setImageBitmap(null);
+        parentViewGroup.removeView(this);
     }
 
     private void nextImage() {
