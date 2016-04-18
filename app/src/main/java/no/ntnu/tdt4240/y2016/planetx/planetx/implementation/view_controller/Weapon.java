@@ -14,12 +14,12 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GravityVector;
 
 public abstract class Weapon extends SpaceEntity {
 
-    private int shots;
-    private double damage, velocityX = 0, velocityY = 0;
+    private int shots, damage;
+    private double velocityX = 0, velocityY = 0;
     private String name, description;
     private CountDownTimer cdt;
     private GameModel gameModel;
-    public Weapon(Context context, GameModel gm, int shots, double damage, String name, String description) {
+    public Weapon(Context context, GameModel gm, int shots, int damage, String name, String description) {
         super(context, gm, -1);
         this.shots = shots;
         this.damage = damage;
@@ -39,6 +39,11 @@ public abstract class Weapon extends SpaceEntity {
                 explode();
             }
         }.start();
+    }
+
+    public int getDamage()
+    {
+        return damage;
     }
 
     public void setVelocityX(double velocity) {
@@ -61,6 +66,7 @@ public abstract class Weapon extends SpaceEntity {
     public void collides(SpaceEntity se){
         cdt.cancel();
         setImageBitmap(null);
+        Log.d("COLLISION", "Weapon() collide!!");
         this.explode();
     }
 
