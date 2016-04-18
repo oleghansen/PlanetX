@@ -97,9 +97,9 @@ public class GameModel {
             }
         }
         for (Spaceship spaceship: spaceships) {
-            if(spaceEntity.collidesWith(spaceship)){
-                spaceEntity.collides(spaceship);
-                spaceship.collides(spaceEntity);
+            if(se.collidesWith(spaceship)){
+                se.collides(spaceship);
+                spaceship.collides(se);
 
                 Log.d("COLLISION", "Spaceentity hit! gameModel collide!!");
                 if(!spaceship.isAlive())
