@@ -28,7 +28,7 @@ public class Missile extends Weapon {
             //animation
             explotion.invalidate();
             //Missile.destroy
-           
+
         } else if (spaceEntity instanceof Spaceship) {
             //animation
             explotion.invalidate();
