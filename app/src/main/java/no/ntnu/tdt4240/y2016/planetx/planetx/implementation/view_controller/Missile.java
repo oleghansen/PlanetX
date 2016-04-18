@@ -19,7 +19,7 @@ public class Missile extends Weapon {
     }
 
     public void collides(SpaceEntity spaceEntity) {
-
+        //super.collides(spaceEntity);
         if (spaceEntity instanceof Planet) {
             //animation
             explotion.invalidate();
@@ -31,6 +31,6 @@ public class Missile extends Weapon {
             //do damage
             ((Spaceship) spaceEntity).reduceHPwith(this.getDamage());
         }
-    }
 
+    }
 }
