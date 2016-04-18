@@ -31,6 +31,7 @@ public class GameActivity extends AppMenu {
             finish();
         }
 
+       // GoogleApiCommunicationHandler gach =
         gameModel = new GameModel(getApplicationContext(), jmr);
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.activity_layout);
         gameModel.getMapView().setParentLayout(rl);

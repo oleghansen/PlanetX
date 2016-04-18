@@ -23,6 +23,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.8">
+
+            <!-- Quick start-->
+            <Button
+                android:id="@+id/check_games"
+                android:layout_margin="10px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quick start"
+                android:onClick="onQuickMatchClicked"/>
             <Button
                 android:layout_margin="10px"
                 android:layout_width="match_parent"
@@ -30,6 +39,14 @@
                 android:text="Start game"
                 android:onClick="click_startGame"
                 />
+
+            <Button
+                android:id="@+id/check_games"
+                android:layout_margin="10px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Check games"
+                android:onClick="onCheckGamesClicked"/>
             <Button
                 android:layout_margin="10px"
                 android:layout_width="match_parent"
@@ -39,11 +56,20 @@
                 />
             <!-- sign-out button -->
             <Button
+                android:id="@+id/sign_out_button"
                 android:layout_margin="10px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sign Out"
-                android:onClick="click_signOut"/>
+                android:onClick="onClick"/>
+            <!--Sign-in button -->
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/sign_in_button"
+                android:layout_margin="10px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sign In"
+                android:onClick="onClick"/>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
