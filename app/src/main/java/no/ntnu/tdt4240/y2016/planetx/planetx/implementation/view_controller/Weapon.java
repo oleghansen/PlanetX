@@ -11,7 +11,6 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GravityGod;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GravityVector;
 
-
 public abstract class Weapon extends SpaceEntity {
 
     private int shots;
@@ -25,16 +24,9 @@ public abstract class Weapon extends SpaceEntity {
         this.damage = damage;
         this.name = name;
         this.description = description;
-        this.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                invalidate();
-                return true;
-            }
-        });
     }
 
-    public void startMove(){
+    public void startMove() {
         final Weapon w = this;
         cdt = new CountDownTimer(900000, 10) {
             public void onTick(long l) {
@@ -42,7 +34,7 @@ public abstract class Weapon extends SpaceEntity {
             }
 
             public void onFinish() {
-              w.invalidate();
+                w.invalidate();
             }
         }.start();
     }
@@ -69,12 +61,17 @@ public abstract class Weapon extends SpaceEntity {
         setImageBitmap(null);
         //animation
     }
-    
+
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        setX(getX()+(float)velocityX);
-        setY(getY()+(float)velocityY);
+        GravityVector gv = gameModel.getGravityGod().getGravityVector((int) getCenterX(), (int) getCenterY());
+        velocityX += gv.getX();
+        velocityY += gv.getY();
+        Log.d("GravityVector","Velocity: "+velocityX+", "+velocityY);
+        Log.d("GravityVector", "Gravity: " + gv.getX() + ", " + gv.getY());
 
+        setX(getX() + (float) velocityX);
+        setY(getY() + (float) velocityY);
     }
 }
