@@ -12,7 +12,7 @@ public abstract class Weapon extends SpaceEntity {
     private String name, description;
 
     public Weapon(Context context, int shots, double damage, String name, String description) {
-        super(context, 50);
+        super(context, -1);
         this.shots = shots;
         this.damage = damage;
         this.name = name;

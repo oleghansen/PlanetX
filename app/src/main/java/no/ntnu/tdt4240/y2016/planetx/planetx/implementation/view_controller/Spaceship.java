@@ -13,6 +13,8 @@ public class Spaceship extends SpaceEntity {
 
     private int healthPoints;
     private ArrayList<Weapon> weapons;
+
+    private double fireAngle = 0;
     private double firDirX;
     private double firDirY;
     private double firPower;
@@ -43,8 +45,6 @@ public class Spaceship extends SpaceEntity {
     public double getFirPower() {
         return firPower;
     }
-
-    private double fireAngle = -90;
 
     public void flipTowardsTouch(View v, MotionEvent e) {
         double difX = e.getX() - getCenterX();

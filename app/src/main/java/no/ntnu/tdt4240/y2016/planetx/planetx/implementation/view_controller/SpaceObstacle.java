@@ -4,12 +4,7 @@ import android.content.Context;
 
 
 public abstract class SpaceObstacle extends SpaceEntity {
-
-    public static final double GRAVITY = 9.81;
-    public static double RADIUS = 20;
-
     protected double gravity;
-
 
     public SpaceObstacle(Context context, double grav, double radius) {
         super(context, radius);

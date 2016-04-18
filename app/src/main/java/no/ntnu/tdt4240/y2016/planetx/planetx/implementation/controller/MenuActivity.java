@@ -72,9 +72,13 @@ public class MenuActivity extends AppMenu implements GoogleApiClient.ConnectionC
         selectMapDialog();
     }
 
+    public void click_settings(View view) {
+        startGame("Crab Nebula");
+    }
+
     public void click_signOut(View view) {
         //LoadingActivity.mGoogleApiClient.disconnect();
-        LoadingActivity.mExplicitSignOut=true;
+        LoadingActivity.mExplicitSignOut = true;
         setContentView(R.layout.activity_main);
         goTo(LoadingActivity.class);
     }
@@ -83,6 +87,7 @@ public class MenuActivity extends AppMenu implements GoogleApiClient.ConnectionC
         Toast.makeText(this, "Starting game on map " + mapName, Toast.LENGTH_SHORT).show();
 
         goToWithMap(GameActivity.class, mapName);
+
     }
 
     /**
@@ -92,6 +97,7 @@ public class MenuActivity extends AppMenu implements GoogleApiClient.ConnectionC
         if(mGoogleApiClient.isConnected()==false)mGoogleApiClient.connect();
         Intent intent = Games.TurnBasedMultiplayer.getSelectOpponentsIntent(mGoogleApiClient,1,7,true);
         startActivityForResult(intent, RC_SELECT_PLAYERS);
+
     }
 
     /**
