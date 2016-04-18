@@ -51,12 +51,17 @@ public abstract class Weapon extends SpaceEntity {
     }
 
     @Override
+    public void collides(SpaceEntity se){
+        cdt.cancel();
+        setImageBitmap(null);
+        //animation
+    }
+
+    @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         setX(getX() + (float) velocityX);
         setY(getY()+(float)velocityY);
-        /*if(gameModel.checkCollision()){
-           cdt.cancel();
-        }*/
+        //gameModel.checkCollision(this);
     }
 }
