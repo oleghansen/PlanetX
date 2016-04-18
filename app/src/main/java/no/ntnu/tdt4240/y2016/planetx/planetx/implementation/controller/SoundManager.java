@@ -35,13 +35,16 @@ public class SoundManager {
      * @param context the state of the application
      */
     public void playInGameSong(Context context) {
+
+        //Clears the MediaPlayer
         if(music.isPlaying()) {
             music.release();
         }
 
+        //Chooses what song to play, in this case the song on the menu
         music = MediaPlayer.create(context, R.raw.ingamesong);
 
-        //Starts playing song
+        //Starts playing song if not muted
         if(!mutedMusic) {
             music.start();
         }
@@ -54,7 +57,6 @@ public class SoundManager {
      * Stops playing the main theme of the game if it is playing.
      */
     public void stopMusic() {
-        //Stops playing if already playing
         if(music.isPlaying()) {
             music.stop();
         }
@@ -66,13 +68,16 @@ public class SoundManager {
      * @param context
      */
     public void playMenuSong(Context context) {
+
+        //Clears the MediaPlayer
         if(music.isPlaying()) {
             music.release();
         }
 
+        //Chooses what song to play, in this case the song on the menu
         music = MediaPlayer.create(context, R.raw.ingamesong);
 
-        //Starts playing song
+        //Starts playing song if music is not muted
         if(!mutedMusic) {
             music.start();
         }
@@ -94,7 +99,13 @@ public class SoundManager {
             return;
         }
 
-        //Chooses sound effect
+        //Stops all existing sound by this MediaPlayer
+        //Just in case something goes wrong
+        if(soundEffectsExplode.isPlaying()) {
+            soundEffectsExplode.release();
+        }
+
+        //Creates a new sound effect to be played
         soundEffectsShoot = MediaPlayer.create(context, R.raw.shoot);
 
         //Start playing
@@ -114,10 +125,13 @@ public class SoundManager {
             return;
         }
 
+        //Stops all existing sound by this MediaPlayer
+        //Just in case something goes wrong
         if(soundEffectsExplode.isPlaying()) {
             soundEffectsExplode.release();
         }
 
+        //Creates a new sound effect to be played
         soundEffectsExplode = MediaPlayer.create(context, R.raw.explosion);
 
         //Start playing
@@ -132,6 +146,8 @@ public class SoundManager {
      *
      */
     public void muteMusic() {
+
+        //Checks if music is muted or ether pauses or resumes the music
         if(music.isPlaying()) {
             music.pause();
         } else {
@@ -143,7 +159,7 @@ public class SoundManager {
     }
 
     /**
-     * Mutes og unmutes sound effects.
+     * Mutes og unmutes sound effects
      *
      */
     public void muteSoundeffects() {
@@ -152,10 +168,20 @@ public class SoundManager {
         mutedSoundEffects = !mutedSoundEffects;
     }
 
+    /**
+     * Method to return the muted or unmuted stat of the music
+     *
+     * @return true if music is muted, else false
+     */
     public boolean isMusicMuted() {
         return mutedMusic;
     }
 
+    /**
+     * Return the muted or unmuted state of the sound effects
+     *
+     * @return true if sound effects is muted, else false
+     */
     public boolean isSoundEffectsMuted() {
         return mutedSoundEffects;
     }
