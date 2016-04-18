@@ -149,10 +149,11 @@ public class Animation extends ImageView{
      *
      *
      */
-    public void Draw(Canvas canvas)
+    @Override
+    public void onDraw(Canvas canvas)
     {
+        super.onDraw(canvas);
         this.Update();
-
         // Checks if show delay is over.
         if(this.timeOfAnimationCration + this.showDelay <= System.currentTimeMillis()){
             //(animImage, x, y, x + frameWidth, y + frameHeight, startingXOfFrameInImage, 0, endingXOfFrameInImage, frameHeight, null);

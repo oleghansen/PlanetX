@@ -24,7 +24,6 @@ public class Missile extends Weapon {
     @Override
     public void collides(SpaceEntity se) {
         super.collides(se);
-        explotion.invalidate();
     }
 
 }
