@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller.SoundManager;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GravityGod;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GravityVector;
@@ -29,13 +30,13 @@ public abstract class Weapon extends SpaceEntity {
 
     public void startMove() {
         final Weapon w = this;
-        cdt = new CountDownTimer(900000, 10) {
+        cdt = new CountDownTimer(5000, 10) {
             public void onTick(long l) {
                 w.invalidate();
             }
 
             public void onFinish() {
-                w.invalidate();
+                explode();
             }
         }.start();
     }
@@ -60,6 +61,11 @@ public abstract class Weapon extends SpaceEntity {
     public void collides(SpaceEntity se){
         cdt.cancel();
         setImageBitmap(null);
+        this.explode();
+    }
+
+    public void explode() {
+        SoundManager.getInstance().playSoundEffectExplosion(this.getContext());
         //animation
     }
 

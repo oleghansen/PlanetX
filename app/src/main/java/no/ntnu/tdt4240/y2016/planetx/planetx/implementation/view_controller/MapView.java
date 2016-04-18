@@ -107,7 +107,7 @@ public class MapView extends RelativeLayout {
         lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
         lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         powerText.setLayoutParams(lp);
-        powerText.setText("0%")
+        powerText.setText("0%");
     }
 
     private void initializePowerBar() {

@@ -90,11 +90,11 @@ public class GameModel {
                 soObstical.collides(se);
             }
         }
-        /*for (Spaceship ssObstical: spaceships) {
+        for (Spaceship ssObstical: spaceships) {
             if(se.collidesWith(ssObstical)){
                 se.collides(ssObstical);
                 ssObstical.collides(se);
             }
-        }*/
+        }
     }
 }
