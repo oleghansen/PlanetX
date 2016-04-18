@@ -8,11 +8,12 @@ import android.util.Log;
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 
 
-
 public class SoundManager {
 
     private static SoundManager instance = new SoundManager();
-    private MediaPlayer mainTheme = new MediaPlayer(); //The main theme
+    private MediaPlayer mainTheme = new MediaPlayer(); //The in game theme
+    private MediaPlayer menuTheme = new MediaPlayer(); //The in game theme
+    private MediaPlayer soundEffects = new MediaPlayer();
     private boolean mutedMusic; //Is true if sound is muted
     private boolean mutedSoundEffects; //Is true if sound is muted
 
@@ -35,20 +36,18 @@ public class SoundManager {
      *
      * @param context the state of the application
      */
-    public void playMainTheme(Context context) {
+    public void playInGameSong(Context context) {
 
         //Return if sound is muted
         if(mutedMusic) {
             return;
         }
 
-        try {
-            //Chooses audio file
-            mainTheme.setDataSource(context,
-                    Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.main_theme));
-        } catch (Exception e) {
-            Log.d("Sound", e.toString());
+        if(menuTheme.isPlaying()) {
+            menuTheme.isPlaying();
         }
+
+        mainTheme = MediaPlayer.create(context, R.raw.ingamesong);
 
         //Starts playing song
         mainTheme.start();
@@ -60,7 +59,7 @@ public class SoundManager {
     /**
      * Stops playing the main theme of the game if it is playing.
      */
-    public void stopMainTheme() {
+    public void stopInGameSong() {
         //Stops playing if already playing
         if(mainTheme.isPlaying()) {
             mainTheme.stop();
@@ -68,7 +67,42 @@ public class SoundManager {
     }
 
     /**
-     * Plays a shot sound effect if sound effects is not muted.
+     * Plays the song of the main menu
+     *
+     * @param context
+     */
+    public void playMenuSong(Context context) {
+
+        //Return if sound is muted
+        if(mutedMusic) {
+            return;
+        }
+
+        if(mainTheme.isPlaying()) {
+            mainTheme.stop();
+        }
+
+        menuTheme = MediaPlayer.create(context, R.raw.ingamesong);
+
+        //Starts playing song
+        menuTheme.start();
+
+        //Make sure the song is looping
+        menuTheme.setLooping(true);
+    }
+
+    /**
+     * Stops playing the song of the manu
+     */
+    public void stopMenuSong() {
+        //Stops playing if already playing
+        if(menuTheme.isPlaying()) {
+            menuTheme.stop();
+        }
+    }
+
+    /**
+     * Plays a shot sound effect of a shoot beaing fired, if sound effects is not muted.
      *
      * @param context the state of the application
      */
@@ -79,38 +113,44 @@ public class SoundManager {
             return;
         }
 
-        //Create a new sound effect
-        MediaPlayer mpSound = new MediaPlayer();
-
-        try {
-            //Chooses sound effect
-            mpSound.setDataSource(context,
-                   Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.short2));
-        } catch (Exception e) {
-            Log.d("Sound", e.toString());
-        }
+        //Chooses sound effect
+        soundEffects = MediaPlayer.create(context, R.raw.shoot);
 
         //Start playing
         //Stops when audio is finished playing
-        mpSound.start();
+        soundEffects.start();
+    }
+
+    /**
+     * Plays a sound effect of an explosion, if sound effects is not muted
+     *
+     * @param context
+     */
+    public void playSoundEffectExplosion(Context context) {
+
+        //Return if sound effects is muted
+        if(mutedSoundEffects) {
+            return;
+        }
+
+        soundEffects = MediaPlayer.create(context, R.raw.explosion);
+
+        //Start playing
+        //Stops when audio is finished playing
+        soundEffects.start();
     }
 
     /**
      * Mutes or unmutes the music of the game.
-     * Starts the song frm the start if unmuted, hence the
-     * method needs a context.
+     * If you are unmuting you need to call the song you need to
+     * start if playing
      *
-     * @param context the state of the application
      */
-    public void muteMusic(Context context) {
-
-
-        if(mutedMusic) {
-            //Starts playing the main theme when unmuting the sound
-            this.playMainTheme(context);
-        } else {
-            //Stops playing
-            this.stopMainTheme();
+    public void muteMusic() {
+        if(mainTheme.isPlaying()) {
+            mainTheme.stop();
+        } else if(menuTheme.isPlaying()) {
+            menuTheme.stop();
         }
 
         //Inverts muting variable
