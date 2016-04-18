@@ -166,4 +166,12 @@ public class SoundManager {
         //Inverts muting variable
         mutedSoundEffects = !mutedSoundEffects;
     }
+
+    public boolean isMutedMusicMuted() {
+        return mutedMusic;
+    }
+
+    public boolean isEffectsMuted() {
+        return mutedSoundEffects;
+    }
 }
