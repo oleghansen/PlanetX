@@ -61,11 +61,11 @@ public class Spaceship extends SpaceEntity {
     }
 
     public Missile fireTestShot(int power) {
-        double pow = power * 0.15 + 15;
+        double pow = power * 0.50;
         Missile m = new Missile(getContext(), gameModel);
 
-        m.setX((float) getCenterX());
-        m.setY((float) getCenterY());
+        m.setX((float) (getCenterX() + getWidth() * Math.cos((fireAngle - 90) * 2 * 3.14 / 360)));
+        m.setY((float) (getCenterY() + getHeight() * Math.sin((fireAngle - 90) * 2 * 3.14 / 360)));
 
 //        Matrix matrix = new Matrix();
 //        matrix.preRotate((float) fireAngle, m.getWidth() / 2, m.getHeight() / 2);
