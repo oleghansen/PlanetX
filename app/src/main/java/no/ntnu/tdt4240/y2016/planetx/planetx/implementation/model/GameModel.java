@@ -86,7 +86,7 @@ public class GameModel {
     public static void spaceshipIsDead(Spaceship spaceship) {
         //TODO:Start END sequence
     }
-    
+
     public void checkCollision (SpaceEntity se){
         for (SpaceObstacle soObstical: spaceObstacles) {
             if(se.collidesWith(soObstical)){
