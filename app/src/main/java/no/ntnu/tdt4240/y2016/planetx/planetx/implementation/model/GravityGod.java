@@ -33,7 +33,7 @@ public class GravityGod {
         double unit_x = difX / dist;
         double unit_y = difY / dist;
 
-        double gravity = so.getGravity() / (unit_radius * unit_radius);
+        double gravity = so.getGravity() / (unit_radius);
 
         vector.add(-gravity * unit_x, -gravity * unit_y);
 

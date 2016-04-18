@@ -24,27 +24,19 @@ public abstract class Weapon extends SpaceEntity {
         this.damage = damage;
         this.name = name;
         this.description = description;
-
-        this.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                invalidate();
-                return true;
-            }
-        });
     }
 
     public void startMove() {
-//        final Weapon w = this;
-//        new CountDownTimer(900000, 100) {
-//            public void onTick(long l) {
-//                w.invalidate();
-//            }
-//
-//            public void onFinish() {
-//                w.invalidate();
-//            }
-//        }.start();
+        final Weapon w = this;
+        new CountDownTimer(900000, 100) {
+            public void onTick(long l) {
+                w.invalidate();
+            }
+
+            public void onFinish() {
+                w.invalidate();
+            }
+        }.start();
     }
 
     public void setVelocityX(double velocity) {
@@ -67,8 +59,8 @@ public abstract class Weapon extends SpaceEntity {
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         GravityVector gv = gameModel.getGravityGod().getGravityVector((int) getCenterX(), (int) getCenterY());
-//        velocityX += gv.getX();
-//        velocityY += gv.getY();
+        velocityX += gv.getX();
+        velocityY += gv.getY();
         Log.d("GravityVector","Velocity: "+velocityX+", "+velocityY);
         Log.d("GravityVector", "Gravity: " + gv.getX() + ", " + gv.getY());
 
