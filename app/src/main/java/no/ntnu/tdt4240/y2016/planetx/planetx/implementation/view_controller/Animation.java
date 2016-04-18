@@ -11,7 +11,7 @@ import android.widget.ImageView;
  * @author www.gametutorial.net & Hans
  */
 
-public class Animation extends ImageView{
+public class Animation{
 
     // Image of animation.
     private Bitmap animImage;
@@ -73,9 +73,8 @@ public class Animation extends ImageView{
      * @param y y coordinate. Where to draw the animation on the screen?
      * @param showDelay In milliseconds. How long to wait before starting the animation and displaying it?
      */
-    public Animation(Bitmap animImage, int frameWidth, int frameHeight, int numberOfFrames, long frameTime, boolean loop, int x, int y, long showDelay,Context context)
+    public Animation(Bitmap animImage, int frameWidth, int frameHeight, int numberOfFrames, long frameTime, boolean loop, int x, int y, long showDelay)
     {
-        super(context);
         this.animImage = animImage;
         this.frameWidth = frameWidth;
         this.frameHeight = frameHeight;
@@ -149,17 +148,15 @@ public class Animation extends ImageView{
      *
      *
      */
-    @Override
-    public void onDraw(Canvas canvas)
+    public void draw(Canvas canvas)
     {
-        super.onDraw(canvas);
         this.Update();
         // Checks if show delay is over.
         if(this.timeOfAnimationCration + this.showDelay <= System.currentTimeMillis()){
             //(animImage, x, y, x + frameWidth, y + frameHeight, startingXOfFrameInImage, 0, endingXOfFrameInImage, frameHeight, null);
             canvas.drawBitmap(animImage,x,y,null);
-
         }
+
 
     }
 }
