@@ -23,17 +23,23 @@ public class GameModel {
     private ArrayList<SpaceObstacle> spaceObstacles = new ArrayList<>();
     private ArrayList<Spaceship> spaceships = new ArrayList<>();
 
+    private GravityGod gravityGod;
     private MapView mapView;
 
     public GameModel(Context context, JsonMapReader jmr) {
-        for (SpaceObstacle so : jmr.getObstacles(context)) {
+        for (SpaceObstacle so : jmr.getObstacles(context, this)) {
             spaceObstacles.add(so);
         }
-        for (Spaceship sp : jmr.getSpaceships(context)) {
+        for (Spaceship sp : jmr.getSpaceships(context, this)) {
             spaceships.add(sp);
         }
 
+        gravityGod = new GravityGod(spaceObstacles);
         mapView = new MapView(context, this);
+    }
+
+    public GravityGod getGravityGod() {
+        return gravityGod;
     }
 
     public ArrayList<SpaceEntity> getEntities() {
