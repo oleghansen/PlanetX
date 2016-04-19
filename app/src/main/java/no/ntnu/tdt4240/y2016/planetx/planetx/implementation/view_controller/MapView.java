@@ -76,7 +76,7 @@ public class MapView extends RelativeLayout {
     }
 
     private void initializeFireButton() {
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.fire);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.fire);
         OnClickListener ocl = new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +88,7 @@ public class MapView extends RelativeLayout {
     }
 
     private void initializeLockButton() {
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.lock);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.lock);
 
         OnClickListener ocl = new OnClickListener() {
             @Override
