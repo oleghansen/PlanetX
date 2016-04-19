@@ -43,7 +43,6 @@ public abstract class AppMenu extends AppCompatActivity {
                 sound.setChecked(false);
             }
         }
-        Toast.makeText(this, "ONRESUME", Toast.LENGTH_SHORT).show();
     }
 
     @Override

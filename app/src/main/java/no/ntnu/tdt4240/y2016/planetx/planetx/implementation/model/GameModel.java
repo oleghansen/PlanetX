@@ -76,13 +76,10 @@ public class GameModel {
         isLocked = false;
         Spaceship s = getCurrentShip();
         mapView.fireTestShot(s.fireTestShot(progress));
-
-        mapView.showLockButton();
     }
 
     public void click_lockButton(View v) {
         isLocked = true;
-        mapView.showFireButton();
     }
 
     private boolean isLocked = false;

@@ -2,12 +2,14 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
@@ -20,6 +22,15 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.JsonMapRe
  */
 public class GameActivity extends AppMenu {
     private GameModel gameModel;
+    private final Handler handler = new Handler();
+    private final int powerBarDelay = 10;
+    private int addProgress = 3;
+    private final Runnable runnable = new Runnable() {
+        public void run() {
+            incrementPowerbar();
+            handler.postDelayed(this, powerBarDelay);
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceBundle) {
@@ -49,5 +60,56 @@ public class GameActivity extends AppMenu {
         if (!SoundManager.getInstance().isMusicMuted()) {
             SoundManager.getInstance().playInGameSong(this);
         }
+    }
+
+    public void click_fire(View view) {
+        findViewById(R.id.btn_lock).setVisibility(View.VISIBLE);
+        findViewById(R.id.btn_fire).setVisibility(View.INVISIBLE);
+        findViewById(R.id.bar_powerbar).setVisibility(View.INVISIBLE);
+
+        stopPowerbar();
+
+        SeekBar powerbar = ((SeekBar) findViewById(R.id.bar_powerbar));
+        gameModel.click_fireButton(powerbar.getProgress());
+        powerbar.setProgress(0);
+
+
+//        gameModel.getMapView().click_fire();
+    }
+
+    public void click_lock(View view) {
+        findViewById(R.id.btn_lock).setVisibility(View.INVISIBLE);
+        findViewById(R.id.btn_fire).setVisibility(View.VISIBLE);
+        findViewById(R.id.bar_powerbar).setVisibility(View.VISIBLE);
+
+        startPowerbar();
+
+        gameModel.click_lockButton(view);
+
+//        gameModel.getMapView().click_lock();
+    }
+
+    private void incrementPowerbar() {
+        SeekBar seekbar = (SeekBar) findViewById(R.id.bar_powerbar);
+        int next = seekbar.getProgress();
+        if (next > 99 || next < 1) {
+            addProgress *= -1;
+        }
+        next = next + addProgress;
+        if (next > 99) {
+            next = 100;
+        }
+        if (next < 1) {
+            next = 0;
+        }
+        seekbar.setProgress(next);
+    }
+
+    private void startPowerbar() {
+        handler.postDelayed(runnable, powerBarDelay);
+    }
+
+    private void stopPowerbar() {
+        handler.removeCallbacks(runnable);
     }
 }
