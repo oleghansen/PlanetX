@@ -243,4 +243,11 @@ public class JsonMapReader implements Serializable {
         }
         return null;
     }
+
+    public Spaceship getSpaceship1(Context context, GameModel gameModel) {
+        return getShip(context,gameModel,true);
+    }
+    public Spaceship getSpaceship2(Context context, GameModel gameModel) {
+        return getShip(context,gameModel,false);
+    }
 }

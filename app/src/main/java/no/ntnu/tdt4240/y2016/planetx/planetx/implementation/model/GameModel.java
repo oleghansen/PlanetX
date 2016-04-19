@@ -5,12 +5,14 @@ import android.content.Context;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.SeekBar;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 
 import java.util.ArrayList;
 
+import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.MapView;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.JsonMapReader;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.SpaceEntity;
@@ -23,6 +25,7 @@ public class GameModel {
     public static final double UNIT_GRAVITY = 9.81;
     public static double UNIT_RADIUS = 0.0;
 
+
     private ArrayList<SpaceObstacle> spaceObstacles = new ArrayList<>();
     private ArrayList<Spaceship> spaceships = new ArrayList<>();
 
@@ -33,13 +36,24 @@ public class GameModel {
     private boolean turnInProgress = false;
     private ImageView lockButton;
 
-    public GameModel(Context context, JsonMapReader jmr) {
+    public GameModel(Context context, JsonMapReader jmr, SeekBar h1, SeekBar h2) {
         for (SpaceObstacle so : jmr.getObstacles(context, this)) {
             spaceObstacles.add(so);
         }
-        for (Spaceship sp : jmr.getSpaceships(context, this)) {
-            spaceships.add(sp);
-        }
+
+        Spaceship sp1 = jmr.getSpaceship1(context, this);
+        sp1.setHelthBar(h1);
+        spaceships.add(sp1);
+
+
+        Spaceship sp2 = jmr.getSpaceship2(context,this);
+        sp2.setHelthBar(h2);
+        spaceships.add(sp2);
+
+
+//        for (Spaceship sp : jmr.getSpaceships(context, this)) {
+//            spaceships.add(sp);
+//        }
 
         gravityGod = new GravityGod(spaceObstacles);
         mapView = new MapView(context, this);
@@ -68,6 +82,8 @@ public class GameModel {
     public Spaceship getCurrentShip() {
         return this.spaceship;
     }
+
+
 
     public void click_fireButton(int progress) {
         if(!turnInProgress) {
@@ -117,6 +133,7 @@ public class GameModel {
         }
     }
 
+
     public void endTurn(){
         try
         {
@@ -140,4 +157,5 @@ public class GameModel {
     public void showLockButton() {
         this.lockButton.setVisibility(View.VISIBLE);
     }
+
 }
