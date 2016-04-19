@@ -67,6 +67,7 @@ public abstract class Weapon extends SpaceEntity {
     public void explode() {
         SoundManager.getInstance().playSoundEffectExplosion(this.getContext());
         //animation
+        gameModel.endTurn();
     }
 
     @Override
