@@ -3,7 +3,10 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,6 +26,7 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
 public class MapView extends RelativeLayout {
     private GameModel gameModel;
     private RelativeLayout parentLayout;
+    private ArrayList<Trajectory> trajectories = new ArrayList<>();
 
 
 
@@ -41,7 +45,7 @@ public class MapView extends RelativeLayout {
             }
         };
         setOnTouchListener(otl);
-
+        setWillNotDraw(false);
     }
 
     public void setParentLayout(RelativeLayout parentLayout) {
@@ -72,5 +76,31 @@ public class MapView extends RelativeLayout {
 
     public void showLockButton() {
         gameModel.showLockButton();
+    }
+
+    public void addTrajectory(float x1, float y1, float x2, float y2)
+    {
+        Trajectory trajectory = new Trajectory(x1, y1, x2, y2);
+        trajectories.add(trajectory);
+    }
+
+    /**
+     * Draws weapon trajectories
+     * @param canvas
+     */
+    @Override
+    public void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setColor(Color.CYAN);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(2.5f);
+        paint.setAlpha(100);
+
+        for(Trajectory trajectory : trajectories){
+            canvas.drawLine(trajectory.getX1(), trajectory.getY1(), trajectory.getX2(), trajectory.getY2(), paint);
+            // Log.d("TRAJECTORY" , trajectories.size() + " | " + trajectory.toString());
+        }
     }
 }
