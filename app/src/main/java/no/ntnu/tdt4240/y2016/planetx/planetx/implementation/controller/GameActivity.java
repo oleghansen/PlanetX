@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
@@ -60,6 +61,7 @@ public class GameActivity extends AppMenu {
         gameModel.initializeMap();
 
 
+
         hp1.getProgressDrawable().setColorFilter(Color.BLUE,android.graphics.PorterDuff.Mode.SRC_IN);
 
 
@@ -80,6 +82,9 @@ public class GameActivity extends AppMenu {
 
 
 
+
+        gameModel.setLockButton((ImageView)findViewById(R.id.btn_lock));
+
     }
 
     @Override
@@ -91,7 +96,7 @@ public class GameActivity extends AppMenu {
     }
 
     public void click_fire(View view) {
-        findViewById(R.id.btn_lock).setVisibility(View.VISIBLE);
+        findViewById(R.id.btn_lock).setVisibility(View.INVISIBLE);
         findViewById(R.id.btn_fire).setVisibility(View.INVISIBLE);
         findViewById(R.id.bar_powerbar).setVisibility(View.INVISIBLE);
 

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.SeekBar;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -30,6 +31,10 @@ public class GameModel {
 
     private GravityGod gravityGod;
     private MapView mapView;
+    private Spaceship spaceship;
+    private boolean isLocked = false;
+    private boolean turnInProgress = false;
+    private ImageView lockButton;
 
     public GameModel(Context context, JsonMapReader jmr, SeekBar h1, SeekBar h2) {
         for (SpaceObstacle so : jmr.getObstacles(context, this)) {
@@ -52,6 +57,7 @@ public class GameModel {
 
         gravityGod = new GravityGod(spaceObstacles);
         mapView = new MapView(context, this);
+        this.spaceship = this.spaceships.get(0);
     }
 
     public GravityGod getGravityGod() {
@@ -74,28 +80,31 @@ public class GameModel {
     }
 
     public Spaceship getCurrentShip() {
-        //TODO: Implement turn logic and return correct ship
-        return spaceships.get(0);
+        return this.spaceship;
     }
 
 
 
     public void click_fireButton(int progress) {
-        isLocked = false;
-        Spaceship s = getCurrentShip();
-        mapView.fireTestShot(s.fireTestShot(progress));
+        if(!turnInProgress) {
+            isLocked = false;
+            this.turnInProgress = true;
+            Spaceship s = getCurrentShip();
+            mapView.fireTestShot(s.fireTestShot(progress));
+        }
     }
 
     public void click_lockButton(View v) {
-        isLocked = true;
+        if(!turnInProgress) {
+            this.isLocked = true;
+        }
     }
 
-    private boolean isLocked = false;
-
     public void touch_map(View v, MotionEvent e) {
-        if (isLocked) return;
-        Spaceship s = getCurrentShip();
-        s.flipTowardsTouch(v, e);
+        if (!isLocked && !turnInProgress) {
+            Spaceship s = getCurrentShip();
+            s.flipTowardsTouch(v, e);
+        }
     }
 
     public static void spaceshipIsDead(Spaceship spaceship) {
@@ -124,5 +133,29 @@ public class GameModel {
         }
     }
 
+
+    public void endTurn(){
+        try
+        {
+            if (spaceships.indexOf(this.spaceship) == 0) {
+                this.spaceship = this.spaceships.get(1);
+            } else {
+                this.spaceship = this.spaceships.get(0);
+            }
+            this.turnInProgress = false;
+            mapView.showLockButton();
+        }
+        catch (IndexOutOfBoundsException e){
+            Log.d("error", "Feil ved oppretting av spaceship");
+        }
+    }
+
+    public void setLockButton(ImageView lockButton) {
+        this.lockButton = lockButton;
+    }
+
+    public void showLockButton() {
+        this.lockButton.setVisibility(View.VISIBLE);
+    }
 
 }

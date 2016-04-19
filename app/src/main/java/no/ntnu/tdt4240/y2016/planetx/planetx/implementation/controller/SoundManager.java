@@ -2,6 +2,9 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.util.Log;
+
+import java.io.IOException;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 
@@ -35,13 +38,16 @@ public class SoundManager {
      * @param context the state of the application
      */
     public void playInGameSong(Context context) {
+
+        //Clears the MediaPlayer
         if(music.isPlaying()) {
             music.release();
         }
 
+        //Chooses what song to play, in this case the song on the menu
         music = MediaPlayer.create(context, R.raw.ingamesong);
 
-        //Starts playing song
+        //Starts playing song if not muted
         if(!mutedMusic) {
             music.start();
         }
@@ -54,7 +60,6 @@ public class SoundManager {
      * Stops playing the main theme of the game if it is playing.
      */
     public void stopMusic() {
-        //Stops playing if already playing
         if(music.isPlaying()) {
             music.stop();
         }
@@ -66,19 +71,22 @@ public class SoundManager {
      * @param context
      */
     public void playMenuSong(Context context) {
-        if(music.isPlaying()) {
+
+        //Clears the MediaPlayer
+        if(music != null) {
             music.release();
         }
 
-        music = MediaPlayer.create(context, R.raw.ingamesong);
-
-        //Starts playing song
-        if(!mutedMusic) {
-            music.start();
-        }
+        //Chooses what song to play, in this case the song on the menu
+        music = MediaPlayer.create(context, R.raw.menusong);
 
         //Make sure the song is looping
         music.setLooping(true);
+
+        //Starts playing song if music is not muted
+        if(!mutedMusic) {
+            music.start();
+        }
     }
 
 
@@ -94,7 +102,13 @@ public class SoundManager {
             return;
         }
 
-        //Chooses sound effect
+        //Stops all existing sound by this MediaPlayer
+        //Just in case something goes wrong
+        if(soundEffectsShoot != null) {
+            soundEffectsShoot.release();
+        }
+
+        //Creates a new sound effect to be played
         soundEffectsShoot = MediaPlayer.create(context, R.raw.shoot);
 
         //Start playing
@@ -114,10 +128,13 @@ public class SoundManager {
             return;
         }
 
-        if(soundEffectsExplode.isPlaying()) {
+        //Stops all existing sound by this MediaPlayer
+        //Just in case something goes wrong
+        if(soundEffectsExplode != null) {
             soundEffectsExplode.release();
         }
 
+        //Creates a new sound effect to be played
         soundEffectsExplode = MediaPlayer.create(context, R.raw.explosion);
 
         //Start playing
@@ -132,6 +149,8 @@ public class SoundManager {
      *
      */
     public void muteMusic() {
+
+        //Checks if music is muted or ether pauses or resumes the music
         if(music.isPlaying()) {
             music.pause();
         } else {
@@ -143,7 +162,7 @@ public class SoundManager {
     }
 
     /**
-     * Mutes og unmutes sound effects.
+     * Mutes og unmutes sound effects
      *
      */
     public void muteSoundeffects() {
@@ -152,11 +171,22 @@ public class SoundManager {
         mutedSoundEffects = !mutedSoundEffects;
     }
 
+    /**
+     * Method to return the muted or unmuted stat of the music
+     *
+     * @return true if music is muted, else false
+     */
     public boolean isMusicMuted() {
         return mutedMusic;
     }
 
+    /**
+     * Return the muted or unmuted state of the sound effects
+     *
+     * @return true if sound effects is muted, else false
+     */
     public boolean isSoundEffectsMuted() {
         return mutedSoundEffects;
     }
+
 }

@@ -70,4 +70,7 @@ public class MapView extends RelativeLayout {
         missile.startMove();
     }
 
+    public void showLockButton() {
+        gameModel.showLockButton();
+    }
 }
