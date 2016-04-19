@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btn_lock"
-            android:src="@drawable/lock"
+            android:src="@mipmap/lock"
             android:onClick="click_lock"
             android:layout_alignParentRight="true"/>
 
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_fire"
             android:visibility="invisible"
-            android:src="@drawable/fire"
+            android:src="@mipmap/fire"
             android:onClick="click_fire"
             android:layout_alignParentRight="true"/>
 
