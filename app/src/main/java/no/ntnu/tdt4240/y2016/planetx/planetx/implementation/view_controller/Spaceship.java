@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 
 import com.google.android.gms.games.Game;
 
@@ -23,6 +24,7 @@ public class Spaceship extends SpaceEntity {
     private double firDirX;
     private double firDirY;
     private double firPower;
+    private SeekBar helthBar;
 
     public Spaceship(Context context, GameModel gm, double radius, int healthPoints, ArrayList<Weapon> weapons) {
         super(context, gm, radius);
@@ -49,6 +51,7 @@ public class Spaceship extends SpaceEntity {
 
     public boolean isAlive()
     {
+
         if(healthPoints <= 0){
             return false;
         }
@@ -60,9 +63,12 @@ public class Spaceship extends SpaceEntity {
 
     public void damageSpaceship(int damage){
         healthPoints = getHealthPoints() - damage;
+        helthBar.setProgress(healthPoints);
+
     }
     public void reduceHPwith(double hp) {
         this.healthPoints -= hp;
+
         if(this.healthPoints<=0) {
             GameModel.spaceshipIsDead(this);
         }
@@ -111,5 +117,9 @@ public class Spaceship extends SpaceEntity {
         m.setVelocityX(xVel);
         m.setVelocityY(yVel);
         return m;
+    }
+
+    public void setHelthBar(SeekBar helthBar) {
+        this.helthBar = helthBar;
     }
 }

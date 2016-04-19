@@ -1,11 +1,14 @@
 package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.RelativeLayout;
@@ -47,11 +50,36 @@ public class GameActivity extends AppMenu {
             finish();
         }
 
-        gameModel = new GameModel(getApplicationContext(), jmr);
+        SeekBar hp1 = (SeekBar) findViewById(R.id.bar_healthbar1);
+        SeekBar hp2 = (SeekBar) findViewById(R.id.bar_healthbar2);
+
+        gameModel = new GameModel(getApplicationContext(), jmr, hp1, hp2);
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.game_content_layout);
         gameModel.getMapView().setParentLayout(rl);
         rl.addView(gameModel.getMapView());
         gameModel.initializeMap();
+
+
+        hp1.getProgressDrawable().setColorFilter(Color.BLUE,android.graphics.PorterDuff.Mode.SRC_IN);
+
+
+
+        hp1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+        hp2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+
+
+
+
     }
 
     @Override
