@@ -19,6 +19,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller.MenuActivity;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.MapView;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.JsonMapReader;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.SpaceEntity;
@@ -87,15 +88,20 @@ public class GameModel {
 
     public Spaceship getCurrentShip() {
         //TODO: Implement turn logic and return correct ship
+
+        if(turnCounter%2!=0)
         return spaceships.get(0);
+        else return spaceships.get(1);
     }
 
     public void click_fireButton(int progress) {
         isLocked = false;
         Spaceship s = getCurrentShip();
         mapView.fireTestShot(s.fireTestShot(progress));
-
+        turnCounter++;
         mapView.showLockButton();
+
+        //EN MÅTE OG SENDE TIL MENUACTIVITY AT TAKETURN() SKAL KALLES?
     }
 
     public void click_lockButton(View v) {

@@ -169,8 +169,8 @@ public class MenuActivity extends AppMenu implements GoogleApiClient.ConnectionC
     }
 
     public void click_startGame(View view) {
-        findPlayer();
 
+        selectMapDialog();
     }
 
     public void click_settings(View view) {
@@ -237,6 +237,7 @@ public class MenuActivity extends AppMenu implements GoogleApiClient.ConnectionC
                     public void onClick(DialogInterface dialog, int id) {
                         //startGame(selectedMap);
                         startGame(selectedMapName);
+                        findPlayer();
                     }
                 }).setView(mapListView);
 
@@ -303,6 +304,7 @@ public class MenuActivity extends AppMenu implements GoogleApiClient.ConnectionC
                     .setAutoMatchCriteria(autoMatchCriteria)
                     .build();
 
+            if(!mGoogleApiClient.isConnected())mGoogleApiClient.connect();
             // Create and start the match.
            Games.TurnBasedMultiplayer
                     .createMatch(mGoogleApiClient, tbmc)
@@ -416,7 +418,7 @@ public class MenuActivity extends AppMenu implements GoogleApiClient.ConnectionC
                     //Log.d(TAG, "Warning: accessing TurnBasedMatch when not connected");
                 }
 
-                //updateMatch(mTurnBasedMatch);
+                updateMatch(mTurnBasedMatch);
                 return;
             }
         }
@@ -564,10 +566,8 @@ public class MenuActivity extends AppMenu implements GoogleApiClient.ConnectionC
 
     public void startMatch(TurnBasedMatch match) {
 
+        mTurnData=GameActivity.getModel();
 
-        startGame("Crab Nebula");
-        JsonMapReader jmr = JsonMapReader.getMapReader("Crab Nebula", getApplicationContext(), getWindowManager());
-        mTurnData=new GameModel(getApplicationContext(),jmr);
         mTurnData.power=2;
         mTurnData.fireangle=2;
         mTurnData.turnCounter=1;
@@ -589,6 +589,36 @@ public class MenuActivity extends AppMenu implements GoogleApiClient.ConnectionC
                     }
                 });
     }
+    public String getNextParticipantId() {
+
+        String playerId = Games.Players.getCurrentPlayerId(mGoogleApiClient);
+        String myParticipantId = mMatch.getParticipantId(playerId);
+
+        ArrayList<String> participantIds = mMatch.getParticipantIds();
+
+        int desiredIndex = -1;
+
+        for (int i = 0; i < participantIds.size(); i++) {
+            if (participantIds.get(i).equals(myParticipantId)) {
+                desiredIndex = i + 1;
+            }
+        }
+
+        if (desiredIndex < participantIds.size()) {
+            return participantIds.get(desiredIndex);
+        }
+
+        if (mMatch.getAvailableAutoMatchSlots() <= 0) {
+            // You've run out of automatch slots, so we start over.
+            return participantIds.get(0);
+        } else {
+            // You have not yet fully automatched, so null will find a new
+            // person to play against.
+            return null;
+        }
+    }
+
+
 
     // Rematch dialog
     public void askForRematch() {

@@ -17,7 +17,7 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.JsonMapRe
  * Created by Ole on 11.04.2016.
  */
 public class GameActivity extends AppMenu {
-    private GameModel gameModel;
+    private static GameModel gameModel;
 
     @Override
     public void onCreate(Bundle savedInstanceBundle) {
@@ -43,6 +43,10 @@ public class GameActivity extends AppMenu {
         gameModel.initializeMap();
     }
 
+    public static GameModel getModel(){
+        return gameModel;
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuActivity.initializeSoundMenu(menu, this);
