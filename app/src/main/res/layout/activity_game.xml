@@ -18,7 +18,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:onClick="click_lock"
-        android:src="@drawable/lock" />
+        android:src="@mipmap/lock" />
 
     <ImageView
         android:id="@+id/btn_fire"
@@ -27,7 +27,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:onClick="click_fire"
-        android:src="@drawable/fire"
+        android:src="@mipmap/fire"
         android:visibility="invisible" />
 
     <SeekBar
@@ -48,13 +48,13 @@
         android:layout_centerInParent="true">
 
         <SeekBar
+            android:id="@+id/bar_healthbar1"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:max="100"
             android:progress="100"
-            android:enabled="false"
-            android:thumb="@null"
-            android:id="@+id/bar_healthbar1"/>
+            android:thumb="@null" />
 
     </LinearLayout>
 
@@ -65,13 +65,13 @@
         android:layout_centerInParent="true">
 
         <SeekBar
+            android:id="@+id/bar_healthbar2"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:max="100"
             android:progress="100"
-            android:enabled="false"
-            android:thumb="@null"
-            android:id="@+id/bar_healthbar2"/>
+            android:thumb="@null" />
     </LinearLayout>
 
 </RelativeLayout>

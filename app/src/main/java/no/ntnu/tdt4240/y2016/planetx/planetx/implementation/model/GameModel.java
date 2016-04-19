@@ -132,8 +132,6 @@ public class GameModel {
                 se.collides(spaceship);
                 spaceship.collides(se);
 
-                Log.d("COLLISION", "Spaceentity hit! gameModel collide!!");
-
                 if(!spaceship.isAlive())
                 {
                     spaceshipIsDead(spaceship);

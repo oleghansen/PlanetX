@@ -1,65 +1,36 @@
 [
-//  MAP 1
-  {
-    "name": "Canis Major",
-    "weapons":[
-      {
-        "type":"missile",
-        "shots":-1
-      }
-    ],
-    "obstacles": [
-      {
-        "type": "planet",
-        "img":"earth",
-        "normal": true,
-        "size": 1,
-        "posX": 50.0,
-        "posY": 50.0
-      }
-    ],
-    "ship1": {
-      "posX": 5.0,
-      "posY": 5.0
-    },
-    "ship2": {
-      "posX": 80.0,
-      "posY": 80.0
-    }
-  },
-
-//  MAP 2
+  //Map1
   {
     "name": "Crab Nebula",
-    "weapons":[
+    "weapons": [
       {
-        "type":"missile",
-        "shots":-1
+        "type": "missile",
+        "shots": -1
       }
     ],
     "obstacles": [
       {
         "type": "planet",
-        "img":"earth",
+        "img": "earth",
         "normal": true,
         "size": 1,
-        "posX": 0.0,
+        "posX": 5.0,
         "posY": 50.0
       },
       {
         "type": "planet",
-        "img":"shine",
+        "img": "shine",
         "normal": true,
         "size": 2,
-        "posX": 80.0,
-        "posY": 50.0
+        "posX": 70.0,
+        "posY": 2.0
       },
       {
         "type": "planet",
-        "img":"shine",
+        "img": "blue",
         "normal": true,
-        "size": 1.5,
-        "posX": 25.0,
+        "size": 1.8,
+        "posX": 35.0,
         "posY": 25.0
       }
     ],
@@ -68,50 +39,280 @@
       "posY": 5.0
     },
     "ship2": {
-      "posX": 10.0,
-      "posY": 80.0
+      "posX": 80.0,
+      "posY": 70.0
     }
   },
-  //  MAP 3
+  //Map 2
   {
-    "name": "Sagittarius",
-    "weapons":[
+    "name": "Canis Major",
+    "weapons": [
       {
-        "type":"missile",
-        "shots":-1
+        "type": "missile",
+        "shots": -1
       }
     ],
     "obstacles": [
       {
         "type": "planet",
-        "img":"blue",
+        "img": "shine",
         "normal": true,
-        "size": 5,
-        "posX": 80.0,
+        "size": 0.8,
+        "posX": 25.0,
+        "posY": 40.0
+      },
+      {
+        "type": "planet",
+        "img": "earth",
+        "normal": true,
+        "size": 1,
+        "posX": 5.0,
         "posY": 50.0
+      },
+      {
+        "type": "planet",
+        "img": "shine",
+        "normal": true,
+        "size": 2,
+        "posX": 70.0,
+        "posY": 2.0
+      },
+      {
+        "type": "planet",
+        "img": "blue",
+        "normal": true,
+        "size": 1.8,
+        "posX": 35.0,
+        "posY": 25.0
       }
     ],
-    "ship1": {
-      "posX": 5.0,
-      "posY": 5.0
-    },
-    "ship2": {
-      "posX": 10.0,
-      "posY": 80.0
-    }
-  },
-//  MAP 4
-  {
-    "name": "Empty space",
-    "weapons":[],
-    "obstacles": [],
     "ship1": {
       "posX": 5.0,
       "posY": 5.0
     },
     "ship2": {
       "posX": 80.0,
-      "posY": 80.0
+      "posY": 70.0
+    }
+  },
+  //Map3
+  {
+    "name": "Sagittarius",
+    "weapons": [
+      {
+        "type": "missile",
+        "shots": -1
+      }
+    ],
+    "obstacles": [
+      {
+        "type": "planet",
+        "img": "shine",
+        "normal": true,
+        "size": 0.7,
+        "posX": 75.0,
+        "posY": 55.0
+      },
+      {
+        "type": "planet",
+        "img": "earth",
+        "normal": true,
+        "size": 1,
+        "posX": 5.0,
+        "posY": 50.0
+      },
+      {
+        "type": "planet",
+        "img": "shine",
+        "normal": true,
+        "size": 2,
+        "posX": 70.0,
+        "posY": 2.0
+      },
+      {
+        "type": "planet",
+        "img": "blue",
+        "normal": true,
+        "size": 1.8,
+        "posX": 35.0,
+        "posY": 25.0
+      }
+    ],
+    "ship1": {
+      "posX": 5.0,
+      "posY": 5.0
+    },
+    "ship2": {
+      "posX": 80.0,
+      "posY": 75.0
+    }
+  },
+  //Map4
+  {
+    "name": "Astroids",
+    "weapons": [
+      {
+        "type": "missile",
+        "shots": -1
+      }
+    ],
+    "obstacles": [
+      {
+        "type": "planet",
+        "img": "shine",
+        "normal": true,
+        "size": 0.2,
+        "posX": 5.0,
+        "posY": 50.0
+      },
+      {
+        "type": "planet",
+        "img": "shine",
+        "normal": true,
+        "size": 0.3,
+        "posX": 7.0,
+        "posY": 35.0
+      },
+      {
+        "type": "planet",
+        "img": "shine",
+        "normal": true,
+        "size": 0.6,
+        "posX": 10.0,
+        "posY": 70.0
+      },
+      {
+        "type": "planet",
+        "img": "shine",
+        "normal": true,
+        "size": 0.3,
+        "posX": 20.0,
+        "posY": 40.0
+      },
+      {
+        "type": "planet",
+        "img": "shine",
+        "normal": true,
+        "size": 0.3,
+        "posX": 30.0,
+        "posY": 32.0
+      },
+      {
+        "type": "planet",
+        "img": "shine",
+        "normal": true,
+        "size": 0.3,
+        "posX": 32.0,
+        "posY": 75.0
+      },
+      {
+        "type": "planet",
+        "img": "shine",
+        "normal": true,
+        "size": 0.4,
+        "posX": 35.0,
+        "posY": 25.0
+      },
+      {
+        "type": "planet",
+        "img": "shine",
+        "normal": true,
+        "size": 0.2,
+        "posX": 42.0,
+        "posY": 60.0
+      },
+      {
+        "type": "planet",
+        "img": "shine",
+        "normal": true,
+        "size": 0.5,
+        "posX": 47.0,
+        "posY": 5.0
+      },
+      {
+        "type": "planet",
+        "img": "shine",
+        "normal": true,
+        "size": 0.2,
+        "posX": 48.0,
+        "posY": 68.0
+      },
+      {
+        "type": "planet",
+        "img": "shine",
+        "normal": true,
+        "size": 0.2,
+        "posX": 49.0,
+        "posY": 58.0
+      },
+      {
+        "type": "planet",
+        "img": "shine",
+        "normal": true,
+        "size": 0.2,
+        "posX": 53.0,
+        "posY": 65.0
+      },
+      {
+        "type": "planet",
+        "img": "shine",
+        "normal": true,
+        "size": 0.2,
+        "posX": 60.0,
+        "posY": 80.0
+      },
+      {
+        "type": "planet",
+        "img": "shine",
+        "normal": true,
+        "size": 0.3,
+        "posX": 70.0,
+        "posY": 2.0
+      },
+      {
+        "type": "planet",
+        "img": "shine",
+        "normal": true,
+        "size": 0.5,
+        "posX": 75.0,
+        "posY": 55.0
+      }
+    ],
+    "ship1": {
+      "posX": 5.0,
+      "posY": 5.0
+    },
+    "ship2": {
+      "posX": 80.0,
+      "posY": 70.0
+    }
+  },
+  //Map5
+  {
+    "name": "Jupiter",
+    "weapons": [
+      {
+        "type": "missile",
+        "shots": -1
+      }
+    ],
+    "obstacles": [
+      {
+        "type": "planet",
+        "img": "blue",
+        "normal": true,
+        "size": 3.7,
+        "posX": 28.0,
+        "posY": 8.0
+      }
+    ],
+    "ship1": {
+      "posX": 5.0,
+      "posY": 5.0
+    },
+    "ship2": {
+      "posX": 80.0,
+      "posY": 70.0
     }
   }
 ]

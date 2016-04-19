@@ -4,6 +4,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -35,6 +38,25 @@ public class MenuActivity extends AppMenu {
 
         mapNames = JsonMapReader.getMapList(getApplicationContext());
         mapListView = new ListView(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main_menu, menu);
+
+        for(String s: JsonMapReader.getMapList(getApplicationContext())){
+            MenuItem item = menu.add(s);
+            final String s2 = s;
+            item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    startGame(s2);
+                    return true;
+                }
+            });
+        }
+        return true;
     }
 
     @Override
@@ -105,4 +127,6 @@ public class MenuActivity extends AppMenu {
         alert.show();
         alert.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
+
+
 }
