@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
@@ -52,6 +53,7 @@ public class GameActivity extends AppMenu {
         gameModel.getMapView().setParentLayout(rl);
         rl.addView(gameModel.getMapView());
         gameModel.initializeMap();
+        gameModel.setLockButton((ImageView)findViewById(R.id.btn_lock));
     }
 
     @Override
@@ -63,7 +65,7 @@ public class GameActivity extends AppMenu {
     }
 
     public void click_fire(View view) {
-        findViewById(R.id.btn_lock).setVisibility(View.VISIBLE);
+        findViewById(R.id.btn_lock).setVisibility(View.INVISIBLE);
         findViewById(R.id.btn_fire).setVisibility(View.INVISIBLE);
         findViewById(R.id.bar_powerbar).setVisibility(View.INVISIBLE);
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -30,6 +31,7 @@ public class GameModel {
     private Spaceship spaceship;
     private boolean isLocked = false;
     private boolean turnInProgress = false;
+    private ImageView lockButton;
 
     public GameModel(Context context, JsonMapReader jmr) {
         for (SpaceObstacle so : jmr.getObstacles(context, this)) {
@@ -68,15 +70,17 @@ public class GameModel {
     }
 
     public void click_fireButton(int progress) {
-        isLocked = false;
-        Spaceship s = getCurrentShip();
-        mapView.fireTestShot(s.fireTestShot(progress));
+        if(!turnInProgress) {
+            isLocked = false;
+            this.turnInProgress = true;
+            Spaceship s = getCurrentShip();
+            mapView.fireTestShot(s.fireTestShot(progress));
+        }
     }
 
     public void click_lockButton(View v) {
         if(!turnInProgress) {
-            turnInProgress = true;
-            isLocked = true;
+            this.isLocked = true;
         }
     }
 
@@ -122,9 +126,18 @@ public class GameModel {
                 this.spaceship = this.spaceships.get(0);
             }
             this.turnInProgress = false;
+            mapView.showLockButton();
         }
         catch (IndexOutOfBoundsException e){
             Log.d("error", "Feil ved oppretting av spaceship");
         }
+    }
+
+    public void setLockButton(ImageView lockButton) {
+        this.lockButton = lockButton;
+    }
+
+    public void showLockButton() {
+        this.lockButton.setVisibility(View.VISIBLE);
     }
 }
