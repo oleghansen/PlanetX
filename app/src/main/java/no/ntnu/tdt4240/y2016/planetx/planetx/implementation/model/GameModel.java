@@ -6,6 +6,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -27,7 +28,6 @@ public class GameModel {
     public static final double INIT_RADIUS = 0.1;
     public static final double UNIT_GRAVITY = 9.81;
     public static double UNIT_RADIUS = 0.0;
-
 
     private ArrayList<SpaceObstacle> spaceObstacles = new ArrayList<>();
     private ArrayList<Spaceship> spaceships = new ArrayList<>();
@@ -87,8 +87,6 @@ public class GameModel {
         return this.spaceship;
     }
 
-
-
     public void click_fireButton(int progress) {
         if(!turnInProgress) {
             isLocked = false;
@@ -122,22 +120,24 @@ public class GameModel {
         //TODO:Start END sequence
     }
 
-    public void checkCollision (SpaceEntity se){
-        for (SpaceObstacle soObstical: spaceObstacles) {
-            if(se.collidesWith(soObstical)){
+    public void checkCollision(SpaceEntity se) {
+        for (SpaceObstacle soObstical : spaceObstacles) {
+            if (se.collidesWith(soObstical)) {
                 se.collides(soObstical);
                 soObstical.collides(se);
             }
         }
-        for (Spaceship spaceship: spaceships) {
-            if(se.collidesWith(spaceship)){
+        for (Spaceship spaceship : spaceships) {
+            if (se.collidesWith(spaceship)) {
                 se.collides(spaceship);
                 spaceship.collides(se);
 
                 Log.d("COLLISION", "Spaceentity hit! gameModel collide!!");
+
                 if(!spaceship.isAlive())
                 {
                     spaceshipIsDead(spaceship);
+
                     Toast.makeText(mapView.getContext(), "Game over!", Toast.LENGTH_LONG).show();
 
 

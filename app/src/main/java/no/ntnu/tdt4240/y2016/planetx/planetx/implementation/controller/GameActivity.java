@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
@@ -60,12 +62,19 @@ public class GameActivity extends AppMenu {
         rl.addView(gameModel.getMapView());
         gameModel.initializeMap();
 
+        SeekBar seekBar = (SeekBar) findViewById(R.id.bar_powerbar);
+        seekBar.getProgressDrawable().setColorFilter(ContextCompat.getColor(this, R.color.black), android.graphics.PorterDuff.Mode.SRC_IN);
+        seekBar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
 
 
         hp1.getProgressDrawable().setColorFilter(Color.BLUE, android.graphics.PorterDuff.Mode.SRC_IN);
         hp2.getProgressDrawable().setColorFilter(Color.MAGENTA,android.graphics.PorterDuff.Mode.SRC_IN);
-
-
+        
 
         hp1.setOnTouchListener(new View.OnTouchListener() {
             @Override
