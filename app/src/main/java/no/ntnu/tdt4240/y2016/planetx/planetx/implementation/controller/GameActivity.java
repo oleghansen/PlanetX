@@ -54,7 +54,7 @@ public class GameActivity extends AppMenu {
         SeekBar hp1 = (SeekBar) findViewById(R.id.bar_healthbar1);
         SeekBar hp2 = (SeekBar) findViewById(R.id.bar_healthbar2);
 
-        gameModel = new GameModel(getApplicationContext(), jmr, hp1, hp2);
+        gameModel = new GameModel(getApplicationContext(), jmr, hp1, hp2,this);
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.game_content_layout);
         gameModel.getMapView().setParentLayout(rl);
         rl.addView(gameModel.getMapView());
@@ -62,7 +62,8 @@ public class GameActivity extends AppMenu {
 
 
 
-        hp1.getProgressDrawable().setColorFilter(Color.BLUE,android.graphics.PorterDuff.Mode.SRC_IN);
+        hp1.getProgressDrawable().setColorFilter(Color.BLUE, android.graphics.PorterDuff.Mode.SRC_IN);
+        hp2.getProgressDrawable().setColorFilter(Color.MAGENTA,android.graphics.PorterDuff.Mode.SRC_IN);
 
 
 
@@ -93,6 +94,10 @@ public class GameActivity extends AppMenu {
         if (!SoundManager.getInstance().isMusicMuted()) {
             SoundManager.getInstance().playInGameSong(this);
         }
+    }
+    public void finished(String winner){
+
+        goToCelebrationScreen(Celebration.class,winner );
     }
 
     public void click_fire(View view) {
