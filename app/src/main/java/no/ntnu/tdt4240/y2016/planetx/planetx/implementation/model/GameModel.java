@@ -116,11 +116,17 @@ public class GameModel {
     }
 
     public void endTurn(){
-        if (spaceships.indexOf(this.spaceship) == 0) {
-            this.spaceship = this.spaceships.get(1);
-        }else {
-            this.spaceship = this.spaceships.get(0);
+        try
+        {
+            if (spaceships.indexOf(this.spaceship) == 0) {
+                this.spaceship = this.spaceships.get(1);
+            } else {
+                this.spaceship = this.spaceships.get(0);
+            }
+            this.turnInProgress = false;
         }
-        this.turnInProgress = false;
+        catch (IndexOutOfBoundsException e){
+            Log.d("error", "Feil ved oppretting av spaceship");
+        }
     }
 }

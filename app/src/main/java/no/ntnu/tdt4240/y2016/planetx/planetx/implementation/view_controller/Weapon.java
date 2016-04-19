@@ -86,6 +86,7 @@ public abstract class Weapon extends SpaceEntity {
         explotion.setLayoutParams(lp);
         gameModel.getMapView().addView(explotion);
         explotion.startAnimation();
+        gameModel.endTurn();
     }
 
     @Override
