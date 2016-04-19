@@ -19,7 +19,7 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GravityVector;
 
 public abstract class Weapon extends SpaceEntity {
     private static final int speedFactor = 2;
-    private static final int gravityFactor = 6;
+    private static final int gravityFactor = 7;
 
     private int shots, damage;
     private double velocityX = 0, velocityY = 0;
