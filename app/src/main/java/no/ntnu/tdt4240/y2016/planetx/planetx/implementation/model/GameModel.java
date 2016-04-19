@@ -87,17 +87,18 @@ public class GameModel {
         return this.spaceship;
     }
 
-    public void click_fireButton(int progress) {
+    public void click_fireButton(int power) {
         if(!turnInProgress) {
             isLocked = false;
             this.turnInProgress = true;
             Spaceship s = getCurrentShip();
-            mapView.fireTestShot(s.fireTestShot(progress));
+            mapView.fireShot(s.fireShot(power));
         }
     }
 
     public void click_lockButton(View v) {
         if(!turnInProgress) {
+            getCurrentShip().stopRotate();
             this.isLocked = true;
         }
     }
@@ -155,7 +156,7 @@ public class GameModel {
                 this.spaceship = this.spaceships.get(0);
             }
             this.turnInProgress = false;
-            mapView.showLockButton();
+            showLockButton();
         }
         catch (IndexOutOfBoundsException e){
             Log.d("error", "Feil ved oppretting av spaceship");
@@ -168,6 +169,7 @@ public class GameModel {
 
     public void showLockButton() {
         this.lockButton.setVisibility(View.VISIBLE);
+        getCurrentShip().startRotate();
     }
 
 }

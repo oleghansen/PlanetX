@@ -37,6 +37,15 @@ public class MapView extends RelativeLayout {
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT));
 
+//        setTouchListener();
+
+        arrow = new ImageView(context);
+        arrow.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        addView(arrow);
+        setWillNotDraw(false);
+    }
+
+    private void setTouchListener() {
         OnTouchListener otl = new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent e) {
@@ -45,11 +54,6 @@ public class MapView extends RelativeLayout {
             }
         };
         setOnTouchListener(otl);
-
-        arrow = new ImageView(context);
-        arrow.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        addView(arrow);
-        setWillNotDraw(false);
     }
 
     public void setParentLayout(RelativeLayout parentLayout) {
@@ -69,14 +73,10 @@ public class MapView extends RelativeLayout {
         this.addView(v);
     }
 
-    public void fireTestShot(Missile missile) {
+    public void fireShot(Weapon weapon) {
         SoundManager.getInstance().playSoundEffectShoot(this.getContext());
-        addToView(missile);
-        missile.startMove();
-    }
-
-    public void showLockButton() {
-        gameModel.showLockButton();
+        addToView(weapon);
+        weapon.startMove();
     }
 
     public void showArrow(float x, float y) {
@@ -125,18 +125,18 @@ public class MapView extends RelativeLayout {
         arrow.setY(dy);
     }
 
-    public void addTrajectory(float x1, float y1, float x2, float y2)
-    {
+    public void addTrajectory(float x1, float y1, float x2, float y2) {
         Trajectory trajectory = new Trajectory(x1, y1, x2, y2);
         trajectories.add(trajectory);
     }
 
-    public void clearTrajectoryArray(){
+    public void clearTrajectoryArray() {
         trajectories.clear();
     }
 
     /**
      * Draws weapon trajectories
+     *
      * @param canvas
      */
     @Override
@@ -149,7 +149,7 @@ public class MapView extends RelativeLayout {
         paint.setStrokeWidth(2.5f);
         paint.setAlpha(100);
 
-        for(Trajectory trajectory : trajectories){
+        for (Trajectory trajectory : trajectories) {
             canvas.drawLine(trajectory.getX1(), trajectory.getY1(), trajectory.getX2(), trajectory.getY2(), paint);
             // Log.d("TRAJECTORY" , trajectories.size() + " | " + trajectory.toString());
         }

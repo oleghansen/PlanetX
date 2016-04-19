@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -67,9 +68,9 @@ public abstract class Weapon extends SpaceEntity {
                 gameModel.getMapView().showArrow(getX(), getY());
             }
 
-
             public void onFinish() {
                 explode();
+                Toast.makeText(getContext(),"Shot timed out!", Toast.LENGTH_SHORT).show();
             }
         }.start();
     }

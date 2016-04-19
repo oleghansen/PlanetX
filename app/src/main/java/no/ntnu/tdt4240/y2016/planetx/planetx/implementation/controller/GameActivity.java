@@ -89,12 +89,9 @@ public class GameActivity extends AppMenu {
             }
         });
 
-
-
-
-
         gameModel.setLockButton((ImageView)findViewById(R.id.btn_lock));
 
+        gameModel.showLockButton();
     }
 
     @Override
