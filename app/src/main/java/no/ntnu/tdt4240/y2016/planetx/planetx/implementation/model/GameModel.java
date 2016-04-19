@@ -68,17 +68,15 @@ public class GameModel {
     }
 
     public void click_fireButton(int progress) {
-           isLocked = false;
-           Spaceship s = getCurrentShip();
-           mapView.fireTestShot(s.fireTestShot(progress));
-           mapView.showLockButton();
+        isLocked = false;
+        Spaceship s = getCurrentShip();
+        mapView.fireTestShot(s.fireTestShot(progress));
     }
 
     public void click_lockButton(View v) {
         if(!turnInProgress) {
             turnInProgress = true;
             isLocked = true;
-            mapView.showFireButton();
         }
     }
 
