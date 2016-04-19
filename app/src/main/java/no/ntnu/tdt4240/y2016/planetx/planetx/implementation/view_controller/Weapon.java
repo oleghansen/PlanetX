@@ -1,12 +1,16 @@
 package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.RelativeLayout;
 
+import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller.SoundManager;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GravityGod;
@@ -14,12 +18,14 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GravityVector;
 
 public abstract class Weapon extends SpaceEntity {
 
-    private int shots;
-    private double damage, velocityX = 0, velocityY = 0;
+    private int shots, damage;
+    private double velocityX = 0, velocityY = 0;
     private String name, description;
     private CountDownTimer cdt;
     private GameModel gameModel;
-    public Weapon(Context context, GameModel gm, int shots, double damage, String name, String description) {
+    private Animation explotion;
+    
+    public Weapon(Context context, GameModel gm, int shots, int damage, String name, String description) {
         super(context, gm, -1);
         this.shots = shots;
         this.damage = damage;
@@ -30,7 +36,7 @@ public abstract class Weapon extends SpaceEntity {
 
     public void startMove() {
         final Weapon w = this;
-        cdt = new CountDownTimer(5000, 10) {
+        cdt = new CountDownTimer(5000, 20) {
             public void onTick(long l) {
                 w.invalidate();
             }
@@ -39,6 +45,11 @@ public abstract class Weapon extends SpaceEntity {
                 explode();
             }
         }.start();
+    }
+
+    public int getDamage()
+    {
+        return damage;
     }
 
     public void setVelocityX(double velocity) {
@@ -58,16 +69,23 @@ public abstract class Weapon extends SpaceEntity {
     }
 
     @Override
-    public void collides(SpaceEntity se){
+    public void collides(SpaceEntity se) {
         cdt.cancel();
-        setImageBitmap(null);
+        Log.d("COLLISION", "Weapon() collide!!");
         this.explode();
     }
 
     public void explode() {
+        gameModel.getMapView().removeView(this);
+
         SoundManager.getInstance().playSoundEffectExplosion(this.getContext());
-        //animation
-        gameModel.endTurn();
+
+        explotion = new Animation(gameModel.getMapView(), BitmapFactory.decodeResource(getResources(), R.drawable.explosion), 12, 45, (int)getX()-100, (int)getY()-100);
+        RelativeLayout.LayoutParams lp =
+                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT ,RelativeLayout.LayoutParams.WRAP_CONTENT);
+        explotion.setLayoutParams(lp);
+        gameModel.getMapView().addView(explotion);
+        explotion.startAnimation();
     }
 
     @Override
@@ -76,7 +94,7 @@ public abstract class Weapon extends SpaceEntity {
         GravityVector gv = gameModel.getGravityGod().getGravityVector((int) getCenterX(), (int) getCenterY());
         velocityX += gv.getX();
         velocityY += gv.getY();
-        Log.d("GravityVector","Velocity: "+velocityX+", "+velocityY);
+        Log.d("GravityVector", "Velocity: " + velocityX + ", " + velocityY);
         Log.d("GravityVector", "Gravity: " + gv.getX() + ", " + gv.getY());
 
         setX(getX() + (float) velocityX);

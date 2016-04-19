@@ -37,6 +37,14 @@ public class MenuActivity extends AppMenu {
         mapListView = new ListView(this);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!SoundManager.getInstance().isMusicMuted()) {
+            SoundManager.getInstance().playMenuSong(this);
+        }
+    }
+
     public void click_startGame(View view) {
         selectMapDialog();
     }
