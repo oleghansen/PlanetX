@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
@@ -86,21 +87,20 @@ public class GameModel {
         //TODO:Start END sequence
     }
 
-    public void checkCollision (SpaceEntity se){
-        for (SpaceObstacle soObstical: spaceObstacles) {
-            if(se.collidesWith(soObstical)){
+    public void checkCollision(SpaceEntity se) {
+        for (SpaceObstacle soObstical : spaceObstacles) {
+            if (se.collidesWith(soObstical)) {
                 se.collides(soObstical);
                 soObstical.collides(se);
             }
         }
-        for (Spaceship spaceship: spaceships) {
-            if(se.collidesWith(spaceship)){
+        for (Spaceship spaceship : spaceships) {
+            if (se.collidesWith(spaceship)) {
                 se.collides(spaceship);
                 spaceship.collides(se);
 
                 Log.d("COLLISION", "Spaceentity hit! gameModel collide!!");
-                if(!spaceship.isAlive())
-                {
+                if (!spaceship.isAlive()) {
                     Toast.makeText(mapView.getContext(), "Game over!", Toast.LENGTH_LONG).show();
                     //TODO: FINISH activity and take to "show-winner-celebration"-screen or something like that
                 }

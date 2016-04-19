@@ -5,61 +5,63 @@
     android:background="@drawable/background">
 
     <RelativeLayout
+        android:id="@+id/game_content_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/game_content_layout">
-    </RelativeLayout>
+        android:layout_height="match_parent"></RelativeLayout>
 
     <include layout="@layout/sound_layout"></include>
-    <RelativeLayout
+
+    <ImageView
+        android:id="@+id/btn_lock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_lock"
-            android:src="@drawable/lock"
-            android:onClick="click_lock"
-            android:layout_alignParentRight="true"/>
+        android:onClick="click_lock"
+        android:src="@drawable/lock" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_fire"
-            android:visibility="invisible"
-            android:src="@drawable/fire"
-            android:onClick="click_fire"
-            android:layout_alignParentRight="true"/>
+    <ImageView
+        android:id="@+id/btn_fire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="click_fire"
+        android:src="@drawable/fire"
+        android:visibility="invisible" />
 
-    </RelativeLayout>
     <SeekBar
+        android:id="@+id/bar_powerbar"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:visibility="invisible"
-        android:enabled="false"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/power_bar_progress_fill"
         android:max="100"
-        android:id="@+id/bar_powerbar"/>
+        android:thumb="@null"
+        android:visibility="invisible" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true">
+
         <SeekBar
             android:layout_width="100dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true">
+
         <SeekBar
             android:layout_width="100dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
 
 </RelativeLayout>
