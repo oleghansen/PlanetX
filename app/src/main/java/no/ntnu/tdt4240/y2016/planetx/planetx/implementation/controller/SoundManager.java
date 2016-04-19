@@ -91,20 +91,20 @@ public class SoundManager {
     public void playMenuSong(Context context) {
 
         //Clears the MediaPlayer
-        if(music.isPlaying()) {
+        if(music != null) {
             music.release();
         }
 
         //Chooses what song to play, in this case the song on the menu
-        music = MediaPlayer.create(context, R.raw.ingamesong);
+        music = MediaPlayer.create(context, R.raw.menusong);
+
+        //Make sure the song is looping
+        music.setLooping(true);
 
         //Starts playing song if music is not muted
         if(!mutedMusic) {
             music.start();
         }
-
-        //Make sure the song is looping
-        music.setLooping(true);
     }
 
 
@@ -206,4 +206,5 @@ public class SoundManager {
     public boolean isSoundEffectsMuted() {
         return mutedSoundEffects;
     }
+
 }
