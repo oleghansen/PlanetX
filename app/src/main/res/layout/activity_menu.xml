@@ -16,7 +16,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="75px"
+        android:layout_marginBottom="5dp"
         android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"
         android:weightSum="1">
@@ -26,14 +26,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.8">
             <Button
-                android:layout_margin="10px"
+                android:layout_margin="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Start game"
                 android:onClick="click_startGame"
                 />
             <Button
-                android:layout_margin="10px"
+                android:layout_margin="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Settings"
@@ -41,7 +41,7 @@
                 />
             <!-- sign-out button -->
             <Button
-                android:layout_margin="10px"
+                android:layout_margin="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sign Out"

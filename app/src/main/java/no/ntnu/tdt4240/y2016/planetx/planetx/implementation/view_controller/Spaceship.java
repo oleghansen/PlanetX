@@ -2,6 +2,7 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller;
 
 import android.content.Context;
 import android.graphics.Matrix;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,10 +22,29 @@ public class Spaceship extends SpaceEntity {
     private ArrayList<Weapon> weapons;
 
     private double fireAngle = 0;
-    private double firDirX;
-    private double firDirY;
-    private double firPower;
     private SeekBar helthBar;
+
+    private final int spinDelay = 45;
+    private final int spinDeg = 5;
+    private final Handler handler = new Handler();
+    private final Runnable runnable = new Runnable() {
+        public void run() {
+            incrementAngle();
+            handler.postDelayed(this, spinDelay);
+        }
+    };
+    public void startRotate() {
+        handler.postDelayed(runnable, spinDelay);
+    }
+    public void stopRotate(){
+        handler.removeCallbacks(runnable);
+    }
+    private void incrementAngle() {
+        fireAngle += spinDeg;
+        if (fireAngle >= 360) fireAngle -= 360;
+        setAngle(fireAngle);
+    }
+
 
     public Spaceship(Context context, GameModel gm, double radius, int healthPoints, ArrayList<Weapon> weapons) {
         super(context, gm, radius);
@@ -38,34 +58,33 @@ public class Spaceship extends SpaceEntity {
     }
 
     public void collides(SpaceEntity spaceEntity) {
-        if(spaceEntity instanceof Weapon){
+        if (spaceEntity instanceof Weapon) {
             this.damageSpaceship(((Weapon) spaceEntity).getDamage());
         }
-      //  healthPoints = setHealthPoints(healthPoints-damage);
+        //  healthPoints = setHealthPoints(healthPoints-damage);
     }
 
-    public int getHealthPoints()
-    {
+    public int getHealthPoints() {
         return healthPoints;
     }
 
-    public boolean isAlive()
-    {
+    public boolean isAlive() {
 
-        if(healthPoints <= 0){
+        if (healthPoints <= 0) {
             return false;
-        }
-        else return true;
+        } else return true;
     }
-    public void setHealthPoints(int hp){
+
+    public void setHealthPoints(int hp) {
         healthPoints = hp;
     }
 
-    public void damageSpaceship(int damage){
+    public void damageSpaceship(int damage) {
         healthPoints = getHealthPoints() - damage;
         helthBar.setProgress(healthPoints);
 
     }
+
     /*
     public void reduceHPwith(double hp) {
         this.healthPoints -= hp;
@@ -75,41 +94,28 @@ public class Spaceship extends SpaceEntity {
         }
     }
 */
-    public double getFirDirX() {
-        return firDirX;
-    }
-
-    public double getFirDirY() {
-        return firDirY;
-    }
-
-    public double getFirPower() {
-        return firPower;
-    }
-
     public void flipTowardsTouch(View v, MotionEvent e) {
         double difX = e.getX() - getCenterX();
         double difY = e.getY() - getCenterY();
         fireAngle = Math.atan(difY / difX) * 360 / (2 * 3.14) + 90;
         if (difX < 0) fireAngle += 180;
+        setAngle(fireAngle);
+    }
 
+    public void setAngle(double angle) {
+        fireAngle = angle;
         Matrix matrix = new Matrix();
         matrix.preRotate((float) fireAngle, getWidth() / 2, getHeight() / 2);
         this.setScaleType(ImageView.ScaleType.MATRIX);
         this.setImageMatrix(matrix);
     }
 
-    public Missile fireTestShot(int power) {
+    public Weapon fireShot(int power) {
         double pow = power * 0.50;
         Missile m = new Missile(getContext(), gameModel);
 
         m.setX((float) (getCenterX() + getWidth() * Math.cos((fireAngle - 90) * 2 * 3.14 / 360)));
         m.setY((float) (getCenterY() + getHeight() * Math.sin((fireAngle - 90) * 2 * 3.14 / 360)));
-
-//        Matrix matrix = new Matrix();
-//        matrix.preRotate((float) fireAngle, m.getWidth() / 2, m.getHeight() / 2);
-//        m.setScaleType(ImageView.ScaleType.MATRIX);
-//        m.setImageMatrix(matrix);
 
         double fireRad = (fireAngle - 90) * 2 * 3.14 / 360;
         double xVel = Math.cos(fireRad) * pow;
