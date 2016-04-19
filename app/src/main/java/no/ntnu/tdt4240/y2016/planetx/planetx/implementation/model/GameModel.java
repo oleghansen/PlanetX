@@ -25,6 +25,9 @@ public class GameModel {
 
     private GravityGod gravityGod;
     private MapView mapView;
+    private Spaceship spaceship;
+    private boolean isLocked = false;
+    private boolean turnInProgress = false;
 
     public GameModel(Context context, JsonMapReader jmr) {
         for (SpaceObstacle so : jmr.getObstacles(context, this)) {
@@ -36,6 +39,7 @@ public class GameModel {
 
         gravityGod = new GravityGod(spaceObstacles);
         mapView = new MapView(context, this);
+        this.spaceship = this.spaceships.get(0);
     }
 
     public GravityGod getGravityGod() {
@@ -58,29 +62,29 @@ public class GameModel {
     }
 
     public Spaceship getCurrentShip() {
-        //TODO: Implement turn logic and return correct ship
-        return spaceships.get(0);
+        return this.spaceship;
     }
 
     public void click_fireButton(int progress) {
-        isLocked = false;
-        Spaceship s = getCurrentShip();
-        mapView.fireTestShot(s.fireTestShot(progress));
-
-        mapView.showLockButton();
+           isLocked = false;
+           Spaceship s = getCurrentShip();
+           mapView.fireTestShot(s.fireTestShot(progress));
+           mapView.showLockButton();
     }
 
     public void click_lockButton(View v) {
-        isLocked = true;
-        mapView.showFireButton();
+        if(!turnInProgress) {
+            turnInProgress = true;
+            isLocked = true;
+            mapView.showFireButton();
+        }
     }
 
-    private boolean isLocked = false;
-
     public void touch_map(View v, MotionEvent e) {
-        if (isLocked) return;
-        Spaceship s = getCurrentShip();
-        s.flipTowardsTouch(v, e);
+        if (!isLocked && !turnInProgress) {
+            Spaceship s = getCurrentShip();
+            s.flipTowardsTouch(v, e);
+        }
     }
     
     public void checkCollision (SpaceEntity se){
@@ -96,5 +100,14 @@ public class GameModel {
                 ssObstical.collides(se);
             }
         }
+    }
+
+    public void endTurn(){
+        if (spaceships.indexOf(this.spaceship) == 0) {
+            this.spaceship = this.spaceships.get(1);
+        }else {
+            this.spaceship = this.spaceships.get(0);
+        }
+        this.turnInProgress = false;
     }
 }
