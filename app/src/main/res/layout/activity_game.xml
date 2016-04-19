@@ -48,8 +48,14 @@
         android:layout_centerInParent="true">
 
         <SeekBar
-            android:layout_width="100dp"
-            android:layout_height="wrap_content" />
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="100"
+            android:enabled="false"
+            android:thumb="@null"
+            android:id="@+id/bar_healthbar1"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -59,9 +65,13 @@
         android:layout_centerInParent="true">
 
         <SeekBar
-            android:layout_width="100dp"
-            android:layout_height="wrap_content" />
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="100"
+            android:enabled="false"
+            android:thumb="@null"
+            android:id="@+id/bar_healthbar2"/>
     </LinearLayout>
-
 
 </RelativeLayout>

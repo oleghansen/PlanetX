@@ -3,6 +3,7 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,6 +23,7 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
 public class MapView extends RelativeLayout {
     private GameModel gameModel;
     private RelativeLayout parentLayout;
+
 
 
     public MapView(Context context, GameModel gm) {
@@ -46,11 +48,14 @@ public class MapView extends RelativeLayout {
         this.parentLayout = parentLayout;
     }
 
+
     public void initializeMap(ArrayList<SpaceEntity> entities) {
         for (SpaceEntity entity : entities) {
             addView(entity);
         }
     }
+
+
 
     public void addToView(View v) {
         v.setLayoutParams(new RelativeLayout.LayoutParams(
@@ -65,4 +70,7 @@ public class MapView extends RelativeLayout {
         missile.startMove();
     }
 
+    public void showLockButton() {
+        gameModel.showLockButton();
+    }
 }
