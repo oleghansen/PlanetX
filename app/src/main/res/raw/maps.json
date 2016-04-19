@@ -1,65 +1,36 @@
 [
-//  MAP 1
-  {
-    "name": "Canis Major",
-    "weapons":[
-      {
-        "type":"missile",
-        "shots":-1
-      }
-    ],
-    "obstacles": [
-      {
-        "type": "planet",
-        "img":"earth",
-        "normal": true,
-        "size": 1,
-        "posX": 50.0,
-        "posY": 50.0
-      }
-    ],
-    "ship1": {
-      "posX": 5.0,
-      "posY": 5.0
-    },
-    "ship2": {
-      "posX": 80.0,
-      "posY": 80.0
-    }
-  },
-
-//  MAP 2
+  //Map1
   {
     "name": "Crab Nebula",
-    "weapons":[
+    "weapons": [
       {
-        "type":"missile",
-        "shots":-1
+        "type": "missile",
+        "shots": -1
       }
     ],
     "obstacles": [
       {
         "type": "planet",
-        "img":"earth",
+        "img": "earth",
         "normal": true,
         "size": 1,
-        "posX": 0.0,
+        "posX": 5.0,
         "posY": 50.0
       },
       {
         "type": "planet",
-        "img":"shine",
+        "img": "shine",
         "normal": true,
         "size": 2,
-        "posX": 80.0,
-        "posY": 50.0
+        "posX": 70.0,
+        "posY": 2.0
       },
       {
         "type": "planet",
-        "img":"shine",
+        "img": "blue",
         "normal": true,
-        "size": 1.5,
-        "posX": 25.0,
+        "size": 1.8,
+        "posX": 35.0,
         "posY": 25.0
       }
     ],
@@ -68,50 +39,8 @@
       "posY": 5.0
     },
     "ship2": {
-      "posX": 10.0,
-      "posY": 80.0
-    }
-  },
-  //  MAP 3
-  {
-    "name": "Sagittarius",
-    "weapons":[
-      {
-        "type":"missile",
-        "shots":-1
-      }
-    ],
-    "obstacles": [
-      {
-        "type": "planet",
-        "img":"blue",
-        "normal": true,
-        "size": 5,
-        "posX": 80.0,
-        "posY": 50.0
-      }
-    ],
-    "ship1": {
-      "posX": 5.0,
-      "posY": 5.0
-    },
-    "ship2": {
-      "posX": 10.0,
-      "posY": 80.0
-    }
-  },
-//  MAP 4
-  {
-    "name": "Empty space",
-    "weapons":[],
-    "obstacles": [],
-    "ship1": {
-      "posX": 5.0,
-      "posY": 5.0
-    },
-    "ship2": {
       "posX": 80.0,
-      "posY": 80.0
+      "posY": 75.0
     }
   }
 ]

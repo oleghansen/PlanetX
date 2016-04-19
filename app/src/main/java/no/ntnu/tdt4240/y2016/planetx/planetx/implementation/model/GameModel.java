@@ -121,7 +121,6 @@ public class GameModel {
                 se.collides(spaceship);
                 spaceship.collides(se);
 
-                Log.d("COLLISION", "Spaceentity hit! gameModel collide!!");
                 if (!spaceship.isAlive()) {
                     Toast.makeText(mapView.getContext(), "Game over!", Toast.LENGTH_LONG).show();
                     //TODO: FINISH activity and take to "show-winner-celebration"-screen or something like that

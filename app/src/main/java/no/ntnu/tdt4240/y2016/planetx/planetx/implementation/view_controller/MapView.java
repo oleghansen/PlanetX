@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -21,10 +22,9 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
  * Created by Anders on 16.04.2016.
  */
 public class MapView extends RelativeLayout {
+    private ImageView arrow;
     private GameModel gameModel;
     private RelativeLayout parentLayout;
-
-
 
     public MapView(Context context, GameModel gm) {
         super(context);
@@ -42,20 +42,20 @@ public class MapView extends RelativeLayout {
         };
         setOnTouchListener(otl);
 
+        arrow = new ImageView(context);
+        arrow.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        addView(arrow);
     }
 
     public void setParentLayout(RelativeLayout parentLayout) {
         this.parentLayout = parentLayout;
     }
 
-
     public void initializeMap(ArrayList<SpaceEntity> entities) {
         for (SpaceEntity entity : entities) {
             addView(entity);
         }
     }
-
-
 
     public void addToView(View v) {
         v.setLayoutParams(new RelativeLayout.LayoutParams(
@@ -72,5 +72,51 @@ public class MapView extends RelativeLayout {
 
     public void showLockButton() {
         gameModel.showLockButton();
+    }
+
+    public void showArrow(float x, float y) {
+        float w = getWidth();
+        float h = getHeight();
+        float dx = 0, dy = 0;
+        if (x >= 0 && x <= w && y >= 0 && y <= h) {
+            arrow.setImageBitmap(null);
+            return;
+        }
+
+        if (x < 0) {
+            if (y < 0) {
+                arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_lu));
+                dy = 0;
+            } else if (y > h) {
+                arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_ld));
+                dy = h - arrow.getHeight();
+            } else {
+                arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_l));
+                dy = y;
+            }
+            dx = 0;
+        } else if (x > w) {
+            if (y < 0) {
+                arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_ru));
+                dy = 0;
+            } else if (y > h) {
+                arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_rd));
+                dy = h - arrow.getHeight();
+            } else {
+                arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_r));
+                dy = y;
+            }
+            dx = w - arrow.getWidth();
+        } else if (y < 0) {
+            arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_u));
+            dx = x;
+            dy = 0;
+        } else if (y > h) {
+            arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_d));
+            dx = x;
+            dy = h - arrow.getHeight();
+        }
+        arrow.setX(dx);
+        arrow.setY(dy);
     }
 }

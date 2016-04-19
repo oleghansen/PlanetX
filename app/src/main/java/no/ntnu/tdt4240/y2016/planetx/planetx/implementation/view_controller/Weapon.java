@@ -8,6 +8,7 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
@@ -17,6 +18,8 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GravityGod;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GravityVector;
 
 public abstract class Weapon extends SpaceEntity {
+    private static final int speedFactor = 3;
+    private static final int gravityFactor = 5;
 
     private int shots, damage;
     private double velocityX = 0, velocityY = 0;
@@ -24,7 +27,7 @@ public abstract class Weapon extends SpaceEntity {
     private CountDownTimer cdt;
     private GameModel gameModel;
     private Animation explotion;
-    
+
     public Weapon(Context context, GameModel gm, int shots, int damage, String name, String description) {
         super(context, gm, -1);
         this.shots = shots;
@@ -34,12 +37,34 @@ public abstract class Weapon extends SpaceEntity {
         this.gameModel = gm;
     }
 
+    private boolean outOfScreen() {
+        int w = gameModel.getMapView().getWidth();
+        int h = gameModel.getMapView().getHeight();
+        if (getX() < 0-getWidth()) {
+            return true;
+        } else if (getX() > w) {
+            return true;
+        }
+        if (getY() < 0-getHeight()) {
+            return true;
+        } else if (getY() > h) {
+            return true;
+        }
+        return false;
+    }
+
     public void startMove() {
         final Weapon w = this;
         cdt = new CountDownTimer(5000, 20) {
             public void onTick(long l) {
-                w.invalidate();
+                if (outOfScreen()) {
+                    w.updatePosition();
+                } else {
+                    w.invalidate();
+                }
+                gameModel.getMapView().showArrow(getX(), getY());
             }
+
 
             public void onFinish() {
                 explode();
@@ -47,42 +72,34 @@ public abstract class Weapon extends SpaceEntity {
         }.start();
     }
 
-    public int getDamage()
-    {
+    public int getDamage() {
         return damage;
     }
 
     public void setVelocityX(double velocity) {
-        velocityX = velocity;
-    }
-
-    public double getVelocityX() {
-        return velocityX;
+        velocityX = velocity / speedFactor;
     }
 
     public void setVelocityY(double velocity) {
-        velocityY = velocity;
-    }
-
-    public double getVelocityY() {
-        return velocityY;
+        velocityY = velocity / speedFactor;
     }
 
     @Override
     public void collides(SpaceEntity se) {
+        gameModel.getMapView().removeView(this);
         cdt.cancel();
-        Log.d("COLLISION", "Weapon() collide!!");
         this.explode();
     }
 
     public void explode() {
         gameModel.getMapView().removeView(this);
+        cdt.cancel();
 
         SoundManager.getInstance().playSoundEffectExplosion(this.getContext());
 
-        explotion = new Animation(gameModel.getMapView(), BitmapFactory.decodeResource(getResources(), R.drawable.explosion), 12, 45, (int)getX()-100, (int)getY()-100);
+        explotion = new Animation(gameModel.getMapView(), BitmapFactory.decodeResource(getResources(), R.drawable.explosion), 12, 45, (int) getX() - 100, (int) getY() - 100);
         RelativeLayout.LayoutParams lp =
-                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT ,RelativeLayout.LayoutParams.WRAP_CONTENT);
+                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         explotion.setLayoutParams(lp);
         gameModel.getMapView().addView(explotion);
         explotion.startAnimation();
@@ -92,14 +109,17 @@ public abstract class Weapon extends SpaceEntity {
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        updatePosition();
+    }
+
+    private void updatePosition() {
         GravityVector gv = gameModel.getGravityGod().getGravityVector((int) getCenterX(), (int) getCenterY());
-        velocityX += gv.getX();
-        velocityY += gv.getY();
-        Log.d("GravityVector", "Velocity: " + velocityX + ", " + velocityY);
-        Log.d("GravityVector", "Gravity: " + gv.getX() + ", " + gv.getY());
+        velocityX += gv.getX() / gravityFactor;
+        velocityY += gv.getY() / gravityFactor;
 
         setX(getX() + (float) velocityX);
         setY(getY() + (float) velocityY);
+
         gameModel.checkCollision(this);
     }
 }
