@@ -11,5 +11,55 @@
     </RelativeLayout>
 
     <include layout="@layout/sound_layout"></include>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_lock"
+            android:src="@drawable/lock"
+            android:onClick="click_lock"
+            android:layout_alignParentRight="true"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_fire"
+            android:visibility="invisible"
+            android:src="@drawable/fire"
+            android:onClick="click_fire"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+    <SeekBar
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible"
+        android:enabled="false"
+        android:max="100"
+        android:id="@+id/bar_powerbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+        <SeekBar
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <SeekBar
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </RelativeLayout>
