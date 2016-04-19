@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import java.util.ArrayList;
+
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller.SoundManager;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
@@ -120,6 +122,20 @@ public abstract class Weapon extends SpaceEntity {
         setX(getX() + (float) velocityX);
         setY(getY() + (float) velocityY);
 
+        float startx = getX();
+        float starty = getY();
+        float endx = getX() + (float) velocityX;
+        float endy = getY() + (float) velocityY;
+        addTrajectory(startx, starty, endx, endy);
+
+        setX(endx);
+        setY(endy);
+
         gameModel.checkCollision(this);
+    }
+
+    public void addTrajectory(float x1, float y1, float x2, float y2)
+    {
+        gameModel.getMapView().addTrajectory(x1, y1, x2, y2);
     }
 }

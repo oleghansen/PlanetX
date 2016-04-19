@@ -66,6 +66,7 @@ public class Spaceship extends SpaceEntity {
         helthBar.setProgress(healthPoints);
 
     }
+    /*
     public void reduceHPwith(double hp) {
         this.healthPoints -= hp;
 
@@ -73,7 +74,7 @@ public class Spaceship extends SpaceEntity {
             GameModel.spaceshipIsDead(this);
         }
     }
-
+*/
     public double getFirDirX() {
         return firDirX;
     }
