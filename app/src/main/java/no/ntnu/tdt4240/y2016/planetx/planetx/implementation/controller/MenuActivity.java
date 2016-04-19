@@ -567,12 +567,6 @@ public class MenuActivity extends AppMenu implements GoogleApiClient.ConnectionC
     public void startMatch(TurnBasedMatch match) {
 
         mTurnData=GameActivity.getModel();
-
-        mTurnData.power=2;
-        mTurnData.fireangle=2;
-        mTurnData.turnCounter=1;
-
-
         mMatch = match;
 
         String playerId = Games.Players.getCurrentPlayerId(mGoogleApiClient);
@@ -742,6 +736,24 @@ public class MenuActivity extends AppMenu implements GoogleApiClient.ConnectionC
 
         // show it
         mAlertDialog.show();
+    }
+
+    public void onDoneClicked(View view) {
+
+        String nextParticipantId = getNextParticipantId();
+        // Create the next turn
+        mTurnData= GameActivity.getModel();
+        mTurnData.turnCounter += 1;
+        Games.TurnBasedMultiplayer.takeTurn(mGoogleApiClient, mMatch.getMatchId(),
+                mTurnData.persist(), nextParticipantId).setResultCallback(
+                new ResultCallback<TurnBasedMultiplayer.UpdateMatchResult>() {
+                    @Override
+                    public void onResult(TurnBasedMultiplayer.UpdateMatchResult result) {
+                        processResult(result);
+                    }
+                });
+
+        mTurnData = null;
     }
 
 }
