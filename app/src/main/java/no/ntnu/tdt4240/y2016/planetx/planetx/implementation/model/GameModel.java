@@ -64,6 +64,14 @@ public class GameModel {
         return spaceships.get(0);
     }
 
+    public int getPlayer1health(){
+        return spaceships.get(0).getHealthPoints();
+    }
+
+    public int getPlayer2health(){
+        return spaceships.get(1).getHealthPoints();
+    }
+
     public void click_fireButton(int progress) {
         isLocked = false;
         Spaceship s = getCurrentShip();

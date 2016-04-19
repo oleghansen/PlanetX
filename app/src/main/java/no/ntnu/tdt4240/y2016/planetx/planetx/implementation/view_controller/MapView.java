@@ -3,6 +3,7 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,6 +28,8 @@ public class MapView extends RelativeLayout {
     private ImageView fireButton;
     private SeekBar powerBar;
     private TextView powerText;
+    private SeekBar healthbar;
+    private SeekBar healthbar2;
 
     public MapView(Context context, GameModel gm) {
         super(context);
@@ -54,8 +57,10 @@ public class MapView extends RelativeLayout {
     private void initializeButtons() {
         initializeFireButton();
         initializeLockButton();
-        initializePowerText();
+        //initializePowerText();
         initializePowerBar();
+        initializeHealthbarp1();
+        initializeHealthbarp2();
     }
 
     private ImageView initializeBottomButton(Bitmap bitmap, OnClickListener ocl) {
@@ -98,7 +103,7 @@ public class MapView extends RelativeLayout {
         };
         this.lockButton = initializeBottomButton(bitmap, ocl);
     }
-
+/*
     private void initializePowerText() {
         powerText = new TextView(getContext());
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
@@ -109,7 +114,7 @@ public class MapView extends RelativeLayout {
         powerText.setLayoutParams(lp);
         powerText.setText("0%");
     }
-
+*/
     private void initializePowerBar() {
         powerBar = new SeekBar(getContext());
         powerBar.setMax(100);
@@ -142,11 +147,53 @@ public class MapView extends RelativeLayout {
         powerBar.setProgress(0);
     }
 
+    public void initializeHealthbarp1(){
+        healthbar=new SeekBar(getContext());
+        healthbar.setMax(100);
+        healthbar.setBackgroundColor(Color.GREEN);
+
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        lp.width=250;
+        lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+       healthbar.setLayoutParams(lp);
+        int h=gameModel.getPlayer1health();
+        healthbar.setProgress(h);
+    }
+
+    public void initializeHealthbarp2(){
+
+        healthbar2=new SeekBar(getContext());
+        healthbar2.setMax(100);
+        healthbar2.setBackgroundColor(Color.GREEN);
+
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        lp.width=250;
+        lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        healthbar2.setLayoutParams(lp);
+
+        healthbar2.setFocusable(false);
+
+        int h=gameModel.getPlayer2health();
+        healthbar2.setProgress(h);
+    }
+    public void updatehealthbar(){
+        healthbar.setProgress(gameModel.getPlayer1health());
+        healthbar2.setProgress(gameModel.getPlayer2health());
+    }
+
+
     public void showFireButton() {
         this.removeView(lockButton);
         this.addView(fireButton);
         this.addView(powerText);
         this.addView(powerBar);
+
     }
 
     public void showLockButton() {
@@ -154,6 +201,8 @@ public class MapView extends RelativeLayout {
         this.removeView(powerText);
         this.removeView(powerBar);
         this.addView(lockButton);
+        this.addView(healthbar);
+        this.addView(healthbar2);
     }
 
     public void initializeMap(ArrayList<SpaceEntity> entities) {
@@ -162,6 +211,8 @@ public class MapView extends RelativeLayout {
         }
         showLockButton();
     }
+
+
 
     public void addToView(View v) {
         v.setLayoutParams(new RelativeLayout.LayoutParams(
