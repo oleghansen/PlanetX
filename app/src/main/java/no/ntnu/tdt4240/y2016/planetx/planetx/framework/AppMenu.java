@@ -75,6 +75,16 @@ public abstract class AppMenu extends AppCompatActivity {
         overridePendingTransition(0, 0);
     }
 
+    public void goToCelebrationScreen(Class javaClass, String winner){
+
+        Intent intent =  new Intent(this, javaClass);
+        intent.putExtra("winner",winner);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(0,0);
+    }
+
     public void toggle_music(View view) {
         SoundManager.getInstance().muteMusic();
     }

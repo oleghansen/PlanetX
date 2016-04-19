@@ -1,6 +1,7 @@
 package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller.Celebration;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller.GameActivity;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.MapView;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.JsonMapReader;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.SpaceEntity;
@@ -35,12 +38,13 @@ public class GameModel {
     private boolean isLocked = false;
     private boolean turnInProgress = false;
     private ImageView lockButton;
+    private GameActivity ga;
 
-    public GameModel(Context context, JsonMapReader jmr, SeekBar h1, SeekBar h2) {
+    public GameModel(Context context, JsonMapReader jmr, SeekBar h1, SeekBar h2, GameActivity g) {
         for (SpaceObstacle so : jmr.getObstacles(context, this)) {
             spaceObstacles.add(so);
         }
-
+        ga=g;
         Spaceship sp1 = jmr.getSpaceship1(context, this);
         sp1.setHelthBar(h1);
         spaceships.add(sp1);
@@ -105,7 +109,14 @@ public class GameModel {
         }
     }
 
-    public static void spaceshipIsDead(Spaceship spaceship) {
+    public void spaceshipIsDead(Spaceship spaceship) {
+        if(spaceships.indexOf(spaceship) == 0){
+            ga.finished("Player 2");
+        }
+        else{
+            ga.finished("Player 1");
+        }
+
         //TODO:Start END sequence
     }
 
@@ -122,8 +133,14 @@ public class GameModel {
                 spaceship.collides(se);
 
                 Log.d("COLLISION", "Spaceentity hit! gameModel collide!!");
-                if (!spaceship.isAlive()) {
+
+                if(!spaceship.isAlive())
+                {
+                    spaceshipIsDead(spaceship);
+
                     Toast.makeText(mapView.getContext(), "Game over!", Toast.LENGTH_LONG).show();
+
+
                     //TODO: FINISH activity and take to "show-winner-celebration"-screen or something like that
                 }
             }
