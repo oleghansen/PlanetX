@@ -66,24 +66,6 @@ public class SoundManager {
     }
 
     /**
-     * Method to use whit onResume() in an Android activity
-     */
-    public void onPause() {
-        if(music.isPlaying()) {
-            music.pause();
-        }
-    }
-
-    /**
-     * Method to use whit onResume() in an Android activity
-     */
-    public void onResume() {
-        if(!mutedMusic) {
-            music.start();
-        }
-    }
-
-    /**
      * Plays the song of the main menu
      *
      * @param context
