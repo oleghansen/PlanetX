@@ -84,6 +84,10 @@ public class MapView extends RelativeLayout {
         trajectories.add(trajectory);
     }
 
+    public void clearTrajectoryArray(){
+        trajectories.clear();
+    }
+
     /**
      * Draws weapon trajectories
      * @param canvas
