@@ -74,4 +74,12 @@
             android:thumb="@null" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/weapon_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" />
+
 </RelativeLayout>
