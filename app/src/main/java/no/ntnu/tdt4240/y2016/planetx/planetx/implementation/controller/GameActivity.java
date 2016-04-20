@@ -53,45 +53,41 @@ public class GameActivity extends AppMenu {
             finish();
         }
 
-        SeekBar hp1 = (SeekBar) findViewById(R.id.bar_healthbar1);
-        SeekBar hp2 = (SeekBar) findViewById(R.id.bar_healthbar2);
-
-        gameModel = new GameModel(getApplicationContext(), jmr, hp1, hp2,this);
+        gameModel = new GameModel(getApplicationContext(), jmr, this);
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.game_content_layout);
-        gameModel.getMapView().setParentLayout(rl);
         rl.addView(gameModel.getMapView());
         gameModel.initializeMap();
 
-        SeekBar seekBar = (SeekBar) findViewById(R.id.bar_powerbar);
-        seekBar.getProgressDrawable().setColorFilter(ContextCompat.getColor(this, R.color.black), android.graphics.PorterDuff.Mode.SRC_IN);
-        seekBar.setOnTouchListener(new View.OnTouchListener() {
+        initializeSeekBars();
+    }
+
+    private void initializeSeekBars() {
+        SeekBar powerBar = (SeekBar) findViewById(R.id.bar_powerbar);
+        powerBar.getProgressDrawable().setColorFilter(ContextCompat.getColor(this, R.color.black), android.graphics.PorterDuff.Mode.SRC_IN);
+        powerBar.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 return true;
             }
         });
 
-
-        hp1.getProgressDrawable().setColorFilter(Color.BLUE, android.graphics.PorterDuff.Mode.SRC_IN);
-        hp2.getProgressDrawable().setColorFilter(Color.MAGENTA,android.graphics.PorterDuff.Mode.SRC_IN);
-        
-
-        hp1.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
-        hp2.setOnTouchListener(new View.OnTouchListener() {
+        SeekBar hpBar1 = (SeekBar) findViewById(R.id.bar_healthbar1);
+        hpBar1.getProgressDrawable().setColorFilter(Color.BLUE, android.graphics.PorterDuff.Mode.SRC_IN);
+        hpBar1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 return true;
             }
         });
 
-        gameModel.setLockButton((ImageView)findViewById(R.id.btn_lock));
-
-        gameModel.showLockButton();
+        SeekBar hpBar2 = (SeekBar) findViewById(R.id.bar_healthbar2);
+        hpBar2.getProgressDrawable().setColorFilter(Color.MAGENTA, android.graphics.PorterDuff.Mode.SRC_IN);
+        hpBar2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
     }
 
     @Override
@@ -101,9 +97,10 @@ public class GameActivity extends AppMenu {
             SoundManager.getInstance().playInGameSong(this);
         }
     }
-    public void finished(String winner){
 
-        goToCelebrationScreen(Celebration.class,winner );
+    public void finished(String winner) {
+
+        goToCelebrationScreen(Celebration.class, winner);
     }
 
     public void click_fire(View view) {

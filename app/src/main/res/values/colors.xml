@@ -3,9 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="green">#00FF00</color>
-    <color name="yellow">#FFDD00</color>
-    <color name="red">#FF0000</color>
 
-    <color name="black">#000000</color>
+    <color name="default_weapon_list">#3F51B5</color>
+    <color name="click_weapon_list">#303F9F</color>
+
+    <color name="green">#0F0</color>
+    <color name="yellow">#FD0</color>
+    <color name="red">#F00</color>
+
+    <color name="black">#000</color>
+    <color name="white">#FFF</color>
 </resources>

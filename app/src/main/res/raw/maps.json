@@ -6,6 +6,14 @@
       {
         "type": "missile",
         "shots": -1
+      },
+      {
+        "type": "bazooka",
+        "shots": 8
+      },
+      {
+        "type": "lazer",
+        "shots": 2
       }
     ],
     "obstacles": [

@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.*;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Bazooka;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Lazer;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Missile;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Planet;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.SpaceEntity;
@@ -90,8 +92,12 @@ public class JsonMapReader implements Serializable {
         for (JsonWeapon w : weapons) {
             switch (w.getType()) {
                 case "bazooka":
-//                    Bazooka b = new Bazooka(context, w.getShots());
-//                    weps.add(b);
+                    Bazooka b = new Bazooka(context, gm, w.getShots());
+                    weps.add(b);
+                    break;
+                case "lazer":
+                    Lazer l = new Lazer(context, gm, w.getShots());
+                    weps.add(l);
                     break;
 
                 default: //missile
@@ -245,9 +251,10 @@ public class JsonMapReader implements Serializable {
     }
 
     public Spaceship getSpaceship1(Context context, GameModel gameModel) {
-        return getShip(context,gameModel,true);
+        return getShip(context, gameModel, true);
     }
+
     public Spaceship getSpaceship2(Context context, GameModel gameModel) {
-        return getShip(context,gameModel,false);
+        return getShip(context, gameModel, false);
     }
 }

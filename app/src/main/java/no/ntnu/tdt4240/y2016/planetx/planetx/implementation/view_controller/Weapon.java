@@ -21,15 +21,12 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GravityGod;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GravityVector;
 
 public abstract class Weapon extends SpaceEntity {
-    private static final int speedFactor = 2;
-    private static final int gravityFactor = 7;
-
-    private int shots, damage;
-    private double velocityX = 0, velocityY = 0;
-    private String name, description;
-    private CountDownTimer cdt;
-    private GameModel gameModel;
-    private Animation explotion;
+    protected int shots, damage;
+    protected double velocityX = 0, velocityY = 0;
+    protected String name, description;
+    protected CountDownTimer cdt;
+    protected GameModel gameModel;
+    protected Animation explotion;
 
     public Weapon(Context context, GameModel gm, int shots, int damage, String name, String description) {
         super(context, gm, -1);
@@ -40,15 +37,23 @@ public abstract class Weapon extends SpaceEntity {
         this.gameModel = gm;
     }
 
-    private boolean outOfScreen() {
+    protected double getSpeedFactor() {
+        return 0.5;
+    }
+
+    protected double getGravityFactor() {
+        return 0.15;
+    }
+
+    protected boolean outOfScreen() {
         int w = gameModel.getMapView().getWidth();
         int h = gameModel.getMapView().getHeight();
-        if (getX() < 0-getWidth()) {
+        if (getX() < 0 - getWidth()) {
             return true;
         } else if (getX() > w) {
             return true;
         }
-        if (getY() < 0-getHeight()) {
+        if (getY() < 0 - getHeight()) {
             return true;
         } else if (getY() > h) {
             return true;
@@ -70,21 +75,37 @@ public abstract class Weapon extends SpaceEntity {
 
             public void onFinish() {
                 explode();
-                Toast.makeText(getContext(),"Shot timed out!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Shot timed out!", Toast.LENGTH_SHORT).show();
             }
         }.start();
+    }
+
+    public int getShots() {
+        return shots;
+    }
+
+    public void setShots(int s) {
+        shots = s;
     }
 
     public int getDamage() {
         return damage;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public void setVelocityX(double velocity) {
-        velocityX = velocity / speedFactor;
+        velocityX = velocity * getSpeedFactor();
     }
 
     public void setVelocityY(double velocity) {
-        velocityY = velocity / speedFactor;
+        velocityY = velocity * getSpeedFactor();
     }
 
     @Override
@@ -115,10 +136,10 @@ public abstract class Weapon extends SpaceEntity {
         updatePosition();
     }
 
-    private void updatePosition() {
+    protected void updatePosition() {
         GravityVector gv = gameModel.getGravityGod().getGravityVector((int) getCenterX(), (int) getCenterY());
-        velocityX += gv.getX() / gravityFactor;
-        velocityY += gv.getY() / gravityFactor;
+        velocityX += gv.getX() * getGravityFactor();
+        velocityY += gv.getY() * getGravityFactor();
 
         setX(getX() + (float) velocityX);
         setY(getY() + (float) velocityY);
@@ -135,8 +156,19 @@ public abstract class Weapon extends SpaceEntity {
         gameModel.checkCollision(this);
     }
 
-    public void addTrajectory(float x1, float y1, float x2, float y2)
-    {
+    public void addTrajectory(float x1, float y1, float x2, float y2) {
         gameModel.getMapView().addTrajectory(x1, y1, x2, y2);
+    }
+
+    public OnClickListener getOnClickListener(final Spaceship spaceship) {
+        final Weapon w = this;
+        return new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Selected '" + name + "'", Toast.LENGTH_SHORT).show();
+                spaceship.setSelectedWeapon(w);
+                gameModel.removeWeaponList();
+            }
+        };
     }
 }

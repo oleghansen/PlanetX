@@ -27,7 +27,6 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
 public class MapView extends RelativeLayout {
     private ImageView arrow;
     private GameModel gameModel;
-    private RelativeLayout parentLayout;
     private ArrayList<Trajectory> trajectories = new ArrayList<>();
 
     public MapView(Context context, GameModel gm) {
@@ -37,7 +36,7 @@ public class MapView extends RelativeLayout {
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT));
 
-//        setTouchListener();
+        setTouchListener();
 
         arrow = new ImageView(context);
         arrow.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
@@ -49,15 +48,12 @@ public class MapView extends RelativeLayout {
         OnTouchListener otl = new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent e) {
-                gameModel.touch_map(v, e);
+                gameModel.removeWeaponList();
+                //gameModel.touch_map(v, e);
                 return true;
             }
         };
         setOnTouchListener(otl);
-    }
-
-    public void setParentLayout(RelativeLayout parentLayout) {
-        this.parentLayout = parentLayout;
     }
 
     public void initializeMap(ArrayList<SpaceEntity> entities) {
@@ -134,11 +130,6 @@ public class MapView extends RelativeLayout {
         trajectories.clear();
     }
 
-    /**
-     * Draws weapon trajectories
-     *
-     * @param canvas
-     */
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
