@@ -156,9 +156,6 @@ public class GameModel {
                 if (!spaceship.isAlive()) {
                     spaceshipIsDead(spaceship);
 
-                    Toast.makeText(mapView.getContext(), "Game over!", Toast.LENGTH_LONG).show();
-
-
                     //TODO: FINISH activity and take to "show-winner-celebration"-screen or something like that
                 }
             }
