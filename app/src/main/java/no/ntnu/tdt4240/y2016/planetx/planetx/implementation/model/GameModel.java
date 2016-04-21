@@ -184,7 +184,7 @@ public class GameModel {
 
         wl.setDescription(weapon.getDescription());
 
-        String shots = "(inf)";
+        String shots = "(" + Character.toString('\u221e') + ")";
         if (weapon.getShots() >= 0) shots = "(" + weapon.getShots() + ")";
         String weaponText = weapon.getName() + " dmg:" + weapon.getDamage() + " " + shots;
         wl.setWeaponText(weaponText);
