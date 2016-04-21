@@ -19,6 +19,8 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import java.util.Random;
+
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 import no.ntnu.tdt4240.y2016.planetx.planetx.framework.AppMenu;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
@@ -29,6 +31,8 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.JsonMapRe
  */
 public class GameActivity extends AppMenu {
     private GameModel gameModel;
+    private RelativeLayout gameLayout;
+    private int[] mapBackgrounds = {R.drawable.background, R.drawable.background2, R.drawable.background3, R.drawable.background4};
     private final Handler handler = new Handler();
     private final int powerBarDelay = 10;
     private int addProgress = 3;
@@ -43,6 +47,9 @@ public class GameActivity extends AppMenu {
     public void onCreate(Bundle savedInstanceBundle) {
         super.onCreate(savedInstanceBundle);
         setContentView(R.layout.activity_game);
+
+        gameLayout = (RelativeLayout) findViewById(R.id.game_content_layout);
+        gameLayout.setBackgroundResource(mapBackgrounds[new Random().nextInt(mapBackgrounds.length)]);
 
         Intent i = getIntent();
         String mapName = (String) i.getSerializableExtra("MapName");
