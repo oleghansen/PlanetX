@@ -13,10 +13,6 @@ public abstract class SpaceObstacle extends SpaceEntity {
         this.gravity = gravity;
     }
 
-    public void setGravity(double x) {
-        this.gravity = x;
-    }
-
     public double getGravity() {
         return this.gravity;
     }
