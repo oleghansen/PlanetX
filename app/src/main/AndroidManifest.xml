@@ -26,7 +26,8 @@
 
         <activity
             android:name=".implementation.controller.MenuActivity"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity

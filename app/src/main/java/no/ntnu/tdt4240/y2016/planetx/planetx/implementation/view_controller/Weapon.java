@@ -27,6 +27,8 @@ public abstract class Weapon extends SpaceEntity {
     protected CountDownTimer cdt;
     protected GameModel gameModel;
     protected Animation explotion;
+    protected boolean fireMultiple = false;
+    protected double startRad = 0;
 
     public Weapon(Context context, GameModel gm, int shots, int damage, String name, String description) {
         super(context, gm, -1);
@@ -117,6 +119,7 @@ public abstract class Weapon extends SpaceEntity {
 
     public void explode() {
         gameModel.getMapView().removeView(this);
+        gameModel.getCurrentWeapon().remove(this);
         cdt.cancel();
 
         SoundManager.getInstance().playSoundEffectExplosion(this.getContext());
@@ -170,5 +173,15 @@ public abstract class Weapon extends SpaceEntity {
                 gameModel.removeWeaponList();
             }
         };
+    }
+
+    public ArrayList<Weapon> getWeapon() {
+        ArrayList<Weapon> weps = new ArrayList<>();
+        weps.add(this);
+        return weps;
+    }
+
+    public void setStartRad(double startRad) {
+        this.startRad = startRad;
     }
 }
