@@ -122,9 +122,6 @@ public class GameModel {
         return mapView;
     }
 
-    public Spaceship getCurrentShip() {
-        return spaceship;
-    }
 
     public LinearLayout getWeaponLayout() {
         return ((LinearLayout) gameActivity.findViewById(R.id.weapon_layout));
