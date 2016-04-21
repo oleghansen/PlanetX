@@ -22,6 +22,7 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.json.model.*;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Bazooka;
+import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.ClusterBomb;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Lazer;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Missile;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller.Planet;
@@ -98,6 +99,11 @@ public class JsonMapReader implements Serializable {
                 case "lazer":
                     Lazer l = new Lazer(context, gm, w.getShots());
                     weps.add(l);
+                    break;
+
+                case "cluster":
+                    ClusterBomb cb = new ClusterBomb(context, gm, w.getShots());
+                    weps.add(cb);
                     break;
 
                 default: //missile

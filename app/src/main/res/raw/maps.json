@@ -15,6 +15,11 @@
         "type": "lazer",
         "shots": 2
       }
+    ,
+      {
+        "type": "cluster",
+        "shots": 6
+      }
     ],
     "obstacles": [
       {
