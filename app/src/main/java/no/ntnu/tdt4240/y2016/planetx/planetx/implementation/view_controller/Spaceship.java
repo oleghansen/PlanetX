@@ -124,8 +124,10 @@ public class Spaceship extends SpaceEntity implements View.OnClickListener {
         } else {
             w = new Missile(getContext(), gameModel);
         }
-        if (weapons.size() > 0) {
-            selectedWeapon = weapons.get(0);
+        if (selectedWeapon.getShots() == 0) {
+            if (weapons.size() > 0) {
+                selectedWeapon = weapons.get(0);
+            }
         }
 
         w.setX((float) (getCenterX() + getWidth() * Math.cos((fireAngle - 90) * 2 * 3.14 / 360)));

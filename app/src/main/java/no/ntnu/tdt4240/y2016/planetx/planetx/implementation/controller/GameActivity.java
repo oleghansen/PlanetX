@@ -3,6 +3,7 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.controller;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -64,6 +65,7 @@ public class GameActivity extends AppMenu {
     private void initializeSeekBars() {
         SeekBar powerBar = (SeekBar) findViewById(R.id.bar_powerbar);
         powerBar.getProgressDrawable().setColorFilter(ContextCompat.getColor(this, R.color.black), android.graphics.PorterDuff.Mode.SRC_IN);
+        powerBar.getThumb().setColorFilter(ContextCompat.getColor(this, R.color.black), PorterDuff.Mode.MULTIPLY);
         powerBar.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -73,6 +75,7 @@ public class GameActivity extends AppMenu {
 
         SeekBar hpBar1 = (SeekBar) findViewById(R.id.bar_healthbar1);
         hpBar1.getProgressDrawable().setColorFilter(Color.BLUE, android.graphics.PorterDuff.Mode.SRC_IN);
+        hpBar1.getThumb().setColorFilter(Color.BLUE, PorterDuff.Mode.MULTIPLY);
         hpBar1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -82,6 +85,7 @@ public class GameActivity extends AppMenu {
 
         SeekBar hpBar2 = (SeekBar) findViewById(R.id.bar_healthbar2);
         hpBar2.getProgressDrawable().setColorFilter(Color.MAGENTA, android.graphics.PorterDuff.Mode.SRC_IN);
+        hpBar2.getThumb().setColorFilter(Color.MAGENTA, PorterDuff.Mode.MULTIPLY);
         hpBar2.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
