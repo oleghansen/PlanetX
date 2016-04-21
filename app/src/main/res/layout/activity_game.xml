@@ -38,7 +38,7 @@
         android:layout_alignParentLeft="true"
         android:background="@drawable/power_bar_progress_fill"
         android:max="100"
-        android:thumb="@null"
+
         android:visibility="invisible" />
 
     <LinearLayout
@@ -53,8 +53,7 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:max="100"
-            android:progress="100"
-            android:thumb="@null" />
+            android:progress="100"/>
 
     </LinearLayout>
 
@@ -70,8 +69,7 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:max="100"
-            android:progress="100"
-            android:thumb="@null" />
+            android:progress="100"/>
     </LinearLayout>
 
     <LinearLayout

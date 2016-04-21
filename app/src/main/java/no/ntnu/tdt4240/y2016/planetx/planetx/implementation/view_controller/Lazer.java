@@ -18,11 +18,11 @@ public class Lazer extends Weapon {
 
     @Override
     protected double getGravityFactor() {
-        return super.getGravityFactor() / 5;
+        return super.getGravityFactor() / 2;
     }
 
     @Override
     protected double getSpeedFactor() {
-        return super.getSpeedFactor() * 4;
+        return super.getSpeedFactor();
     }
 }
