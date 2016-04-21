@@ -30,6 +30,7 @@ public class MenuActivity extends AppMenu {
     private ViewGroup vg;
     private String selectedMapName;
     private ArrayList<String> mapNames = new ArrayList<>();
+    private int save;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,8 @@ public class MenuActivity extends AppMenu {
         setContentView(R.layout.activity_menu);
 
         mapNames = JsonMapReader.getMapList(getApplicationContext());
+
+        save = -1;
         mapListView = new ListView(this);
     }
 
@@ -84,6 +87,10 @@ public class MenuActivity extends AppMenu {
         goToWithMap(GameActivity.class, mapName);
     }
 
+    public void initiateMapAdapter(){
+
+    }
+
     /**
      * This method opens the map selection dialog.
      */
@@ -91,29 +98,41 @@ public class MenuActivity extends AppMenu {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.maplist_item, R.id.mapName_textView, mapNames);
         mapListView.setAdapter(adapter);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(this.getString(R.string.choose_map))
+        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        final AlertDialog alertd = alert.create();
+
+        if(mapListView.getParent() == null){
+            mapListView.setAdapter(adapter);
+            alert.setView(mapListView);
+        }
+        else {
+            mapListView = null;
+            mapListView = new ListView(this);
+            mapListView.setAdapter(adapter);
+            alert.setView(mapListView);
+        }
+
+        alert.setMessage(this.getString(R.string.choose_map))
                 .setCancelable(true)
                 .setPositiveButton("Start", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //startGame(selectedMap);
                         startGame(selectedMapName);
                     }
-                }).setView(mapListView);
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+                alertd.dismiss();
+            }
+        });
 
-        final AlertDialog alert = builder.create();
+
         mapListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            int save = -1;
-
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 vg = (ViewGroup) view;
                 TextView mapName = (TextView) vg.findViewById(R.id.mapName_textView);
                 selectedMapName = mapName.getText().toString();
-                alert.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
-
                 parent.getChildAt(position).setBackgroundColor(Color.parseColor("#7ac5cd"));
-
                 if (save != -1 && save != position) {
                     parent.getChildAt(save).setBackgroundColor(Color.parseColor("#00000000"));
                 }
@@ -121,7 +140,6 @@ public class MenuActivity extends AppMenu {
             }
         });
         alert.show();
-        alert.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
 
 
