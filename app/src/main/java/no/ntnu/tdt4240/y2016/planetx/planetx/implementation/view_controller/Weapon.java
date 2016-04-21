@@ -28,7 +28,7 @@ public abstract class Weapon extends SpaceEntity {
     protected GameModel gameModel;
     protected Animation explotion;
     protected boolean fireMultiple = false;
-    protected double startRad = 0;
+    private double startRad;
 
     public Weapon(Context context, GameModel gm, int shots, int damage, String name, String description) {
         super(context, gm, -1);

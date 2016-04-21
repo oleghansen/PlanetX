@@ -14,8 +14,7 @@
       {
         "type": "lazer",
         "shots": 2
-      }
-    ,
+      },
       {
         "type": "cluster",
         "shots": 6
@@ -167,6 +166,10 @@
       {
         "type": "missile",
         "shots": -1
+      },
+      {
+        "type": "cluster",
+        "shots": 6
       }
     ],
     "obstacles": [
@@ -307,6 +310,10 @@
       {
         "type": "missile",
         "shots": -1
+      },
+      {
+        "type": "lazer",
+        "shots": 2
       }
     ],
     "obstacles": [

@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -105,7 +106,7 @@ public class GameModel {
     public void showLockButton() {
         gameActivity.findViewById(R.id.btn_lock).setVisibility(View.VISIBLE);
         gameActivity.findViewById(R.id.btn_weapon).setVisibility(View.VISIBLE);
-        for(Spaceship s: spaceships){
+        for (Spaceship s : spaceships) {
             s.stopRotate();
         }
         getCurrentShip().startRotate();
@@ -131,12 +132,17 @@ public class GameModel {
         return ((LinearLayout) gameActivity.findViewById(R.id.weapon_layout));
     }
 
-    public ArrayList<Weapon> getCurrentWeapon(){
+    public ArrayList<Weapon> getCurrentWeapon() {
         return currentWeapon;
     }
 
     //Game logic
     public void spaceshipIsDead(Spaceship spaceship) {
+        getMapView().removeAllViews();
+        deleteReferences();
+        if (spaceships == null || spaceships.size() < 1) {
+            gameActivity.finished("Player 1");
+        }
         if (spaceships.indexOf(spaceship) == 0) {
             gameActivity.finished("Player 2");
         } else {
@@ -144,6 +150,16 @@ public class GameModel {
         }
 
         //TODO:Start END sequence
+    }
+
+    private void deleteReferences() {
+        gameActivity.deleteReferences();
+        mapView = null;
+        gravityGod = null;
+        spaceship = null;
+        gameActivity = null;
+        spaceships = null;
+        spaceObstacles = null;
     }
 
     public void checkCollision(SpaceEntity se) {
@@ -160,15 +176,13 @@ public class GameModel {
 
                 if (!spaceship.isAlive()) {
                     spaceshipIsDead(spaceship);
-
-                    //TODO: FINISH activity and take to "show-winner-celebration"-screen or something like that
                 }
             }
         }
     }
 
     public void endTurn() {
-        if(!currentWeapon.isEmpty()){
+        if (!currentWeapon.isEmpty()) {
             return;
         }
         try {

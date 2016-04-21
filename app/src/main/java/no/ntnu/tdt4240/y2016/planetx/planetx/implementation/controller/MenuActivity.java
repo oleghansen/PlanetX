@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -43,24 +44,24 @@ public class MenuActivity extends AppMenu {
         mapListView = new ListView(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main_menu, menu);
-
-        for(String s: JsonMapReader.getMapList(getApplicationContext())){
-            MenuItem item = menu.add(s);
-            final String s2 = s;
-            item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    startGame(s2);
-                    return true;
-                }
-            });
-        }
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_main_menu, menu);
+//
+//        for(String s: JsonMapReader.getMapList(getApplicationContext())){
+//            MenuItem item = menu.add(s);
+//            final String s2 = s;
+//            item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//                @Override
+//                public boolean onMenuItemClick(MenuItem item) {
+//                    startGame(s2);
+//                    return true;
+//                }
+//            });
+//        }
+//        return true;
+//    }
 
     @Override
     public void onResume() {
@@ -87,7 +88,7 @@ public class MenuActivity extends AppMenu {
         goToWithMap(GameActivity.class, mapName);
     }
 
-    public void initiateMapAdapter(){
+    public void initiateMapAdapter() {
 
     }
 
@@ -101,11 +102,10 @@ public class MenuActivity extends AppMenu {
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
         final AlertDialog alertd = alert.create();
 
-        if(mapListView.getParent() == null){
+        if (mapListView.getParent() == null) {
             mapListView.setAdapter(adapter);
             alert.setView(mapListView);
-        }
-        else {
+        } else {
             mapListView = null;
             mapListView = new ListView(this);
             mapListView.setAdapter(adapter);
@@ -118,7 +118,7 @@ public class MenuActivity extends AppMenu {
                     public void onClick(DialogInterface dialog, int id) {
                         startGame(selectedMapName);
                     }
-                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
                 alertd.dismiss();
@@ -129,14 +129,19 @@ public class MenuActivity extends AppMenu {
         mapListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                vg = (ViewGroup) view;
-                TextView mapName = (TextView) vg.findViewById(R.id.mapName_textView);
-                selectedMapName = mapName.getText().toString();
-                parent.getChildAt(position).setBackgroundColor(Color.parseColor("#7ac5cd"));
-                if (save != -1 && save != position) {
-                    parent.getChildAt(save).setBackgroundColor(Color.parseColor("#00000000"));
+                System.gc();
+                try {
+                    vg = (ViewGroup) view;
+                    TextView mapName = (TextView) vg.findViewById(R.id.mapName_textView);
+                    selectedMapName = mapName.getText().toString();
+                    parent.getChildAt(position).setBackgroundColor(Color.parseColor("#7ac5cd"));
+                    if (save != -1 && save != position) {
+                        parent.getChildAt(save).setBackgroundColor(Color.parseColor("#00000000"));
+                    }
+                    save = position;
+                } catch (NullPointerException np) {
+                    Log.d("NullPointerException", np.toString());
                 }
-                save = position;
             }
         });
         alert.show();
