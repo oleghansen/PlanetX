@@ -76,7 +76,7 @@ public class GameModel {
     public ArrayList<Spaceship> getSpaceships() {
         return spaceships;
     }
-    
+
     public void click_fireButton(int power) {
         if (!turnInProgress) {
             isLocked = false;
@@ -121,10 +121,6 @@ public class GameModel {
 
     public MapView getMapView() {
         return mapView;
-    }
-
-    public Spaceship getCurrentShip() {
-        return spaceship;
     }
 
     public LinearLayout getWeaponLayout() {
