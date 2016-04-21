@@ -43,6 +43,7 @@ public class GameModel {
     private boolean isLocked = false;
     private boolean turnInProgress = false;
     private GameActivity gameActivity;
+    private ArrayList<Weapon> currentWeapon = new ArrayList<>();
 
     public GameModel(Context context, JsonMapReader jmr, GameActivity ga) {
         for (SpaceObstacle so : jmr.getObstacles(context, this)) {
@@ -130,6 +131,10 @@ public class GameModel {
         return ((LinearLayout) gameActivity.findViewById(R.id.weapon_layout));
     }
 
+    public ArrayList<Weapon> getCurrentWeapon(){
+        return currentWeapon;
+    }
+
     //Game logic
     public void spaceshipIsDead(Spaceship spaceship) {
         if (spaceships.indexOf(spaceship) == 0) {
@@ -163,6 +168,9 @@ public class GameModel {
     }
 
     public void endTurn() {
+        if(!currentWeapon.isEmpty()){
+            return;
+        }
         try {
             if (spaceships.indexOf(spaceship) == 0) {
                 spaceship = spaceships.get(1);

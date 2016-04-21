@@ -78,11 +78,13 @@ public class MapView extends RelativeLayout {
         this.addView(v);
     }
 
-    public void fireShot(Weapon weapon) {
+    public void fireShot(ArrayList<Weapon> wep){
         SoundManager.getInstance().playSoundEffectShoot(this.getContext());
-        addToView(weapon);
-        weapon.startMove();
-        
+        for(Weapon w: wep){
+            gameModel.getCurrentWeapon().add(w);
+            addToView(w);
+            w.startMove();
+        }
         if (gameModel.getCurrentShip() == gameModel.getSpaceships().get(0)) {
             resetPlayerTrajectory(1);
         } else {

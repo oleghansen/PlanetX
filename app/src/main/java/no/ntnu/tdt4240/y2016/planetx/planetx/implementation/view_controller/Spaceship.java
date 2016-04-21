@@ -115,7 +115,7 @@ public class Spaceship extends SpaceEntity implements View.OnClickListener {
 
     }
 
-    public Weapon fireShot(int power) {
+    public ArrayList<Weapon> fireShot(int power) {
         double pow = power * 0.50;
         Weapon w;
         if (selectedWeapon != null && selectedWeapon.getShots() != 0) {
@@ -130,6 +130,8 @@ public class Spaceship extends SpaceEntity implements View.OnClickListener {
             }
         }
 
+        w.setStartRad((fireAngle - 90) * 2 * 3.14 / 360);
+
         w.setX((float) (getCenterX() + getWidth() * Math.cos((fireAngle - 90) * 2 * 3.14 / 360)));
         w.setY((float) (getCenterY() + getHeight() * Math.sin((fireAngle - 90) * 2 * 3.14 / 360)));
 
@@ -139,7 +141,9 @@ public class Spaceship extends SpaceEntity implements View.OnClickListener {
 
         w.setVelocityX(xVel);
         w.setVelocityY(yVel);
-        return w;
+
+        return w.getWeapon();
+
     }
 
     public void setHelthBar(SeekBar helthBar) {
