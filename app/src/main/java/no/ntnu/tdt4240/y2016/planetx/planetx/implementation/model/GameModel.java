@@ -44,13 +44,13 @@ public class GameModel {
         for (SpaceObstacle so : jmr.getObstacles(context, this)) {
             spaceObstacles.add(so);
         }
-        ga=g;
+        ga = g;
         Spaceship sp1 = jmr.getSpaceship1(context, this);
         sp1.setHelthBar(h1);
         spaceships.add(sp1);
 
 
-        Spaceship sp2 = jmr.getSpaceship2(context,this);
+        Spaceship sp2 = jmr.getSpaceship2(context, this);
         sp2.setHelthBar(h2);
         spaceships.add(sp2);
 
@@ -87,8 +87,12 @@ public class GameModel {
         return this.spaceship;
     }
 
+    public ArrayList<Spaceship> getSpaceships() {
+        return spaceships;
+    }
+
     public void click_fireButton(int progress) {
-        if(!turnInProgress) {
+        if (!turnInProgress) {
             isLocked = false;
             this.turnInProgress = true;
             Spaceship s = getCurrentShip();
@@ -97,7 +101,7 @@ public class GameModel {
     }
 
     public void click_lockButton(View v) {
-        if(!turnInProgress) {
+        if (!turnInProgress) {
             this.isLocked = true;
         }
     }
@@ -110,10 +114,9 @@ public class GameModel {
     }
 
     public void spaceshipIsDead(Spaceship spaceship) {
-        if(spaceships.indexOf(spaceship) == 0){
+        if (spaceships.indexOf(spaceship) == 0) {
             ga.finished("Player 2");
-        }
-        else{
+        } else {
             ga.finished("Player 1");
         }
 
@@ -132,10 +135,7 @@ public class GameModel {
                 se.collides(spaceship);
                 spaceship.collides(se);
 
-                Log.d("COLLISION", "Spaceentity hit! gameModel collide!!");
-
-                if(!spaceship.isAlive())
-                {
+                if (!spaceship.isAlive()) {
                     spaceshipIsDead(spaceship);
 
                     Toast.makeText(mapView.getContext(), "Game over!", Toast.LENGTH_LONG).show();
@@ -148,9 +148,8 @@ public class GameModel {
     }
 
 
-    public void endTurn(){
-        try
-        {
+    public void endTurn() {
+        try {
             if (spaceships.indexOf(this.spaceship) == 0) {
                 this.spaceship = this.spaceships.get(1);
             } else {
@@ -158,8 +157,7 @@ public class GameModel {
             }
             this.turnInProgress = false;
             mapView.showLockButton();
-        }
-        catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             Log.d("error", "Feil ved oppretting av spaceship");
         }
     }
@@ -170,6 +168,10 @@ public class GameModel {
 
     public void showLockButton() {
         this.lockButton.setVisibility(View.VISIBLE);
+    }
+
+    public boolean playerHasTrajectory() {
+        return true;
     }
 
 }
