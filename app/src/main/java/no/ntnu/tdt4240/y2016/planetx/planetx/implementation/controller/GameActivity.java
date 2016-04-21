@@ -110,6 +110,7 @@ public class GameActivity extends AppMenu {
     public void click_fire(View view) {
         findViewById(R.id.btn_lock).setVisibility(View.INVISIBLE);
         findViewById(R.id.btn_fire).setVisibility(View.INVISIBLE);
+        findViewById(R.id.btn_weapon).setVisibility(View.INVISIBLE);
         findViewById(R.id.bar_powerbar).setVisibility(View.INVISIBLE);
 
         stopPowerbar();
@@ -156,5 +157,9 @@ public class GameActivity extends AppMenu {
 
     private void stopPowerbar() {
         handler.removeCallbacks(runnable);
+    }
+
+    public void click_weapon(View view) {
+        gameModel.getCurrentShip().onClick(view);
     }
 }

@@ -35,11 +35,11 @@
                 android:text="Start game" />
             <!-- sign-out button -->
             <!--<Button-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_margin="2dp"-->
-                <!--android:onClick="click_signOut"-->
-                <!--android:text="Sign Out" />-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="2dp"-->
+            <!--android:onClick="click_signOut"-->
+            <!--android:text="Sign Out" />-->
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
