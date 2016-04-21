@@ -112,7 +112,6 @@ public class Spaceship extends SpaceEntity implements View.OnClickListener {
     public void damageSpaceship(int damage) {
         healthPoints = getHealthPoints() - damage;
         helthBar.setProgress(healthPoints);
-
     }
 
     public ArrayList<Weapon> fireShot(int power) {

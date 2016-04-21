@@ -126,7 +126,6 @@ public class GameActivity extends AppMenu {
         gameModel.click_fireButton(powerbar.getProgress());
         powerbar.setProgress(0);
 
-
 //        gameModel.getMapView().click_fire();
     }
 
@@ -168,5 +167,16 @@ public class GameActivity extends AppMenu {
 
     public void click_weapon(View view) {
         gameModel.getCurrentShip().onClick(view);
+    }
+
+    public void deleteReferences() {
+        gameModel = null;
+        gameLayout = null;
+    }
+
+    @Override
+    public void onBackPressed() {
+        System.gc();
+        super.onBackPressed();
     }
 }

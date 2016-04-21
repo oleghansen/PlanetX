@@ -75,7 +75,7 @@ public class MapView extends RelativeLayout {
         v.setLayoutParams(new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT));
-        this.addView(v);
+        addView(v);
     }
 
     public void fireShot(ArrayList<Weapon> wep){

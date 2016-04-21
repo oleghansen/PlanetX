@@ -83,6 +83,7 @@ public abstract class AppMenu extends AppCompatActivity {
         startActivity(intent);
         finish();
         overridePendingTransition(0,0);
+        System.gc();
     }
 
     public void toggle_music(View view) {
