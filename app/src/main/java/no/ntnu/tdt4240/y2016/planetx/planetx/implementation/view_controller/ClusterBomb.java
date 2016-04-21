@@ -45,20 +45,22 @@ public class ClusterBomb extends Weapon {
     @Override
     public void setVelocityX(double velocity) {
         double power = 0;
-        if (velocity != 0) {
+        if (velocity != 0 && Math.cos(startRad) != 0) {
             power = velocity / Math.cos(startRad);
         }
         missiles.get(0).velocityX = (power * Math.cos(startRad + RAD_DIF)) * missiles.get(0).getSpeedFactor();
+        missiles.get(1).velocityX = velocity * missiles.get(1).getSpeedFactor();
         missiles.get(2).velocityX = (power * Math.cos(startRad - RAD_DIF)) * missiles.get(2).getSpeedFactor();
     }
 
     @Override
     public void setVelocityY(double velocity) {
         double power = 0;
-        if (velocity != 0) {
+        if (velocity != 0 && Math.sin(startRad) != 0) {
             power = velocity / Math.sin(startRad);
         }
         missiles.get(0).velocityY = (power * Math.sin(startRad + RAD_DIF)) * missiles.get(0).getSpeedFactor();
+        missiles.get(1).velocityY = velocity * missiles.get(1).getSpeedFactor();
         missiles.get(2).velocityY = (power * Math.sin(startRad - RAD_DIF)) * missiles.get(2).getSpeedFactor();
     }
 

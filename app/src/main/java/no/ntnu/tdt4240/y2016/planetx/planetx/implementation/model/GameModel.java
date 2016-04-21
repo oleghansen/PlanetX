@@ -138,8 +138,7 @@ public class GameModel {
 
     //Game logic
     public void spaceshipIsDead(Spaceship spaceship) {
-        getMapView().removeAllViews();
-        deleteReferences();
+        finish();
         if (spaceships == null || spaceships.size() < 1) {
             gameActivity.finished("Player 1");
         }
@@ -150,16 +149,6 @@ public class GameModel {
         }
 
         //TODO:Start END sequence
-    }
-
-    private void deleteReferences() {
-        gameActivity.deleteReferences();
-        mapView = null;
-        gravityGod = null;
-        spaceship = null;
-        gameActivity = null;
-        spaceships = null;
-        spaceObstacles = null;
     }
 
     public void checkCollision(SpaceEntity se) {
@@ -235,5 +224,15 @@ public class GameModel {
         LinearLayout ll = (LinearLayout) gameActivity.findViewById(R.id.weapon_layout);
         return ll.getChildCount() == 0;
 
+    }
+
+    public void finish(){
+        mapView.finish();
+        mapView = null;
+        gravityGod = null;
+        spaceship = null;
+        gameActivity = null;
+        spaceships = null;
+        spaceObstacles = null;
     }
 }
