@@ -71,16 +71,12 @@ public class MenuActivity extends AppMenu {
         selectMapDialog();
     }
 
-    public void click_settings(View view) {
-        startGame("Crab Nebula");
-    }
-
-    public void click_signOut(View view) {
-        //LoadingActivity.mGoogleApiClient.disconnect();
-        LoadingActivity.mExplicitSignOut = true;
-        setContentView(R.layout.activity_main);
-        goTo(LoadingActivity.class);
-    }
+//    public void click_signOut(View view) {
+//        //LoadingActivity.mGoogleApiClient.disconnect();
+//        LoadingActivity.mExplicitSignOut = true;
+//        setContentView(R.layout.activity_main);
+//        goTo(LoadingActivity.class);
+//    }
 
     public void startGame(String mapName) {
         Toast.makeText(this, "Starting game on map " + mapName, Toast.LENGTH_SHORT).show();

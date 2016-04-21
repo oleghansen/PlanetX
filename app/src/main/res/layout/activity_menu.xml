@@ -1,51 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/main_background"/>
+        android:src="@drawable/main_background" />
 
     <include layout="@layout/sound_layout"></include>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dp"
         android:gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
         android:weightSum="1">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8">
+            android:layout_weight="0.8"
+            android:orientation="vertical">
+
             <Button
-                android:layout_margin="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Start game"
+                android:layout_margin="2dp"
                 android:onClick="click_startGame"
-                />
-            <Button
-                android:layout_margin="2dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Settings"
-                android:onClick="click_settings"
-                />
+                android:text="Start game" />
             <!-- sign-out button -->
-            <Button
-                android:layout_margin="2dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sign Out"
-                android:onClick="click_signOut"/>
+            <!--<Button-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="2dp"-->
+                <!--android:onClick="click_signOut"-->
+                <!--android:text="Sign Out" />-->
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
