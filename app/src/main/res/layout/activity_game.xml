@@ -19,7 +19,7 @@
         android:layout_alignParentRight="true"
         android:paddingBottom="50dp"
         android:onClick="click_weapon"
-        android:src="@mipmap/lock" />
+        android:src="@mipmap/weapon_select" />
 
     <ImageView
         android:id="@+id/btn_lock"
