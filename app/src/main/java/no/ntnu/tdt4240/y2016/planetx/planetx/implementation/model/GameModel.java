@@ -69,6 +69,14 @@ public class GameModel {
         showLockButton();
     }
 
+    public Spaceship getCurrentShip() {
+        return this.spaceship;
+    }
+
+    public ArrayList<Spaceship> getSpaceships() {
+        return spaceships;
+    }
+    
     public void click_fireButton(int power) {
         if (!turnInProgress) {
             isLocked = false;

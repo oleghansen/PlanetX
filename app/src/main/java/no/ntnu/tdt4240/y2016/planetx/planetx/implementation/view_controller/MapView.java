@@ -27,7 +27,10 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
 public class MapView extends RelativeLayout {
     private ImageView arrow;
     private GameModel gameModel;
-    private ArrayList<Trajectory> trajectories = new ArrayList<>();
+    private RelativeLayout parentLayout;
+    private ArrayList<Trajectory> playerOneTrajectories = new ArrayList<>();
+    private ArrayList<Trajectory> playerTwoTrajectories = new ArrayList<>();
+    private ArrayList<ArrayList<Trajectory>> trajectoriesList = new ArrayList<>(2);
 
     public MapView(Context context, GameModel gm) {
         super(context);
@@ -54,8 +57,14 @@ public class MapView extends RelativeLayout {
             }
         };
         setOnTouchListener(otl);
+        initializeTrajectories();
     }
 
+    public void initializeTrajectories() {
+        trajectoriesList.add(playerOneTrajectories);
+        trajectoriesList.add(playerTwoTrajectories);
+    }
+    
     public void initializeMap(ArrayList<SpaceEntity> entities) {
         for (SpaceEntity entity : entities) {
             addView(entity);
@@ -73,6 +82,12 @@ public class MapView extends RelativeLayout {
         SoundManager.getInstance().playSoundEffectShoot(this.getContext());
         addToView(weapon);
         weapon.startMove();
+        
+        if (gameModel.getCurrentShip() == gameModel.getSpaceships().get(0)) {
+            resetPlayerTrajectory(1);
+        } else {
+            resetPlayerTrajectory(2);
+        }
     }
 
     public void showArrow(float x, float y) {
@@ -123,13 +138,32 @@ public class MapView extends RelativeLayout {
 
     public void addTrajectory(float x1, float y1, float x2, float y2) {
         Trajectory trajectory = new Trajectory(x1, y1, x2, y2);
-        trajectories.add(trajectory);
+        if (gameModel.getCurrentShip() == gameModel.getSpaceships().get(0)) {
+            playerOneTrajectories.add(trajectory);
+            trajectoriesList.set(0, playerOneTrajectories);
+        } else if (gameModel.getCurrentShip() == gameModel.getSpaceships().get(1)) {
+            playerTwoTrajectories.add(trajectory);
+            trajectoriesList.set(1, playerTwoTrajectories);
+        }
     }
 
-    public void clearTrajectoryArray() {
+    public void resetPlayerTrajectory(int playerNumber) {
+        if (playerNumber == 1) {
+            playerOneTrajectories.clear();
+        } else if (playerNumber == 2) {
+            playerTwoTrajectories.clear();
+        }
+    }
+
+    public void clearTrajectoryArray(ArrayList<Trajectory> trajectories) {
         trajectories.clear();
     }
 
+    /**
+     * Draws weapon trajectories
+     *
+     * @param canvas
+     */
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -140,9 +174,10 @@ public class MapView extends RelativeLayout {
         paint.setStrokeWidth(2.5f);
         paint.setAlpha(100);
 
-        for (Trajectory trajectory : trajectories) {
-            canvas.drawLine(trajectory.getX1(), trajectory.getY1(), trajectory.getX2(), trajectory.getY2(), paint);
-            // Log.d("TRAJECTORY" , trajectories.size() + " | " + trajectory.toString());
+        for (ArrayList<Trajectory> trajectoryCollection : trajectoriesList) {
+            for (Trajectory trajectory : trajectoryCollection) {
+                canvas.drawLine(trajectory.getX1(), trajectory.getY1(), trajectory.getX2(), trajectory.getY2(), paint);
+            }
         }
     }
 }
