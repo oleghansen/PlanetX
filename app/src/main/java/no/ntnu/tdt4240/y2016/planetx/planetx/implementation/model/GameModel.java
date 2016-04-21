@@ -76,7 +76,7 @@ public class GameModel {
     public ArrayList<Spaceship> getSpaceships() {
         return spaceships;
     }
-    
+
     public void click_fireButton(int power) {
         if (!turnInProgress) {
             isLocked = false;
@@ -104,6 +104,9 @@ public class GameModel {
     public void showLockButton() {
         gameActivity.findViewById(R.id.btn_lock).setVisibility(View.VISIBLE);
         gameActivity.findViewById(R.id.btn_weapon).setVisibility(View.VISIBLE);
+        for(Spaceship s: spaceships){
+            s.stopRotate();
+        }
         getCurrentShip().startRotate();
     }
 
@@ -122,7 +125,6 @@ public class GameModel {
     public MapView getMapView() {
         return mapView;
     }
-
 
     public LinearLayout getWeaponLayout() {
         return ((LinearLayout) gameActivity.findViewById(R.id.weapon_layout));
