@@ -27,7 +27,6 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
 public class MapView extends RelativeLayout {
     private ImageView arrow;
     private GameModel gameModel;
-    private RelativeLayout parentLayout;
     private ArrayList<Trajectory> playerOneTrajectories = new ArrayList<>();
     private ArrayList<Trajectory> playerTwoTrajectories = new ArrayList<>();
     private ArrayList<ArrayList<Trajectory>> trajectoriesList = new ArrayList<>(2);
@@ -64,7 +63,7 @@ public class MapView extends RelativeLayout {
         trajectoriesList.add(playerOneTrajectories);
         trajectoriesList.add(playerTwoTrajectories);
     }
-    
+
     public void initializeMap(ArrayList<SpaceEntity> entities) {
         for (SpaceEntity entity : entities) {
             addView(entity);
@@ -78,9 +77,9 @@ public class MapView extends RelativeLayout {
         addView(v);
     }
 
-    public void fireShot(ArrayList<Weapon> wep){
+    public void fireShot(ArrayList<Weapon> wep) {
         SoundManager.getInstance().playSoundEffectShoot(this.getContext());
-        for(Weapon w: wep){
+        for (Weapon w : wep) {
             gameModel.getCurrentWeapon().add(w);
             addToView(w);
             w.startMove();
@@ -176,10 +175,23 @@ public class MapView extends RelativeLayout {
         paint.setStrokeWidth(2.5f);
         paint.setAlpha(100);
 
+        if(trajectoriesList == null){
+            return;
+        }
         for (ArrayList<Trajectory> trajectoryCollection : trajectoriesList) {
             for (Trajectory trajectory : trajectoryCollection) {
                 canvas.drawLine(trajectory.getX1(), trajectory.getY1(), trajectory.getX2(), trajectory.getY2(), paint);
             }
         }
+    }
+
+    public void finish() {
+        removeAllViews();
+
+        arrow = null;
+        gameModel = null;
+        playerOneTrajectories = null;
+        playerTwoTrajectories = null;
+        trajectoriesList = null;
     }
 }

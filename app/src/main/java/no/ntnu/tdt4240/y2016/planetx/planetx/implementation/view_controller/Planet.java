@@ -22,6 +22,7 @@ public class Planet extends SpaceObstacle {
         super.setParameters(json);
 
         int drawableId = getContext().getResources().getIdentifier(json.getImgName(), "drawable", getContext().getPackageName());
+
         setImageBitmap(BitmapFactory.decodeResource(getResources(), drawableId));
 
         setMaxWidth((int) (radius * 2));

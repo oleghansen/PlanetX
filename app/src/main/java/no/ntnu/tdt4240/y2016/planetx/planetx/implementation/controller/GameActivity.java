@@ -176,7 +176,17 @@ public class GameActivity extends AppMenu {
 
     @Override
     public void onBackPressed() {
-        System.gc();
+        gameModel.finish();
+        finish();
         super.onBackPressed();
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        ((RelativeLayout)findViewById(R.id.main_game_activity_layout)).removeAllViews();
+        gameModel = null;
+        gameLayout = null;
+        mapBackgrounds = null;
     }
 }
