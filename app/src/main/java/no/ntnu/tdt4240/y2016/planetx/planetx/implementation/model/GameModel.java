@@ -138,7 +138,6 @@ public class GameModel {
 
     //Game logic
     public void spaceshipIsDead(Spaceship spaceship) {
-        finish();
         if (spaceships == null || spaceships.size() < 1) {
             gameActivity.finished("Player 1");
         }
@@ -147,8 +146,7 @@ public class GameModel {
         } else {
             gameActivity.finished("Player 1");
         }
-
-        //TODO:Start END sequence
+        finish();
     }
 
     public void checkCollision(SpaceEntity se) {
@@ -226,7 +224,7 @@ public class GameModel {
 
     }
 
-    public void finish(){
+    public void finish() {
         mapView.finish();
         mapView = null;
         gravityGod = null;

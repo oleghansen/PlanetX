@@ -169,22 +169,17 @@ public class GameActivity extends AppMenu {
         gameModel.getCurrentShip().onClick(view);
     }
 
-    public void deleteReferences() {
-        gameModel = null;
-        gameLayout = null;
-    }
-
     @Override
     public void onBackPressed() {
-        gameModel.finish();
         finish();
         super.onBackPressed();
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
-        ((RelativeLayout)findViewById(R.id.main_game_activity_layout)).removeAllViews();
+        //        gameModel.finish();
+        ((RelativeLayout) findViewById(R.id.main_game_activity_layout)).removeAllViews();
         gameModel = null;
         gameLayout = null;
         mapBackgrounds = null;
