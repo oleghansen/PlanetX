@@ -39,7 +39,7 @@ public class MenuActivity extends AppMenu {
         setContentView(R.layout.activity_menu);
 
         mapNames = JsonMapReader.getMapList(getApplicationContext());
-
+        selectedMapName = "";
         save = -1;
         mapListView = new ListView(this);
     }
@@ -116,7 +116,16 @@ public class MenuActivity extends AppMenu {
                 .setCancelable(true)
                 .setPositiveButton("Start", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        startGame(selectedMapName);
+                        if(!selectedMapName.equals(""))
+                        {
+                            startGame(selectedMapName);
+                            selectedMapName = "";
+                        }
+                        else
+                        {
+                            Toast.makeText(MenuActivity.this, "Please choose a map!", Toast.LENGTH_SHORT).show();
+                            selectMapDialog();
+                        }
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
