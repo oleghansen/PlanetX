@@ -104,6 +104,7 @@ public class GameModel {
     }
 
     public void showLockButton() {
+        if(gameActivity == null) return;
         gameActivity.findViewById(R.id.btn_lock).setVisibility(View.VISIBLE);
         gameActivity.findViewById(R.id.btn_weapon).setVisibility(View.VISIBLE);
         for (Spaceship s : spaceships) {
