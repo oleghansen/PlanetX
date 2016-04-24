@@ -147,7 +147,6 @@ public class GameModel {
         } else {
             gameActivity.finished("Player 1");
         }
-        finish();
     }
 
     public void checkCollision(SpaceEntity se) {

@@ -178,7 +178,6 @@ public class GameActivity extends AppMenu {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //        gameModel.finish();
         ((RelativeLayout) findViewById(R.id.main_game_activity_layout)).removeAllViews();
         gameModel = null;
         gameLayout = null;
