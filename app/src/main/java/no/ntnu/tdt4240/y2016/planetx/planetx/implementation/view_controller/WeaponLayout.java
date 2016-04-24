@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.Gravity;
@@ -69,9 +70,9 @@ public class WeaponLayout extends LinearLayout {
         });
     }
 
-    public void setWeaponImage(Bitmap imageBitmap) {
+    public void setWeaponImage(Drawable imageDrawable) {
         ImageView iv = new ImageView(getContext());
-        iv.setImageBitmap(imageBitmap);
+        iv.setImageDrawable(imageDrawable);
         iv.setPadding(0, 0, 10 * padding_in_px, 0);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.gravity = Gravity.CENTER;

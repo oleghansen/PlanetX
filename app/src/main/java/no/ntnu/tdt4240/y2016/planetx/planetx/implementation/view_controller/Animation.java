@@ -59,6 +59,7 @@ public class Animation extends ImageView {
     }
 
     private void stopAnimation() {
+        bitmap.recycle();
         parentViewGroup.removeView(this);
     }
 

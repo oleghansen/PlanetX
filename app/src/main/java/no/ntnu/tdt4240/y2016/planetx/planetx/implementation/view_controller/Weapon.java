@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.CountDownTimer;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -125,6 +126,8 @@ public abstract class Weapon extends SpaceEntity {
         SoundManager.getInstance().playSoundEffectExplosion(this.getContext());
 
         explotion = new Animation(gameModel.getMapView(), BitmapFactory.decodeResource(getResources(), R.drawable.explosion), 12, 45, (int) getX() - 100, (int) getY() - 100);
+
+//        explotion = new Animation(gameModel.getMapView(),ContextCompat.getDrawable(getContext(), R.drawable.explosion), 12, 45, (int) getX() - 100, (int) getY() - 100);
         RelativeLayout.LayoutParams lp =
                 new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         explotion.setLayoutParams(lp);

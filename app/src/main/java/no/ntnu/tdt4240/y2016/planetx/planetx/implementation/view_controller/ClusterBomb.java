@@ -3,6 +3,7 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.os.CountDownTimer;
+import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -19,7 +20,8 @@ public class ClusterBomb extends Weapon {
 
     public ClusterBomb(Context context, GameModel gm, int shots) {
         super(context, gm, shots, 15, "Cluster bomb", "Fires three missiles");
-        setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.missile));
+        setImageDrawable(ContextCompat.getDrawable(context, R.drawable.missile));
+//        setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.missile));
 
         fireMultiple = true;
 

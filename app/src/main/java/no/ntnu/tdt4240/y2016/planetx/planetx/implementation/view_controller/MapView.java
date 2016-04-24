@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -96,40 +97,49 @@ public class MapView extends RelativeLayout {
         float h = getHeight();
         float dx = 0, dy = 0;
         if (x >= 0 && x <= w && y >= 0 && y <= h) {
-            arrow.setImageBitmap(null);
+//            arrow.setImageBitmap(null);
+            arrow.setImageDrawable(null);
             return;
         }
 
         if (x < 0) {
             if (y < 0) {
-                arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_lu));
+//                arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_lu));
+                arrow.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.arrow_lu));
                 dy = 0;
             } else if (y > h) {
-                arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_ld));
+//                arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_ld));
+                arrow.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.arrow_ld));
                 dy = h - arrow.getHeight();
             } else {
-                arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_l));
+//                arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_l));
+                arrow.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.arrow_l));
                 dy = y;
             }
             dx = 0;
         } else if (x > w) {
             if (y < 0) {
-                arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_ru));
+//                arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_ru));
+                arrow.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.arrow_ru));
                 dy = 0;
             } else if (y > h) {
-                arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_rd));
+//                arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_rd));
+                arrow.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.arrow_rd));
                 dy = h - arrow.getHeight();
             } else {
-                arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_r));
+//                arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_r));
+                arrow.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.arrow_r));
                 dy = y;
             }
             dx = w - arrow.getWidth();
         } else if (y < 0) {
-            arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_u));
+//            arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_u));
+            arrow.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.arrow_u));
             dx = x;
             dy = 0;
         } else if (y > h) {
-            arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_d));
+//            arrow.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.arrow_d));
+            arrow.setImageDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.arrow_d));
             dx = x;
             dy = h - arrow.getHeight();
         }

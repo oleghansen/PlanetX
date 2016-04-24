@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
@@ -157,12 +158,16 @@ public class JsonMapReader implements Serializable {
 
     private Spaceship getShip(Context context, GameModel gm, boolean shipOne) {
         JsonShip thisShip = ship1;
-        Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.ship);
+        int drawableId = R.drawable.ship;
+
+//        Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.ship);
 
         if (!shipOne) {
             thisShip = ship2;
-            b = BitmapFactory.decodeResource(context.getResources(), R.drawable.ship2);
+            drawableId = R.drawable.ship2;
+//            b = BitmapFactory.decodeResource(context.getResources(), R.drawable.ship2);
         }
+
 
         ArrayList<Weapon> weaponList = getWeaponList(context, gm);
 
@@ -170,7 +175,10 @@ public class JsonMapReader implements Serializable {
         double radius = -1;
         Spaceship ship = new Spaceship(context, gm, radius, 100, weaponList);
         ship.setParameters(thisShip);
-        ship.setImageBitmap(b);
+
+        ship.setImageDrawable(ContextCompat.getDrawable(context, drawableId));
+
+//        ship.setImageBitmap(b);
 
         return ship;
     }

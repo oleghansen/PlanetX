@@ -2,6 +2,7 @@ package no.ntnu.tdt4240.y2016.planetx.planetx.implementation.view_controller;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.support.v4.content.ContextCompat;
 
 import no.ntnu.tdt4240.y2016.planetx.planetx.R;
 import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
@@ -12,7 +13,8 @@ import no.ntnu.tdt4240.y2016.planetx.planetx.implementation.model.GameModel;
 public class Lazer extends Weapon {
     public Lazer(Context context, GameModel gm, int shots) {
         super(context, gm, shots, 50, "Lazer", "Gravity has less effect on lazer");
-        setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.lazer));
+        setImageDrawable(ContextCompat.getDrawable(context, R.drawable.lazer));
+//        setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.lazer));
     }
 
 

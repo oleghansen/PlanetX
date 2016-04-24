@@ -194,7 +194,7 @@ public class GameModel {
 
         wl.setOnClickListener(ocl);
 
-        wl.setWeaponImage(((BitmapDrawable) weapon.getDrawable()).getBitmap());
+        wl.setWeaponImage(weapon.getDrawable());
 
         wl.setDescription(weapon.getDescription());
 
